@@ -1,12 +1,8 @@
 package rcm;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
-public class MaintenanceUI extends JFrame {
+public class MaintenanceUI extends JPanel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 }

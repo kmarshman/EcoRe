@@ -1,12 +1,8 @@
 package rmos;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
-public class MachineManagerUI extends JFrame {
+public class MachineManagerUI extends JPanel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 
 }
