@@ -1,12 +1,7 @@
 package rmos;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
-public class RecyclablesManagerUI extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class RecyclablesManagerUI extends JPanel {
 
 }

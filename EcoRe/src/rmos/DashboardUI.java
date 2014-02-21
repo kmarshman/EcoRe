@@ -1,6 +1,6 @@
 package rmos;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
 public class DashboardUI extends JFrame {
 

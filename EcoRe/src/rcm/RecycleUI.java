@@ -1,12 +1,9 @@
 package rcm;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 
-public class RecycleUI extends JFrame {
+public class RecycleUI extends JPanel {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+
 
 }
