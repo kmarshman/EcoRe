@@ -1,16 +1,21 @@
 package rmos;
 
+import rcm.*;
+
+import java.awt.*;
+
 import javax.swing.*;
 
-public class DashboardUI extends JFrame {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class DashboardUI extends JPanel {
 	
-	public static void main(String[] args){
-		System.out.println("Welcome to EcoRe, California USA 95035 la bla");
+	public DashboardUI(){
+		setLayout(new GridLayout(2,1));
+		
+		GraphGenerator graph = new GraphGenerator();
+		add(graph);
+		
+		ActiveMachineTable activeMachines = new ActiveMachineTable();
+		add(activeMachines);
 	}
-
+	
 }
