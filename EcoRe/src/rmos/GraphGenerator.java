@@ -7,6 +7,9 @@ import javax.swing.border.EmptyBorder;
 
 
 public class GraphGenerator extends JPanel{
+
+	private static final long serialVersionUID = 1L;
+
 	public GraphGenerator(){
 		setLayout(new BorderLayout());
 		
@@ -14,10 +17,10 @@ public class GraphGenerator extends JPanel{
 		control.setBorder(new EmptyBorder(20, 10, 20, 10) );
 		
 		String[] metricOptions = {"Value", "Weight"};
-		JComboBox metrics = new JComboBox(metricOptions);
+		JComboBox<String> metrics = new JComboBox<String>(metricOptions);
 		
 		String[] timeframeOptions = {"Day", "Week", "Month"};
-		JComboBox timeframes = new JComboBox(timeframeOptions);
+		JComboBox<String> timeframes = new JComboBox<String>(timeframeOptions);
 		
 		control.add(metrics, BorderLayout.NORTH);
 		control.add(timeframes, BorderLayout.SOUTH);

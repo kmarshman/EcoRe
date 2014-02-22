@@ -8,6 +8,8 @@ import javax.swing.table.*;
 
 public class RecyclablesTable extends JPanel {
 	
+	private static final long serialVersionUID = 1L;
+
 	public RecyclablesTable(){
 		
 		setLayout(new BorderLayout());
@@ -17,10 +19,15 @@ public class RecyclablesTable extends JPanel {
 		Object[][] items = getItems();
 		
 	    DefaultTableModel model = new DefaultTableModel(items, columnNames) {
-	        @Override public Class<?> getColumnClass(int column) {
+
+			private static final long serialVersionUID = 1L;
+
+			@Override 
+			public Class<?> getColumnClass(int column) {
 	          return getValueAt(0, column).getClass();
 	        }
 	      };
+	      
 		JTable recyclables = new JTable(model);
 		recyclables.getColumnModel().getColumn(0).setPreferredWidth(5);
 		

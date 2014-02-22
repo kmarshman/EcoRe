@@ -8,6 +8,8 @@ import javax.swing.table.DefaultTableModel;
 
 public class MachineTable extends JPanel {
 	
+	private static final long serialVersionUID = 1L;
+
 	public MachineTable(){
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
@@ -17,7 +19,10 @@ public class MachineTable extends JPanel {
 		Object[][] rcms = getMachines();
 		
 	    DefaultTableModel model = new DefaultTableModel(rcms, columnNames) {
-	        @Override public Class<?> getColumnClass(int column) {
+			private static final long serialVersionUID = 1L;
+
+			@Override
+			public Class<?> getColumnClass(int column) {
 	          return getValueAt(0, column).getClass();
 	        }
 	      };

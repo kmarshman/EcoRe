@@ -6,6 +6,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 public class MachineManagerUI extends JPanel {
+
+	private static final long serialVersionUID = 1L;
+
 	public MachineManagerUI(){
 		setLayout(new BorderLayout());
 		
@@ -14,7 +17,7 @@ public class MachineManagerUI extends JPanel {
 		JPanel control = new JPanel(new BorderLayout());
 		
 		String[] options = {"I want to...", "Activate", "Deactivate", "Remove"};
-		JComboBox actions = new JComboBox(options);
+		JComboBox<String> actions = new JComboBox<String>(options);
 		
 		JButton addNewRecyclable = new JButton("Add Item");
 		

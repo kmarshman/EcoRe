@@ -1,13 +1,12 @@
 package rmos;
 
-import rcm.*;
-
 import java.awt.*;
-
 import javax.swing.*;
 
 public class DashboardUI extends JPanel {
 	
+	private static final long serialVersionUID = 1L;
+
 	public DashboardUI(){
 		setLayout(new GridLayout(2,1));
 		
