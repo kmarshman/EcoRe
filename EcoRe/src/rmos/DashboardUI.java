@@ -1,6 +1,5 @@
 package rmos;
 
-import java.awt.*;
 import javax.swing.*;
 
 public class DashboardUI extends JPanel {
@@ -8,8 +7,8 @@ public class DashboardUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 
 	public DashboardUI(){
-		setLayout(new GridLayout(2,1));
-		
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+
 		GraphGenerator graph = new GraphGenerator();
 		add(graph);
 		

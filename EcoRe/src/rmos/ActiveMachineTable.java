@@ -1,7 +1,9 @@
 package rmos;
 
 import java.awt.BorderLayout;
+import java.awt.Font;
 
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -15,6 +17,11 @@ public class ActiveMachineTable extends JPanel {
 	public ActiveMachineTable(){
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
+		
+		JPanel machineTable = new JPanel(new BorderLayout());
+		
+		JLabel tableTitle = new JLabel("Active Machines");
+		tableTitle.setFont(new Font("Serif", Font.BOLD, 14));
 		
 		String[] columnNames = {"ID", "Location", "Status", "Notes"};
 		
@@ -30,13 +37,12 @@ public class ActiveMachineTable extends JPanel {
 	        }
 	      };
 		JTable machines = new JTable(model);
-		machines.getColumnModel().getColumn(1).setPreferredWidth(100);
-		machines.getColumnModel().getColumn(3).setPreferredWidth(100);
-		
 		JScrollPane scrollPane = new JScrollPane(machines, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		machines.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		
-		add(scrollPane, BorderLayout.CENTER);
+		machineTable.add(tableTitle, BorderLayout.NORTH);
+		machineTable.add(scrollPane, BorderLayout.CENTER);
+		
+		add(machineTable, BorderLayout.CENTER);
 		
 	}
 	
