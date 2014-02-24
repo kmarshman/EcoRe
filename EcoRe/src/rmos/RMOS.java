@@ -1,11 +1,12 @@
 package rmos;
 
 import java.util.ArrayList;
+import java.util.Observable;
 
 import rcm.RCM;
 import rcm.RCM.Status;
 
-public class RMOS {
+public class RMOS extends Observable{
 	
 	private Manager[] managers = new Manager[2];
 	private ArrayList<RCM> rcmGroup = new ArrayList<RCM>();
@@ -33,6 +34,8 @@ public class RMOS {
 	
 	public void addRCM(RCM rcm){
 		rcmGroup.add(rcm);
+		setChanged();
+		notifyObservers(this);
 	}
 	
 	public int getNumActiveRCMs(){
@@ -49,6 +52,8 @@ public class RMOS {
 	
 	public void addItem(Item newItem){
 		acceptedItems.add(newItem);
+		setChanged();
+		notifyObservers(this);
 	}
 	
 	public ItemType getGlass(){

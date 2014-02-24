@@ -2,10 +2,11 @@ package rcm;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Observable;
 
 import rmos.Item;
 
-public class RCM {
+public class RCM extends Observable{
 	
 	public enum Status {
 		ACTIVE, INACTIVE;
@@ -27,7 +28,7 @@ public class RCM {
 	public RCM(String location){
 		id = "423423";
 		this.location = location;
-		status = Status.INACTIVE;
+		status = Status.ACTIVE;
 		state = State.OPERATING;
 		capacity = 250;
 		weight = 0;

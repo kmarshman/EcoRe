@@ -13,17 +13,19 @@ import javax.swing.table.DefaultTableModel;
 import rcm.RCM;
 import rcm.RCM.Status;
 
-public class ActiveMachineTable extends JPanel {
+public class ActiveMachineTable extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	private RMOS rmos;
 
-	public ActiveMachineTable(RMOS rmos){
-		this.rmos = rmos;
+	public ActiveMachineTable(final RMOS rmos){
 		
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
 		
+		drawTable(rmos);
+	}
+	
+	public void drawTable(RMOS rmos){
 		JPanel machineTable = new JPanel(new BorderLayout());
 		
 		JLabel tableTitle = new JLabel("Active Machines");
@@ -31,7 +33,7 @@ public class ActiveMachineTable extends JPanel {
 		
 		String[] columnNames = {"ID", "Location", "Status", "Notes"};
 		
-		Object[][] rcms = getMachines();
+		Object[][] rcms = getMachines(rmos);
 		
 	    DefaultTableModel model = new DefaultTableModel(rcms, columnNames) {
 
@@ -52,7 +54,7 @@ public class ActiveMachineTable extends JPanel {
 		
 	}
 	
-	public Object[][] getMachines(){
+	public Object[][] getMachines(RMOS rmos){
 		int size = rmos.getNumActiveRCMs();
 		Object[][] items = new Object[size][4];
 		

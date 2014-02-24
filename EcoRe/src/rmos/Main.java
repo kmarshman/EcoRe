@@ -12,9 +12,9 @@ import rcm.*;
 public class Main extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	final JPanel cardPanel;
-	final Login login;
-	final CardLayout cards;
+	private final JPanel cardPanel;
+	private final Login login;
+	private final CardLayout cards;
 	
 	public Main(RMOS rmos){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -66,10 +66,18 @@ public class Main extends JFrame {
 		cons.anchor = GridBagConstraints.LINE_END;
 		loginContainer.add(go,cons);
 		
+		DashboardUI dashboard = new DashboardUI(rmos);
+		MachineManagerUI machineManager = new MachineManagerUI(rmos);
+		RecyclablesManagerUI recyclablesManager = new RecyclablesManagerUI(rmos);
+		
+		rmos.addObserver(dashboard);
+		rmos.addObserver(machineManager);
+		rmos.addObserver(recyclablesManager);
+		
     	JTabbedPane tabbedPane = new JTabbedPane();
-    	tabbedPane.addTab("Home", new DashboardUI(rmos));
-    	tabbedPane.addTab("Manage Machines", new MachineManagerUI(rmos));
-    	tabbedPane.addTab("Manage Recyclables", new RecyclablesManagerUI(rmos));
+    	tabbedPane.addTab("Home", dashboard);
+    	tabbedPane.addTab("Manage Machines", machineManager);
+    	tabbedPane.addTab("Manage Recyclables", recyclablesManager);
     	
     	cardPanel.add(loginContainer, "Login");
     	cardPanel.add(tabbedPane, "Tabs");
@@ -91,13 +99,7 @@ public class Main extends JFrame {
 		rmos.addItem(new Item("Soda Can", rmos.getAluminum(), .5));
 		rmos.addItem(new Item("Pop-top Soup Can", rmos.getAluminum(), .53));
 		rmos.addItem(new Item("Jam Jar", rmos.getGlass(), .74));
-		rmos.addItem(new Item("Soda Can", rmos.getAluminum(), .5));
-		rmos.addItem(new Item("Pop-top Soup Can", rmos.getAluminum(), .53));
-		rmos.addItem(new Item("Jam Jar", rmos.getGlass(), .74));
-		rmos.addItem(new Item("Soda Can", rmos.getAluminum(), .5));
-		rmos.addItem(new Item("Pop-top Soup Can", rmos.getAluminum(), .53));
-		rmos.addItem(new Item("Jam Jar", rmos.getGlass(), .74));
-		
+
 		new Main(rmos);
 	}
 }

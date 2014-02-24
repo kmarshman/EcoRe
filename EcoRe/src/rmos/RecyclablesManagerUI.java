@@ -1,16 +1,24 @@
 package rmos;
 
 import java.awt.Dimension;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-public class RecyclablesManagerUI extends JPanel {
+public class RecyclablesManagerUI extends JPanel implements Observer{
 
 	private static final long serialVersionUID = 1L;
 
 	public RecyclablesManagerUI(RMOS rmos){
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		
+		display(rmos);
+	}
+	
+	public void display(RMOS rmos){
+		removeAll();
 		
 		RecyclablesTable tableView = new RecyclablesTable(rmos);
 		tableView.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -31,5 +39,11 @@ public class RecyclablesManagerUI extends JPanel {
 		add(itemControl);
 		
 		add(Box.createVerticalGlue());
+	}
+
+	@Override
+	public void update(Observable o, Object arg) {
+		display((RMOS)arg);
+		
 	}
 }
