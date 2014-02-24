@@ -9,10 +9,10 @@ public class MachineManagerUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public MachineManagerUI(){
+	public MachineManagerUI(RMOS rmos){	
 		setLayout(new BorderLayout());
 		
-		MachineTable tableView = new MachineTable();
+		MachineTable tableView = new MachineTable(rmos);
 		
 		JPanel control = new JPanel(new BorderLayout());
 		

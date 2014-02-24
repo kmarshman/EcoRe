@@ -31,7 +31,7 @@ public class Item {
 	}
 	
 	public double getValue(){
-		return weight * type.getPrice();
+		return Math.round(weight * type.getPrice() * 100.0) / 100.0;
 	}
 
 }

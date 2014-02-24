@@ -6,11 +6,16 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
+import rcm.RCM;
+
 public class MachineTable extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
+	private RMOS rmos;
 
-	public MachineTable(){
+	public MachineTable(RMOS rmos){
+		this.rmos = rmos;
+		
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
 		
@@ -40,8 +45,24 @@ public class MachineTable extends JPanel {
 	}
 	
 	public Object[][] getMachines(){
-		Object[] item = {false, "2132432", "23 Main St.", "Active", "256 lb", "123 lb", "Jul 23 02:16:57", "$564", "89", "Near Capacity"};
-		Object[][]items = {item, item, item, item};
+		int size = rmos.getRCMGroup().size();
+		Object[][] items = new Object[size][10];
+		
+		int count = 0;
+		for (RCM machine: rmos.getRCMGroup()){
+			items[count][0] = false;
+			items[count][1] = machine.getID();
+			items[count][2] = machine.getLocation();
+			items[count][3] = machine.getStatus();
+			items[count][4] = machine.getCapacity();
+			items[count][5] = machine.getWeight();
+			items[count][6] = machine.getTimeLastEmptied();
+			items[count][7] = machine.getCash();
+			items[count][8] = machine.getCouponPaper();			
+			items[count][9] = machine.getState();
+			
+			count++;
+		}
 		return items;
 	}
 }

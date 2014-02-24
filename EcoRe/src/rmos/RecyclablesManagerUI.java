@@ -1,6 +1,6 @@
 package rmos;
 
-import java.awt.*;
+import java.awt.Dimension;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -9,23 +9,27 @@ public class RecyclablesManagerUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 
-	public RecyclablesManagerUI(){
-		setLayout(new BorderLayout());
+	public RecyclablesManagerUI(RMOS rmos){
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		RecyclablesTable tableView = new RecyclablesTable();
+		RecyclablesTable tableView = new RecyclablesTable(rmos);
+		tableView.setBorder(new EmptyBorder(10, 10, 10, 10));
+		RecyclablesControl control = new RecyclablesControl(rmos);
+		control.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
-		JPanel control = new JPanel(new BorderLayout());
+		add(tableView);
+		add(control);
 		
-		String[] options = {"I want to...", "Change Price", "Remove"};
-		JComboBox<String> actions = new JComboBox<String>(options);
+		add(Box.createRigidArea(new Dimension(10, 30)));
 		
-		JButton addNewRecyclable = new JButton("Add Item");
+		ItemTypeTable itemTableView = new ItemTypeTable(rmos);
+		itemTableView.setBorder(new EmptyBorder(10, 10, 10, 10));
+		ItemTypeControl itemControl = new ItemTypeControl(rmos);
+		itemControl.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
-		control.add(actions, BorderLayout.WEST);
-		control.add(addNewRecyclable, BorderLayout.EAST);
-		control.setBorder(new EmptyBorder(10, 75, 200, 75) );
+		add(itemTableView);
+		add(itemControl);
 		
-		add(tableView, BorderLayout.CENTER);
-		add(control, BorderLayout.SOUTH);		
+		add(Box.createVerticalGlue());
 	}
 }

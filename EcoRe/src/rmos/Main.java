@@ -67,9 +67,9 @@ public class Main extends JFrame {
 		loginContainer.add(go,cons);
 		
     	JTabbedPane tabbedPane = new JTabbedPane();
-    	tabbedPane.addTab("Home", new DashboardUI());
-    	tabbedPane.addTab("Manage Machines", new MachineManagerUI());
-    	tabbedPane.addTab("Manage Recyclables", new RecyclablesManagerUI());
+    	tabbedPane.addTab("Home", new DashboardUI(rmos));
+    	tabbedPane.addTab("Manage Machines", new MachineManagerUI(rmos));
+    	tabbedPane.addTab("Manage Recyclables", new RecyclablesManagerUI(rmos));
     	
     	cardPanel.add(loginContainer, "Login");
     	cardPanel.add(tabbedPane, "Tabs");
@@ -82,6 +82,22 @@ public class Main extends JFrame {
 
 	public static void main(String[] args) {
 		RMOS rmos = new RMOS();
+		
+		rmos.addRCM(new RCM("test location"));
+		rmos.addRCM(new RCM("test location2"));
+		rmos.addRCM(new RCM("test location3"));
+		rmos.addRCM(new RCM());
+		
+		rmos.addItem(new Item("Soda Can", rmos.getAluminum(), .5));
+		rmos.addItem(new Item("Pop-top Soup Can", rmos.getAluminum(), .53));
+		rmos.addItem(new Item("Jam Jar", rmos.getGlass(), .74));
+		rmos.addItem(new Item("Soda Can", rmos.getAluminum(), .5));
+		rmos.addItem(new Item("Pop-top Soup Can", rmos.getAluminum(), .53));
+		rmos.addItem(new Item("Jam Jar", rmos.getGlass(), .74));
+		rmos.addItem(new Item("Soda Can", rmos.getAluminum(), .5));
+		rmos.addItem(new Item("Pop-top Soup Can", rmos.getAluminum(), .53));
+		rmos.addItem(new Item("Jam Jar", rmos.getGlass(), .74));
+		
 		new Main(rmos);
 	}
 }
