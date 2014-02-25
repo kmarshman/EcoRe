@@ -26,7 +26,7 @@ public class RCM extends Observable{
 	private ArrayList<Item> acceptedItems = new ArrayList<Item>();
 	
 	public RCM(String location){
-		id = "423423";
+		id = String.valueOf(Math.random() * ( 9999 - 1000 ));
 		this.location = location;
 		status = Status.ACTIVE;
 		state = State.OPERATING;
@@ -88,6 +88,10 @@ public class RCM extends Observable{
 	
 	public ArrayList<Item> getAcceptedItems(){
 		return acceptedItems;
+	}
+	
+	public void setStatus(Status status){
+		this.status = status;
 	}
 
 }

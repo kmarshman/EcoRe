@@ -38,6 +38,27 @@ public class RMOS extends Observable{
 		notifyObservers(this);
 	}
 	
+	public void removeRCM(String id){
+		RCM rcmToRemove = null;
+		for(RCM m : rcmGroup){
+			if (m.getID().equals(id)) rcmToRemove = m;
+		}
+		rcmGroup.remove(rcmToRemove);
+		setChanged();
+		notifyObservers(this);
+	}
+	
+	public void changeRCMstatus(String id, Status status){
+		int index = 0;
+		for(RCM m : rcmGroup){
+			if (m.getID().equals(id)) break;
+			index++;
+		}
+		rcmGroup.get(index).setStatus(status);
+		setChanged();
+		notifyObservers(this);
+	}
+	
 	public int getNumActiveRCMs(){
 		int num = 0;
 		for (RCM machine: rcmGroup){

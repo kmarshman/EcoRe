@@ -12,6 +12,7 @@ public class MachineTable extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private RMOS rmos;
+	private JTable machines;
 
 	public MachineTable(RMOS rmos){
 		this.rmos = rmos;
@@ -31,7 +32,7 @@ public class MachineTable extends JPanel {
 	          return getValueAt(0, column).getClass();
 	        }
 	      };
-		JTable machines = new JTable(model);
+		machines = new JTable(model);
 		machines.getColumnModel().getColumn(0).setPreferredWidth(5);
 		machines.getColumnModel().getColumn(2).setPreferredWidth(100);
 		machines.getColumnModel().getColumn(6).setPreferredWidth(100);
@@ -44,7 +45,7 @@ public class MachineTable extends JPanel {
 		
 	}
 	
-	public Object[][] getMachines(){
+	private Object[][] getMachines(){
 		int size = rmos.getRCMGroup().size();
 		Object[][] items = new Object[size][10];
 		
@@ -64,5 +65,9 @@ public class MachineTable extends JPanel {
 			count++;
 		}
 		return items;
+	}
+	
+	public JTable getTable(){
+		return machines;
 	}
 }
