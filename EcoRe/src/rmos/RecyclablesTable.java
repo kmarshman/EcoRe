@@ -9,7 +9,8 @@ import javax.swing.table.*;
 public class RecyclablesTable extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
-	RMOS rmos;
+	private RMOS rmos;
+	private JTable recyclables;
 
 	public RecyclablesTable(RMOS rmos){
 		this.rmos = rmos;
@@ -30,7 +31,7 @@ public class RecyclablesTable extends JPanel {
 	        }
 	      };
 	      
-		JTable recyclables = new JTable(model);
+		recyclables = new JTable(model);
 		recyclables.getColumnModel().getColumn(0).setPreferredWidth(5);
 		
 		JScrollPane scrollPane = new JScrollPane(recyclables, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -39,7 +40,7 @@ public class RecyclablesTable extends JPanel {
 		
 	}
 	
-	public Object[][] getItems(){
+	private Object[][] getItems(){
 		int size = rmos.getAcceptedItems().size();
 		Object[][] items = new Object[size][5];
 		
@@ -53,6 +54,10 @@ public class RecyclablesTable extends JPanel {
 			count++;
 		}
 		return items;
+	}
+	
+	public JTable getTable(){
+		return recyclables;
 	}
 	
 }

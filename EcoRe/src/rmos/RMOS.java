@@ -56,6 +56,16 @@ public class RMOS extends Observable{
 		notifyObservers(this);
 	}
 	
+	public void removeItem(String name){
+		Item itemToRemove = null;
+		for(Item i : acceptedItems){
+			if (i.getName().equals(name)) itemToRemove = i;
+		}
+		acceptedItems.remove(itemToRemove);
+		setChanged();
+		notifyObservers(this);
+	}
+	
 	public ItemType getGlass(){
 		return itemTypes[0];
 	}
@@ -66,6 +76,18 @@ public class RMOS extends Observable{
 	
 	public ItemType[] getItemTypes(){
 		return itemTypes;
+	}
+	
+	public void setGlassPrice(double price){
+		itemTypes[0].setPrice(price);
+		setChanged();
+		notifyObservers(this);
+	}
+	
+	public void setAluminumPrice(double price){
+		itemTypes[1].setPrice(price);
+		setChanged();
+		notifyObservers(this);
 	}
 
 }

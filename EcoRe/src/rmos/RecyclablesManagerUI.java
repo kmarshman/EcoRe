@@ -22,7 +22,7 @@ public class RecyclablesManagerUI extends JPanel implements Observer{
 		
 		RecyclablesTable tableView = new RecyclablesTable(rmos);
 		tableView.setBorder(new EmptyBorder(10, 10, 10, 10));
-		RecyclablesControl control = new RecyclablesControl(rmos);
+		RecyclablesControl control = new RecyclablesControl(rmos, tableView.getTable());
 		control.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		add(tableView);
@@ -32,7 +32,7 @@ public class RecyclablesManagerUI extends JPanel implements Observer{
 		
 		ItemTypeTable itemTableView = new ItemTypeTable(rmos);
 		itemTableView.setBorder(new EmptyBorder(10, 10, 10, 10));
-		ItemTypeControl itemControl = new ItemTypeControl(rmos);
+		ItemTypeControl itemControl = new ItemTypeControl(rmos, itemTableView.getTable());
 		itemControl.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		add(itemTableView);
