@@ -9,13 +9,26 @@ import javax.swing.border.EmptyBorder;
 
 import rcm.*;
 
+/**
+ * 
+ * @author Kelsey
+ *
+ */
 public class Main extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
+
 	private final JPanel cardPanel;
+	/**
+	 * Login panel for RMOS system
+	 */
 	private final Login login;
 	private final CardLayout cards;
 	
+	/**
+	 * Creates main window split into 2 panels: left for RMOS and right for RCMs
+	 * @param rmos instance of model represented by UI
+	 */
 	public Main(RMOS rmos){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("EcoRe");
@@ -87,7 +100,11 @@ public class Main extends JFrame {
     	
     	setVisible(true);
 	}
-
+	
+	/**
+	 * TODO: RCMs and Items are hardcoded for testing purposes
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		RMOS rmos = new RMOS();
 		

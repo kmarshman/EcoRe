@@ -3,7 +3,11 @@ package rmos;
 import java.awt.*;
 import javax.swing.*;
 
-
+/**
+ * Login panel for RMOS system
+ * @author Kelsey
+ *
+ */
 public class Login extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
@@ -11,6 +15,17 @@ public class Login extends JPanel {
 	private JTextField username;
 	private JPasswordField password;
 	
+	/**
+	 * Default Constructor
+	 */
+	public Login(){
+		new Login(new RMOS());
+	}
+	
+	/**
+	 * Creates login panel for RMOS
+	 * @param rmos
+	 */
 	public Login(RMOS rmos){
 		this.rmos = rmos;
 		
@@ -37,10 +52,17 @@ public class Login extends JPanel {
 		add(inputs);
 	}
 	
+	/**
+	 * Checks if username and password
+	 * @return True if user is verified, False otherwise
+	 */
 	public boolean authenticate(){
 		return rmos.authenticate(username.getText().trim(), new String(password.getPassword())); 
 	}
 	
+	/**
+	 * Called if username and password are not found
+	 */
 	public void loginFailed(){
 		JOptionPane.showMessageDialog(this, "Username and/or password is incorrect. Please try again", "Login Failed", JOptionPane.ERROR_MESSAGE);
 		password.setText("");

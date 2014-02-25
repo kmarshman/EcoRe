@@ -13,18 +13,40 @@ import javax.swing.table.DefaultTableModel;
 import rcm.RCM;
 import rcm.RCM.Status;
 
+/**
+ * Table view for active machines
+ * @author Kelsey
+ *
+ */
 public class ActiveMachineTable extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
-	public ActiveMachineTable(final RMOS rmos){
-		
+	/**
+	 * Creates a new view for the provided RMOS
+	 * @param rmos
+	 */
+	public ActiveMachineTable(RMOS rmos){
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
 		
 		drawTable(rmos);
 	}
 	
+	/**
+	 * Default Constructor
+	 */
+	public ActiveMachineTable(){
+		setLayout(new BorderLayout());
+		setBorder(new EmptyBorder(10, 10, 10, 10) );
+		
+		drawTable(new RMOS());
+	}
+	
+	/**
+	 * Draws table of active machine statuses
+	 * @param rmos
+	 */
 	public void drawTable(RMOS rmos){
 		JPanel machineTable = new JPanel(new BorderLayout());
 		
@@ -54,7 +76,12 @@ public class ActiveMachineTable extends JPanel{
 		
 	}
 	
-	public Object[][] getMachines(RMOS rmos){
+	/**
+	 * Creates 2D Object array with RCM data
+	 * @param rmos
+	 * @return 2D Object array
+	 */
+	private Object[][] getMachines(RMOS rmos){
 		int size = rmos.getNumActiveRCMs();
 		Object[][] items = new Object[size][4];
 		
@@ -69,6 +96,5 @@ public class ActiveMachineTable extends JPanel{
 			}
 		}
 		return items;
-	}
-		
+	}		
 }

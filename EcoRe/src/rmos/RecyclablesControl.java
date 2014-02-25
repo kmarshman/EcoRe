@@ -15,10 +15,27 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Control panel for recyclable items
+ * @author Kelsey
+ *
+ */
 public class RecyclablesControl extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Default Constructor
+	 */
+	public RecyclablesControl(){
+		new RecyclablesControl(new RMOS(), new JTable());
+	}
+	
+	/**
+	 * Creates control panel for adding/removing recyclables
+	 * @param rmos
+	 * @param table
+	 */
 	public RecyclablesControl(final RMOS rmos, final JTable table){
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 75, 200, 75) );
@@ -66,6 +83,11 @@ public class RecyclablesControl extends JPanel {
 		add(addNewRecyclable, BorderLayout.EAST);
 	}
 	
+	/**
+	 * Removes selected items from the list of accepted recyclables
+	 * @param selectedRows
+	 * @param rmos
+	 */
 	private void removeItems(ArrayList<String> selectedRows, RMOS rmos){
 		int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete these items?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		if(confirmation == JOptionPane.YES_OPTION){

@@ -6,12 +6,28 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.*;
 
+/**
+ * Table view for recyclables
+ * @author Kelsey
+ *
+ */
 public class RecyclablesTable extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private RMOS rmos;
 	private JTable recyclables;
 
+	/**
+	 * Default Constructor
+	 */
+	public RecyclablesTable(){
+		new RecyclablesTable(new RMOS());
+	}
+	
+	/**
+	 * Creates new table view of recyclables
+	 * @param rmos
+	 */
 	public RecyclablesTable(RMOS rmos){
 		this.rmos = rmos;
 		
@@ -40,6 +56,10 @@ public class RecyclablesTable extends JPanel {
 		
 	}
 	
+	/**
+	 * Creates 2D array for table data
+	 * @return 2D Object array of recyclable item fields
+	 */
 	private Object[][] getItems(){
 		int size = rmos.getAcceptedItems().size();
 		Object[][] items = new Object[size][5];

@@ -6,12 +6,29 @@ import java.util.Observable;
 
 import rmos.Item;
 
+/**
+ * Represents recycling machine
+ * @author Kelsey
+ *
+ */
 public class RCM extends Observable{
 	
+	/**
+	 * Status options for RCM
+	 * Default: INACTIVE
+	 * @author Kelsey
+	 *
+	 */
 	public enum Status {
 		ACTIVE, INACTIVE;
 	}
 	
+	/**
+	 * State options for RCM
+	 * Default: OPERATING
+	 * @author Kelsey
+	 *
+	 */
 	public enum State {
 		FULL, NEAR_CAPACITY, NEED_CASH, NEED_COUPONS, OPERATING;
 	}

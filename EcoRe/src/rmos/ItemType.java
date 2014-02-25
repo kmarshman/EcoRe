@@ -1,15 +1,28 @@
 package rmos;
 
+/**
+ * Represents type or class of recyclable
+ * @author Kelsey
+ *
+ */
 public class ItemType {
 
 	private String name;
 	private double price;
 	
+	/**
+	 * Creates new item type with given fields
+	 * @param name
+	 * @param price
+	 */
 	public ItemType(String name, double price){
 		this.name = name;
 		this.price = price;
 	}
 	
+	/**
+	 * Default constructor
+	 */
 	public ItemType(){
 		name = "not set";
 		price = 0;

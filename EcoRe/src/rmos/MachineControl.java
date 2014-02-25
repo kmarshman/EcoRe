@@ -18,11 +18,28 @@ import javax.swing.border.EmptyBorder;
 import rcm.RCM;
 import rcm.RCM.Status;
 
+/**
+ * RCM group control panel
+ * @author Kelsey
+ *
+ */
 public class MachineControl extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JComboBox<String> actions;
 
+	/**
+	 * Default Constructor
+	 */
+	public MachineControl(){
+		new MachineControl(new RMOS(), new JTable());
+	}
+	
+	/**
+	 * Creates new control panel for RCM group
+	 * @param rmos
+	 * @param table table with user selections
+	 */
 	public MachineControl(final RMOS rmos, final JTable table){
 		setLayout(new BorderLayout());
 		
@@ -69,6 +86,11 @@ public class MachineControl extends JPanel {
 		setBorder(new EmptyBorder(10, 10, 200, 10) );
 	}
 	
+	/**
+	 * Activates the selected machines
+	 * @param rmos
+	 * @param selectedRows
+	 */
 	private void activateMachines(RMOS rmos, ArrayList<String> selectedRows){
 		int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to activate these machines?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		if(confirmation == JOptionPane.YES_OPTION){
@@ -78,6 +100,11 @@ public class MachineControl extends JPanel {
 		}
 	}
 	
+	/**
+	 * Deactivates the selected machines
+	 * @param rmos
+	 * @param selectedRows
+	 */
 	private void deactivateMachines(RMOS rmos, ArrayList<String> selectedRows){
 		int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to deactivate these machines?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		if(confirmation == JOptionPane.YES_OPTION){
@@ -87,6 +114,11 @@ public class MachineControl extends JPanel {
 		}
 	}
 	
+	/**
+	 * Removes selected machines from the RCM group
+	 * @param rmos
+	 * @param selectedRows
+	 */
 	private void removeMachines(RMOS rmos, ArrayList<String> selectedRows){
 		int confirmation = JOptionPane.showConfirmDialog(null, "Are you sure you want to delete these machines?", "Confirm", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
 		if(confirmation == JOptionPane.YES_OPTION){

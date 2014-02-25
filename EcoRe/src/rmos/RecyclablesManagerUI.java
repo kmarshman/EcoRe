@@ -7,17 +7,37 @@ import java.util.Observer;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Recyclables Tab
+ * @author Kelsey
+ *
+ */
 public class RecyclablesManagerUI extends JPanel implements Observer{
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Default Constructor
+	 */
+	public RecyclablesManagerUI(){
+		new RecyclablesManagerUI(new RMOS());
+	}
+	
+	/**
+	 * Creates new recyclables tab
+	 * @param rmos
+	 */
 	public RecyclablesManagerUI(RMOS rmos){
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		display(rmos);
 	}
 	
-	public void display(RMOS rmos){
+	/**
+	 * Adds item and item type tables and controls to panel
+	 * @param rmos
+	 */
+	private void display(RMOS rmos){
 		removeAll();
 		
 		RecyclablesTable tableView = new RecyclablesTable(rmos);

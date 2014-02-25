@@ -5,11 +5,19 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-
+/**
+ * Usage statistics visualization panel
+ * @author Kelsey
+ *
+ */
 public class GraphGenerator extends JPanel{
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Creates new graph panel
+	 * TODO: this class is still in process
+	 */
 	public GraphGenerator(){
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(500, 1000));

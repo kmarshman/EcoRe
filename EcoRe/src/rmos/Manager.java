@@ -1,5 +1,10 @@
 package rmos;
 
+/**
+ * Represents an RMOS manager
+ * @author Kelsey
+ *
+ */
 public class Manager {
 	
 	private String username;

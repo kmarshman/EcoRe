@@ -6,16 +6,36 @@ import java.util.Observer;
 
 import javax.swing.*;
 
+/**
+ * Machine management tab
+ * @author Kelsey
+ *
+ */
 public class MachineManagerUI extends JPanel implements Observer{
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Default Constructor
+	 */
+	public MachineManagerUI(){
+		new MachineManagerUI(new RMOS());
+	}
+	
+	/**
+	 * Creates new machine management tab for given RMOS
+	 * @param rmos
+	 */
 	public MachineManagerUI(final RMOS rmos){	
 		setLayout(new BorderLayout());
 		
 		display(rmos);
 	}
 	
+	/**
+	 * Adds machine table view and control to the panel
+	 * @param rmos
+	 */
 	private void display(final RMOS rmos){
 		removeAll();
 		

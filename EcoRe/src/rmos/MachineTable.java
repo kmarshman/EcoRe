@@ -8,12 +8,28 @@ import javax.swing.table.DefaultTableModel;
 
 import rcm.RCM;
 
+/**
+ * Table view for RCM group
+ * @author Kelsey
+ *
+ */
 public class MachineTable extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private RMOS rmos;
 	private JTable machines;
 
+	/**
+	 * Default Constructor
+	 */
+	public MachineTable(){
+		new MachineTable(new RMOS());
+	}
+	
+	/**
+	 * Creates new table for RCM group
+	 * @param rmos
+	 */
 	public MachineTable(RMOS rmos){
 		this.rmos = rmos;
 		
@@ -45,6 +61,10 @@ public class MachineTable extends JPanel {
 		
 	}
 	
+	/**
+	 * Creates 2D Object array for table data
+	 * @return 2D Object array filled with RCM fields
+	 */
 	private Object[][] getMachines(){
 		int size = rmos.getRCMGroup().size();
 		Object[][] items = new Object[size][10];

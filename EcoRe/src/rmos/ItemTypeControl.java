@@ -14,10 +14,20 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+/**
+ * Control panel for item types
+ * @author Kelsey
+ *
+ */
 public class ItemTypeControl extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	
+	/**
+	 * Create new panel for changing the price of recyclable types
+	 * @param rmos
+	 * @param table
+	 */
 	public ItemTypeControl(final RMOS rmos, final JTable table){
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 75, 200, 75) );
@@ -38,6 +48,11 @@ public class ItemTypeControl extends JPanel {
 		add(changePrice, BorderLayout.EAST);
 	}
 	
+	/**
+	 * Given the selected item types, prompts the user for new prices and updates the RMOS
+	 * @param selectedRows
+	 * @param rmos
+	 */
 	private void changePrice(ArrayList<String> selectedRows, RMOS rmos){
 		for (String type: selectedRows){
 			JTextField price = new JTextField();
