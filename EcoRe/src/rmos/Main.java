@@ -83,10 +83,6 @@ public class Main extends JFrame {
 		MachineManagerUI machineManager = new MachineManagerUI(rmos);
 		RecyclablesManagerUI recyclablesManager = new RecyclablesManagerUI(rmos);
 		
-		rmos.addObserver(dashboard);
-		rmos.addObserver(machineManager);
-		rmos.addObserver(recyclablesManager);
-		
     	JTabbedPane tabbedPane = new JTabbedPane();
     	tabbedPane.addTab("Home", dashboard);
     	tabbedPane.addTab("Manage Machines", machineManager);

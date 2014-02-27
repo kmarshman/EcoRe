@@ -81,9 +81,11 @@ public class RMOS extends Observable{
 			if (m.getID().equals(id)) break;
 			index++;
 		}
-		rcmGroup.get(index).setStatus(status);
-		setChanged();
-		notifyObservers(this);
+		if (index < rcmGroup.size()){
+			rcmGroup.get(index).setStatus(status);
+			setChanged();
+			notifyObservers(this);
+		}
 	}
 	
 	/**

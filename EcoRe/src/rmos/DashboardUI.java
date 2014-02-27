@@ -1,8 +1,5 @@
 package rmos;
 
-import java.util.Observable;
-import java.util.Observer;
-
 import javax.swing.*;
 
 /**
@@ -10,47 +7,31 @@ import javax.swing.*;
  * @author Kelsey
  *
  */
-public class DashboardUI extends JPanel implements Observer{
+public class DashboardUI extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
-	
-	/**
-	 * Creates new dashboard display for given RMOS
-	 * @param rmos
-	 */
-	public DashboardUI(final RMOS rmos){		
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		display(rmos);
-	}
+	private static RMOS rmos;
 	
 	/**
 	 * Default Constructor
 	 */
 	public DashboardUI(){
-		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		display(new RMOS());
+		new DashboardUI(new RMOS());
 	}
 	
 	/**
-	 * Splits panel into visualization panel and active machine table
+	 * Creates new dashboard display for given RMOS
 	 * @param rmos
 	 */
-	private void display(RMOS rmos){
-		removeAll();
+	public DashboardUI(RMOS rmos){
+		DashboardUI.rmos = rmos;
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		GraphGenerator graph = new GraphGenerator();
 		add(graph);
 		
 		ActiveMachineTable activeMachines = new ActiveMachineTable(rmos);
 		add(activeMachines);
-	}
-	
-	@Override
-	public void update(Observable o, Object arg) {
-		display((RMOS)arg);
-		
-	}
-	
+		DashboardUI.rmos.addObserver(activeMachines);
+	}	
 }

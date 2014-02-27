@@ -37,7 +37,11 @@ public class MachineTable extends DisplayTable {
 		display();
 	}
 	
-	public void display(){		
+	@Override
+	public void display(){
+		this.removeAll();
+		this.updateUI();
+		
 		String[] columnNames = {"", "ID", "Location", "Status", "Capacity", "Weight", "Last Emptied", "Cash", "Paper", "Notes"};
 		
 		Object[][] rcms = getMachines();

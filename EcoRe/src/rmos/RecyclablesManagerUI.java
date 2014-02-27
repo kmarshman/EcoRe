@@ -1,8 +1,6 @@
 package rmos;
 
 import java.awt.Dimension;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -12,9 +10,10 @@ import javax.swing.border.EmptyBorder;
  * @author Kelsey
  *
  */
-public class RecyclablesManagerUI extends JPanel implements Observer{
+public class RecyclablesManagerUI extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	private static RMOS rmos;
 
 	/**
 	 * Default Constructor
@@ -28,20 +27,12 @@ public class RecyclablesManagerUI extends JPanel implements Observer{
 	 * @param rmos
 	 */
 	public RecyclablesManagerUI(RMOS rmos){
+		RecyclablesManagerUI.rmos = rmos;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		
-		display(rmos);
-	}
-	
-	/**
-	 * Adds item and item type tables and controls to panel
-	 * @param rmos
-	 */
-	private void display(RMOS rmos){
-		removeAll();
 		
 		RecyclablesTable tableView = new RecyclablesTable(rmos);
 		tableView.setBorder(new EmptyBorder(10, 10, 10, 10));
+		RecyclablesManagerUI.rmos.addObserver(tableView);
 		RecyclablesControl control = new RecyclablesControl(rmos, tableView.getTable());
 		control.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
@@ -52,6 +43,7 @@ public class RecyclablesManagerUI extends JPanel implements Observer{
 		
 		ItemTypeTable itemTableView = new ItemTypeTable(rmos);
 		itemTableView.setBorder(new EmptyBorder(10, 10, 10, 10));
+		RecyclablesManagerUI.rmos.addObserver(itemTableView);
 		ItemTypeControl itemControl = new ItemTypeControl(rmos, itemTableView.getTable());
 		itemControl.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
@@ -59,11 +51,5 @@ public class RecyclablesManagerUI extends JPanel implements Observer{
 		add(itemControl);
 		
 		add(Box.createVerticalGlue());
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		display((RMOS)arg);
-		
 	}
 }

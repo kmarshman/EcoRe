@@ -64,6 +64,9 @@ public class RecyclablesTable extends DisplayTable {
 	 * @return 2D Object array of recyclable item fields
 	 */
 	private Object[][] getItems(){
+		this.removeAll();
+		this.updateUI();
+		
 		int size = super.getRmos().getAcceptedItems().size();
 		Object[][] items = new Object[size][5];
 		

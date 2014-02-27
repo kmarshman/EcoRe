@@ -34,7 +34,11 @@ public class ItemTypeTable extends DisplayTable {
 		display();
 	}
 	
-	public void display(){		
+	@Override
+	public void display(){
+		this.removeAll();
+		this.updateUI();
+		
 		String[] columnNames = {"", "Type", "Price"};
 		Object[][] items = getTypes();
 		

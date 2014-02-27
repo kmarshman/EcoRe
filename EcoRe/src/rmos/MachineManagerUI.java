@@ -1,8 +1,6 @@
 package rmos;
 
 import java.awt.BorderLayout;
-import java.util.Observable;
-import java.util.Observer;
 
 import javax.swing.*;
 
@@ -11,9 +9,10 @@ import javax.swing.*;
  * @author Kelsey
  *
  */
-public class MachineManagerUI extends JPanel implements Observer{
+public class MachineManagerUI extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	private static RMOS rmos;
 
 	/**
 	 * Default Constructor
@@ -26,30 +25,25 @@ public class MachineManagerUI extends JPanel implements Observer{
 	 * Creates new machine management tab for given RMOS
 	 * @param rmos
 	 */
-	public MachineManagerUI(final RMOS rmos){	
+	public MachineManagerUI(RMOS rmos){	
+		MachineManagerUI.rmos = rmos;
 		setLayout(new BorderLayout());
-		
-		display(rmos);
+		display();
 	}
 	
 	/**
 	 * Adds machine table view and control to the panel
 	 * @param rmos
 	 */
-	private void display(final RMOS rmos){
+	private void display(){
 		removeAll();
 		
 		MachineTable tableView = new MachineTable(rmos);
+		MachineManagerUI.rmos.addObserver(tableView);
 		MachineControl control = new MachineControl(rmos, tableView.getTable());
 		
 		add(tableView, BorderLayout.CENTER);
 		add(control, BorderLayout.SOUTH);	
-	}
-
-	@Override
-	public void update(Observable o, Object arg) {
-		display((RMOS)arg);
-		
 	}
 
 }

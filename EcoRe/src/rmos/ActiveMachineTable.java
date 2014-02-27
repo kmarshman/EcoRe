@@ -43,7 +43,10 @@ public class ActiveMachineTable extends DisplayTable{
 	}
 	
 	@Override
-	public void display(){		
+	public void display(){
+		this.removeAll();
+		this.updateUI();
+		
 		JPanel machineTable = new JPanel(new BorderLayout());
 		
 		JLabel tableTitle = new JLabel("Active Machines");

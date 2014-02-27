@@ -66,6 +66,7 @@ public class MachineControl extends JPanel {
 					removeMachines(rmos, selectedRows);
 					break;
 				}
+				actions.setSelectedIndex(0);
 			}
 		});
 		
