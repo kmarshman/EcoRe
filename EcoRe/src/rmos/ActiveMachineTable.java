@@ -18,36 +18,32 @@ import rcm.RCM.Status;
  * @author Kelsey
  *
  */
-public class ActiveMachineTable extends JPanel{
+public class ActiveMachineTable extends DisplayTable{
 
 	private static final long serialVersionUID = 1L;
 
+	/**
+	 * Default Constructor
+	 */
+	public ActiveMachineTable(){
+		new ActiveMachineTable(new RMOS());
+	}
+	
 	/**
 	 * Creates a new view for the provided RMOS
 	 * @param rmos
 	 */
 	public ActiveMachineTable(RMOS rmos){
+		super.setRmos(rmos);
+		
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
 		
-		drawTable(rmos);
+		display();
 	}
 	
-	/**
-	 * Default Constructor
-	 */
-	public ActiveMachineTable(){
-		setLayout(new BorderLayout());
-		setBorder(new EmptyBorder(10, 10, 10, 10) );
-		
-		drawTable(new RMOS());
-	}
-	
-	/**
-	 * Draws table of active machine statuses
-	 * @param rmos
-	 */
-	public void drawTable(RMOS rmos){
+	@Override
+	public void display(){		
 		JPanel machineTable = new JPanel(new BorderLayout());
 		
 		JLabel tableTitle = new JLabel("Active Machines");
@@ -55,7 +51,7 @@ public class ActiveMachineTable extends JPanel{
 		
 		String[] columnNames = {"ID", "Location", "Status", "Notes"};
 		
-		Object[][] rcms = getMachines(rmos);
+		Object[][] rcms = getMachines();
 		
 	    DefaultTableModel model = new DefaultTableModel(rcms, columnNames) {
 
@@ -66,8 +62,8 @@ public class ActiveMachineTable extends JPanel{
 	          return getValueAt(0, column).getClass();
 	        }
 	      };
-		JTable machines = new JTable(model);
-		JScrollPane scrollPane = new JScrollPane(machines, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		super.setTable(new JTable(model));
+		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		machineTable.add(tableTitle, BorderLayout.NORTH);
 		machineTable.add(scrollPane, BorderLayout.CENTER);
@@ -81,12 +77,12 @@ public class ActiveMachineTable extends JPanel{
 	 * @param rmos
 	 * @return 2D Object array
 	 */
-	private Object[][] getMachines(RMOS rmos){
-		int size = rmos.getNumActiveRCMs();
+	private Object[][] getMachines(){
+		int size = super.getRmos().getNumActiveRCMs();
 		Object[][] items = new Object[size][4];
 		
 		int count = 0;
-		for (RCM machine: rmos.getRCMGroup()){
+		for (RCM machine: super.getRmos().getRCMGroup()){
 			if (machine.getStatus() == Status.ACTIVE){
 				items[count][0] = machine.getID();
 				items[count][1] = machine.getLocation();

@@ -63,7 +63,7 @@ public class RecyclablesControl extends JPanel {
 				final JComponent[] inputs = new JComponent[] {
 						new JLabel("Name:"),name,
 						new JLabel("Type:"),type,
-						new JLabel("Weight:"), weight
+						new JLabel("Weight in oz:"), weight
 				};
 				JOptionPane.showMessageDialog(null, inputs, "Add New Recyclable", JOptionPane.PLAIN_MESSAGE);
 				ItemType newType = null;

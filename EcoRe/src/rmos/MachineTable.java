@@ -13,11 +13,9 @@ import rcm.RCM;
  * @author Kelsey
  *
  */
-public class MachineTable extends JPanel {
+public class MachineTable extends DisplayTable {
 	
 	private static final long serialVersionUID = 1L;
-	private RMOS rmos;
-	private JTable machines;
 
 	/**
 	 * Default Constructor
@@ -31,11 +29,15 @@ public class MachineTable extends JPanel {
 	 * @param rmos
 	 */
 	public MachineTable(RMOS rmos){
-		this.rmos = rmos;
+		super.setRmos(rmos);
 		
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
 		
+		display();
+	}
+	
+	public void display(){		
 		String[] columnNames = {"", "ID", "Location", "Status", "Capacity", "Weight", "Last Emptied", "Cash", "Paper", "Notes"};
 		
 		Object[][] rcms = getMachines();
@@ -48,14 +50,14 @@ public class MachineTable extends JPanel {
 	          return getValueAt(0, column).getClass();
 	        }
 	      };
-		machines = new JTable(model);
-		machines.getColumnModel().getColumn(0).setPreferredWidth(5);
-		machines.getColumnModel().getColumn(2).setPreferredWidth(100);
-		machines.getColumnModel().getColumn(6).setPreferredWidth(100);
-		machines.getColumnModel().getColumn(9).setPreferredWidth(100);
+		super.setTable(new JTable(model));
+		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(5);
+		super.getTable().getColumnModel().getColumn(2).setPreferredWidth(100);
+		super.getTable().getColumnModel().getColumn(6).setPreferredWidth(100);
+		super.getTable().getColumnModel().getColumn(9).setPreferredWidth(100);
 		
-		JScrollPane scrollPane = new JScrollPane(machines, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		machines.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		super.getTable().setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 		
 		add(scrollPane, BorderLayout.CENTER);
 		
@@ -66,11 +68,11 @@ public class MachineTable extends JPanel {
 	 * @return 2D Object array filled with RCM fields
 	 */
 	private Object[][] getMachines(){
-		int size = rmos.getRCMGroup().size();
+		int size = super.getRmos().getRCMGroup().size();
 		Object[][] items = new Object[size][10];
 		
 		int count = 0;
-		for (RCM machine: rmos.getRCMGroup()){
+		for (RCM machine: super.getRmos().getRCMGroup()){
 			items[count][0] = false;
 			items[count][1] = machine.getID();
 			items[count][2] = machine.getLocation();
@@ -85,9 +87,5 @@ public class MachineTable extends JPanel {
 			count++;
 		}
 		return items;
-	}
-	
-	public JTable getTable(){
-		return machines;
 	}
 }

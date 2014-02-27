@@ -2,7 +2,6 @@ package rmos;
 
 import java.awt.BorderLayout;
 
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
@@ -12,11 +11,9 @@ import javax.swing.table.DefaultTableModel;
  * @author Kelsey
  *
  */
-public class ItemTypeTable extends JPanel {
+public class ItemTypeTable extends DisplayTable {
 	
 	private static final long serialVersionUID = 1L;
-	private RMOS rmos;
-	private JTable types;
 	
 	/**
 	 * Default Constructor
@@ -30,12 +27,16 @@ public class ItemTypeTable extends JPanel {
 	 * @param rmos
 	 */
 	public ItemTypeTable(RMOS rmos){
-		this.rmos = rmos;
+		super.setRmos(rmos);
 		
 		setLayout(new BorderLayout());
 		
+		display();
+	}
+	
+	public void display(){		
 		String[] columnNames = {"", "Type", "Price"};
-		Object[][] items = getItems();
+		Object[][] items = getTypes();
 		
 	    DefaultTableModel model = new DefaultTableModel(items, columnNames) {
 
@@ -47,10 +48,10 @@ public class ItemTypeTable extends JPanel {
 	        }
 	      };
 	      
-		types = new JTable(model);
-		types.getColumnModel().getColumn(0).setPreferredWidth(5);
+		super.setTable(new JTable(model));
+		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(5);
 		
-		JScrollPane scrollPane = new JScrollPane(types, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		add(scrollPane, BorderLayout.CENTER);
 		
@@ -60,11 +61,11 @@ public class ItemTypeTable extends JPanel {
 	 * Creates 2D Object array from item type fields
 	 * @return 2D Object array with item name and price
 	 */
-	private Object[][] getItems(){
+	private Object[][] getTypes(){
 		Object[][] items = new Object[2][3];
 		
 		int count = 0;
-		for (ItemType t: rmos.getItemTypes()){
+		for (ItemType t: super.getRmos().getItemTypes()){
 			items[count][0] = false;
 			items[count][1] = t.getName();
 			items[count][2] = "$" + t.getPrice();
@@ -72,9 +73,4 @@ public class ItemTypeTable extends JPanel {
 		}
 		return items;
 	}
-
-	public JTable getTable(){
-		return types;
-	}
-
 }

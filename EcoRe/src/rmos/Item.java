@@ -47,6 +47,10 @@ public class Item {
 		return weight;
 	}
 	
+	public double getWeightInKg(){
+		return weight * 28.3495;
+	}
+	
 	/**
 	 * Calculates value of item using its weight and the price per lb for its type
 	 * Weight is converted to lb from oz

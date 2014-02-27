@@ -11,11 +11,9 @@ import javax.swing.table.*;
  * @author Kelsey
  *
  */
-public class RecyclablesTable extends JPanel {
+public class RecyclablesTable extends DisplayTable {
 	
 	private static final long serialVersionUID = 1L;
-	private RMOS rmos;
-	private JTable recyclables;
 
 	/**
 	 * Default Constructor
@@ -29,11 +27,16 @@ public class RecyclablesTable extends JPanel {
 	 * @param rmos
 	 */
 	public RecyclablesTable(RMOS rmos){
-		this.rmos = rmos;
+		super.setRmos(rmos);
 		
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 75, 10, 75) );
 		
+		display();
+	}
+	
+	@Override
+	public void display(){
 		String[] columnNames = {"", "Item", "Type", "Weight", "Price"};
 		Object[][] items = getItems();
 		
@@ -47,10 +50,10 @@ public class RecyclablesTable extends JPanel {
 	        }
 	      };
 	      
-		recyclables = new JTable(model);
-		recyclables.getColumnModel().getColumn(0).setPreferredWidth(5);
+		super.setTable(new JTable(model));
+		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(5);
 		
-		JScrollPane scrollPane = new JScrollPane(recyclables, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		add(scrollPane, BorderLayout.CENTER);
 		
@@ -61,11 +64,11 @@ public class RecyclablesTable extends JPanel {
 	 * @return 2D Object array of recyclable item fields
 	 */
 	private Object[][] getItems(){
-		int size = rmos.getAcceptedItems().size();
+		int size = super.getRmos().getAcceptedItems().size();
 		Object[][] items = new Object[size][5];
 		
 		int count = 0;
-		for (Item i: rmos.getAcceptedItems()){
+		for (Item i: super.getRmos().getAcceptedItems()){
 			items[count][0] = false;
 			items[count][1] = i.getName();
 			items[count][2] = i.getType().getName();
@@ -74,10 +77,6 @@ public class RecyclablesTable extends JPanel {
 			count++;
 		}
 		return items;
-	}
-	
-	public JTable getTable(){
-		return recyclables;
 	}
 	
 }

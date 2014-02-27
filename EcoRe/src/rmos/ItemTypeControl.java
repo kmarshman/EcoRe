@@ -24,6 +24,13 @@ public class ItemTypeControl extends JPanel {
 	private static final long serialVersionUID = 1L;
 	
 	/**
+	 * Default Constructor
+	 */
+	public ItemTypeControl(){
+		new ItemTypeControl(new RMOS(), new JTable());
+	}
+	
+	/**
 	 * Create new panel for changing the price of recyclable types
 	 * @param rmos
 	 * @param table

@@ -40,7 +40,10 @@ public class RCM extends Observable{
 	private double capacity, weight, cash;
 	private int couponPaper;
 	private Date timeLastEmptied;
-	private ArrayList<Item> acceptedItems = new ArrayList<Item>();
+	/**
+	 * shared array list of accepted items
+	 */
+	private static ArrayList<Item> acceptedItems = new ArrayList<Item>();
 	
 	public RCM(String location){
 		id = String.valueOf(Math.random() * ( 9999 - 1000 ));
