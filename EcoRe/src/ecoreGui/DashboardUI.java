@@ -3,6 +3,7 @@ package ecoreGui;
 import javax.swing.*;
 
 import view.ActiveMachineTable;
+import view.GraphGenerator;
 import ecore.RMOS;
 
 /**

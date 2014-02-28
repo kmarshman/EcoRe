@@ -1,4 +1,4 @@
-package ecoreGui;
+package view;
 
 import java.awt.*;
 

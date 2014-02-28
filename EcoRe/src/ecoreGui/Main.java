@@ -42,7 +42,7 @@ public class Main extends JFrame {
 		
 		setLayout(new GridLayout(1,2));
 		
-		WelcomeUI rcm = new WelcomeUI();
+		RcmUI rcm = new RcmUI();
 		
 		cardPanel = new JPanel();
 		cards = new CardLayout();
