@@ -1,11 +1,8 @@
 package ecoreGui;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 
 import ecore.Item;
 import ecore.RCM;
@@ -21,10 +18,6 @@ public class Main extends JFrame {
 	private static final long serialVersionUID = 1L;
 
 	private final JPanel cardPanel;
-	/**
-	 * Login panel for RMOS system
-	 */
-	private final Login login;
 	private final CardLayout cards;
 	
 	/**
@@ -48,38 +41,7 @@ public class Main extends JFrame {
 		cards = new CardLayout();
 		cardPanel.setLayout(cards);
 		
-		JPanel loginContainer = new JPanel(new GridBagLayout());
-		GridBagConstraints cons = new GridBagConstraints();
-		cons.fill = GridBagConstraints.NONE;
-		
-		cons.gridx = 2;
-		cons.gridy = 0;
-		cons.anchor = GridBagConstraints.PAGE_START;
-		JLabel welcome = new JLabel("<html><center>Welcome to EcoRe!<br>Enter your login informaiton to get started.<center><html>");
-		welcome.setFont(new Font("Serif", Font.BOLD, 14));
-		loginContainer.add(welcome, cons);
-		
-		cons.gridx = 2;
-		cons.gridy = 1;
-		cons.anchor = GridBagConstraints.LINE_END;
-		login = new Login(rmos);
-		login.setBorder(new EmptyBorder(10, 10, 0, 10));
-		loginContainer.add(login, cons);
-		
-		JButton go = new JButton("Login");
-		go.addActionListener(new ActionListener(){
-			public void actionPerformed(ActionEvent e){
-				if(login.authenticate()){
-					cards.next(cardPanel);
-				}else{
-					login.loginFailed();
-				}
-			}
-		});
-		cons.gridx = 2;
-		cons.gridy =2;
-		cons.anchor = GridBagConstraints.LINE_END;
-		loginContainer.add(go,cons);
+		RmosWelcomeUI loginContainer = new RmosWelcomeUI(rmos, cards, cardPanel);
 		
 		DashboardUI dashboard = new DashboardUI(rmos);
 		MachineManagerUI machineManager = new MachineManagerUI(rmos);
