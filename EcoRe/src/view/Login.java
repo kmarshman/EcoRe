@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -22,14 +24,14 @@ public class Login extends JPanel {
 	 * Default Constructor
 	 */
 	public Login(){
-		new Login(new RMOS());
+		new Login(new RMOS(), new CardLayout(), new JPanel());
 	}
 	
 	/**
 	 * Creates login panel for RMOS
 	 * @param rmos
 	 */
-	public Login(RMOS rmos){
+	public Login(RMOS rmos, final CardLayout cards, final JPanel cardPanel){
 		this.rmos = rmos;
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -46,8 +48,18 @@ public class Login extends JPanel {
 		JPanel pass = new JPanel(new FlowLayout());
 		JLabel passwordLabel = new JLabel("Password:");
 		password = new JPasswordField(20);
+		password.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				if(authenticate()){
+					cards.next(cardPanel);
+				}else{
+					loginFailed();
+				}
+			}
+		});
 		pass.add(passwordLabel);
 		pass.add(password);
+		
 		
 		inputs.add(name);
 		inputs.add(pass);

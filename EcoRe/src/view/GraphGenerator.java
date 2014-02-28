@@ -10,7 +10,7 @@ import javax.swing.border.EmptyBorder;
  * @author Kelsey
  *
  */
-public class GraphGenerator extends JPanel{
+public class GraphGenerator extends GraphicDisplay{
 
 	private static final long serialVersionUID = 1L;
 

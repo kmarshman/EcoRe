@@ -4,6 +4,7 @@ import javax.swing.*;
 
 import view.ActiveMachineTable;
 import view.GraphGenerator;
+import view.ItemChart;
 import ecore.RMOS;
 
 /**
@@ -34,8 +35,17 @@ public class DashboardUI extends JPanel{
 		GraphGenerator graph = new GraphGenerator();
 		add(graph);
 		
+		JPanel wrapper = new JPanel();
+		wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.X_AXIS));
+		
 		ActiveMachineTable activeMachines = new ActiveMachineTable(rmos);
-		add(activeMachines);
+		wrapper.add(activeMachines);
 		DashboardUI.rmos.addObserver(activeMachines);
+		
+		ItemChart itemChart = new ItemChart(rmos);
+		wrapper.add(itemChart);
+		DashboardUI.rmos.addObserver(itemChart);
+		
+		add(wrapper);
 	}	
 }

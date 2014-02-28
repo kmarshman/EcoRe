@@ -38,7 +38,7 @@ public class RmosWelcomeUI extends JPanel{
 		cons.gridx = 2;
 		cons.gridy = 1;
 		cons.anchor = GridBagConstraints.LINE_END;
-		login = new Login(rmos);
+		login = new Login(rmos, cards, cardPanel);
 		login.setBorder(new EmptyBorder(10, 10, 0, 10));
 		add(login, cons);
 		
