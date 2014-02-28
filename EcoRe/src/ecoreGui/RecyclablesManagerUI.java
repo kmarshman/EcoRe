@@ -1,9 +1,15 @@
-package rmos;
+package ecoreGui;
 
 import java.awt.Dimension;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import control.ItemTypeControl;
+import control.RecyclablesControl;
+import view.ItemTypeTable;
+import view.RecyclablesTable;
+import ecore.RMOS;
 
 /**
  * Recyclables Tab

@@ -1,4 +1,4 @@
-package rmos;
+package ecoreGui;
 
 import java.awt.*;
 

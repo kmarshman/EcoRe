@@ -1,7 +1,10 @@
-package rmos;
+package ecoreGui;
 
 import java.awt.*;
+
 import javax.swing.*;
+
+import ecore.RMOS;
 
 /**
  * Login panel for RMOS system

@@ -1,10 +1,12 @@
-package rmos;
+package view;
 
 import java.util.Observable;
 import java.util.Observer;
 
 import javax.swing.JPanel;
 import javax.swing.JTable;
+
+import ecore.RMOS;
 
 public abstract class DisplayTable extends JPanel implements Observer {
 	

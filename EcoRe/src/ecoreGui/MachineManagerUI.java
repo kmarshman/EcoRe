@@ -1,8 +1,12 @@
-package rmos;
+package ecoreGui;
 
 import java.awt.BorderLayout;
 
 import javax.swing.*;
+
+import control.MachineControl;
+import view.MachineTable;
+import ecore.RMOS;
 
 /**
  * Machine management tab
@@ -28,15 +32,6 @@ public class MachineManagerUI extends JPanel{
 	public MachineManagerUI(RMOS rmos){	
 		MachineManagerUI.rmos = rmos;
 		setLayout(new BorderLayout());
-		display();
-	}
-	
-	/**
-	 * Adds machine table view and control to the panel
-	 * @param rmos
-	 */
-	private void display(){
-		removeAll();
 		
 		MachineTable tableView = new MachineTable(rmos);
 		MachineManagerUI.rmos.addObserver(tableView);

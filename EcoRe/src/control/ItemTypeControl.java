@@ -1,4 +1,4 @@
-package rmos;
+package control;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -13,6 +13,8 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
+
+import ecore.RMOS;
 
 /**
  * Control panel for item types

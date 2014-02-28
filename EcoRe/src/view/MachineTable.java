@@ -1,4 +1,4 @@
-package rmos;
+package view;
 
 import java.awt.BorderLayout;
 
@@ -6,7 +6,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import rcm.RCM;
+import ecore.RCM;
+import ecore.RMOS;
 
 /**
  * Table view for RCM group

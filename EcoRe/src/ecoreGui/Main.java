@@ -1,4 +1,4 @@
-package rmos;
+package ecoreGui;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,7 +7,9 @@ import java.awt.event.ActionListener;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import rcm.*;
+import ecore.Item;
+import ecore.RCM;
+import ecore.RMOS;
 
 /**
  * 
@@ -40,7 +42,7 @@ public class Main extends JFrame {
 		
 		setLayout(new GridLayout(1,2));
 		
-		RecycleUI rcm = new RecycleUI();
+		WelcomeUI rcm = new WelcomeUI();
 		
 		cardPanel = new JPanel();
 		cards = new CardLayout();

@@ -1,10 +1,13 @@
-package rmos;
+package view;
 
 import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.*;
+
+import ecore.Item;
+import ecore.RMOS;
 
 /**
  * Table view for recyclables

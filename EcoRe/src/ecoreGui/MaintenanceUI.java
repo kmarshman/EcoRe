@@ -1,4 +1,4 @@
-package rcm;
+package ecoreGui;
 
 import javax.swing.*;
 

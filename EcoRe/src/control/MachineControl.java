@@ -1,4 +1,4 @@
-package rmos;
+package control;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -15,8 +15,9 @@ import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import rcm.RCM;
-import rcm.RCM.Status;
+import ecore.RCM;
+import ecore.RMOS;
+import ecore.RCM.Status;
 
 /**
  * RCM group control panel

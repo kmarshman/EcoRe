@@ -1,4 +1,4 @@
-package rmos;
+package ecore;
 
 /**
  * Represents an RMOS manager

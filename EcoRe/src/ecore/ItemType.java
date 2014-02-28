@@ -1,4 +1,4 @@
-package rmos;
+package ecore;
 
 /**
  * Represents type or class of recyclable

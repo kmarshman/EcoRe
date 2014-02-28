@@ -1,10 +1,9 @@
-package rmos;
+package ecore;
 
 import java.util.ArrayList;
 import java.util.Observable;
 
-import rcm.RCM;
-import rcm.RCM.Status;
+import ecore.RCM.Status;
 
 /**
  * Represents recyling management system

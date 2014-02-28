@@ -1,6 +1,9 @@
-package rmos;
+package ecoreGui;
 
 import javax.swing.*;
+
+import view.ActiveMachineTable;
+import ecore.RMOS;
 
 /**
  * Main tab for RMOS - contains usage statistic visualization and overview of active machines

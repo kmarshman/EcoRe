@@ -1,4 +1,4 @@
-package rmos;
+package view;
 
 import java.awt.BorderLayout;
 import java.awt.Font;
@@ -10,8 +10,9 @@ import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import rcm.RCM;
-import rcm.RCM.Status;
+import ecore.RCM;
+import ecore.RMOS;
+import ecore.RCM.Status;
 
 /**
  * Table view for active machines

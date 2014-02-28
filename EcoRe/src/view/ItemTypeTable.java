@@ -1,10 +1,13 @@
-package rmos;
+package view;
 
 import java.awt.BorderLayout;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+
+import ecore.ItemType;
+import ecore.RMOS;
 
 /**
  * Table view for item types

@@ -1,10 +1,8 @@
-package rcm;
+package ecore;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
-
-import rmos.Item;
 
 /**
  * Represents recycling machine
