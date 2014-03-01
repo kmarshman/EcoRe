@@ -2,6 +2,7 @@ package view;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
@@ -32,16 +33,17 @@ public class ItemChart extends GraphicDisplay{
 		setBorder(new EmptyBorder(50, 50, 50, 50));
 		
 		slices[0] = new Slice(getAluminum(), new Color(85, 255, 47), "Aluminum");
-		slices[1] = new Slice(getGlass(), new Color(148, 255, 123), "Glass");;
+		slices[1] = new Slice(getGlass(), new Color(68, 204, 37), "Glass");;
 	}
 	
 	@Override
 	public void paintComponent(Graphics g){
+		super.paintComponent(g);
 		drawPie((Graphics2D)g, getBounds(), slices);
 	}
 	
 	private void drawPie(Graphics2D g, Rectangle area, Slice[] slices){
-	    double total = 0.0D;
+		double total = 0.0D;
 	    for (Slice s: slices) {
 	    	total += s.value;
 	    }
@@ -53,13 +55,13 @@ public class ItemChart extends GraphicDisplay{
 	    	int arcAngle = (int) (s.value * 360 / total);
 	      
 	    	g.setColor(s.color);
-	    	g.fillArc(50, 50, area.width - 50, area.height - 50, startAngle, arcAngle);
+	    	g.fillArc(40, 40, area.width - 40, area.height - 40, startAngle, arcAngle);
 		      
 	    	curValue += s.value;
 	    }
 	    
 	    int x = 0;
-	    int y = 20;
+	    int y = 35;
 	    for(Slice s: slices){
 	    	g.setColor(s.color);
 	    	g.fillRect(x, y, 10, 10);
@@ -69,6 +71,10 @@ public class ItemChart extends GraphicDisplay{
 	    	g.drawString ((s.name + " " + percentage + "%"), x + 15, y + 10);
 	    	y += 15;
 	    }
+	    
+	    g.setColor(Color.BLACK);
+	    g.setFont(new Font("SansSerif", Font.BOLD, 14));
+		g.drawString("% Contributions by Material", 30, 25);
 	}
 	
 	private double getAluminum(){

@@ -46,9 +46,7 @@ public class GraphGenerator extends GraphicDisplay{
 		
 		add(graphAxis, BorderLayout.EAST);
 		
-		JPanel graph = new JPanel();
-		setBorder(new EmptyBorder(10, 10, 10, 10) );
-		
+		BarGraph graph = new BarGraph();	
 		add(graph, BorderLayout.CENTER);
 		
 	}

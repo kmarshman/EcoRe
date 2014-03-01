@@ -51,6 +51,7 @@ public class ActiveMachineTable extends DisplayTable{
 		JPanel machineTable = new JPanel(new BorderLayout());
 		
 		JLabel tableTitle = new JLabel("Active Machines");
+		setFont(new Font("SansSerif", Font.BOLD, 14));
 		tableTitle.setFont(new Font("Serif", Font.BOLD, 14));
 		
 		String[] columnNames = {"ID", "Location", "Status", "Notes"};
