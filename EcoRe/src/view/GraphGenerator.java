@@ -48,7 +48,6 @@ public class GraphGenerator extends GraphicDisplay{
 		
 		JPanel graph = new JPanel();
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
-		graph.setBackground(new Color(0x00FF00));
 		
 		add(graph, BorderLayout.CENTER);
 		
