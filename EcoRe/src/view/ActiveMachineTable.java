@@ -68,6 +68,10 @@ public class ActiveMachineTable extends DisplayTable{
 	        }
 	      };
 		super.setTable(new JTable(model));
+		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(5);
+		super.getTable().getColumnModel().getColumn(1).setPreferredWidth(200);
+		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(30);
+		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(30);
 		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		machineTable.add(tableTitle, BorderLayout.NORTH);

@@ -78,8 +78,14 @@ public class MachineControl extends JPanel {
 				final JComponent[] inputs = new JComponent[] {
 						new JLabel("Enter the location of the new machine."),location
 				};
+				
 				JOptionPane.showMessageDialog(null, inputs, "Add New Machine", JOptionPane.PLAIN_MESSAGE);
-				rmos.addRCM(new RCM(location.getText().trim()));
+				String newLocation = location.getText().trim();
+				if(newLocation.length() > 0){
+					rmos.addRCM(new RCM(newLocation));
+				}else{
+					JOptionPane.showMessageDialog(null,"Please enter a location for the machine.", "Add New Machine Failed", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		

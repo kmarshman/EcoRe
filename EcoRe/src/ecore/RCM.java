@@ -3,6 +3,7 @@ package ecore;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
+import java.util.Random;
 
 /**
  * Represents recycling machine
@@ -38,13 +39,14 @@ public class RCM extends Observable{
 	private double capacity, weight, cash;
 	private int couponPaper;
 	private Date timeLastEmptied;
+	private Random random = new Random();
 	/**
 	 * shared array list of accepted items
 	 */
 	private static ArrayList<Item> acceptedItems = new ArrayList<Item>();
 	
 	public RCM(String location){
-		id = String.valueOf(Math.random() * ( 9999 - 1000 ));
+		id = String.valueOf(random.nextInt(9999-1000) + 1000);
 		this.location = location;
 		status = Status.ACTIVE;
 		state = State.OPERATING;

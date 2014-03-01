@@ -79,7 +79,17 @@ public class RecyclablesControl extends JPanel {
 					newType = rmos.getAluminum();
 					break;
 				}
-				rmos.addItem(new Item(name.getText().trim(), newType, Double.parseDouble(weight.getText().trim())));
+				try{
+					double newWeight = Double.parseDouble(weight.getText().trim());
+					String newName = name.getText().trim();
+					if(newName.length() > 0){
+						rmos.addItem(new Item(newName, newType, newWeight));
+					}else{
+						JOptionPane.showMessageDialog(null,"Please enter a name for the item.", "Add New Item Failed", JOptionPane.ERROR_MESSAGE);
+					}
+				}catch (NumberFormatException nfe){
+					JOptionPane.showMessageDialog(null,"Please enter numbers only for the item's weight.", "Add New Item Failed", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		

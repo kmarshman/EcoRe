@@ -66,16 +66,21 @@ public class ItemTypeControl extends JPanel {
 		for (String type: selectedRows){
 			JTextField price = new JTextField();
 			final JComponent[] inputs = new JComponent[] {
-					new JLabel("New price:"), price
+					new JLabel("New price for " + type + " items:"), price
 			};
 			JOptionPane.showMessageDialog(null, inputs, ("Change Price of " + type), JOptionPane.PLAIN_MESSAGE);
-			switch(type){
-			case "Glass":
-				rmos.setGlassPrice(Double.parseDouble(price.getText().trim()));
-				break;
-			case "Aluminum":
-				rmos.setAluminumPrice(Double.parseDouble(price.getText().trim()));
-				break;
+			try{
+				double newPrice= Double.parseDouble(price.getText().trim());
+				switch(type){
+				case "Glass":
+					rmos.setGlassPrice(newPrice);
+					break;
+				case "Aluminum":
+					rmos.setAluminumPrice(newPrice);
+					break;
+				}
+			}catch(NumberFormatException nfe){
+				JOptionPane.showMessageDialog(null,"Please enter numbers only.", "Change Price Failed", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}

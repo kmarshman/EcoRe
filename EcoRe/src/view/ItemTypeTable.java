@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -33,6 +34,7 @@ public class ItemTypeTable extends DisplayTable {
 		super.setRmos(rmos);
 		
 		setLayout(new BorderLayout());
+		setPreferredSize(new Dimension(100, 100));
 		
 		display();
 	}
