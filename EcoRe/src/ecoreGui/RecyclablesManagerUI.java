@@ -5,10 +5,10 @@ import java.awt.Dimension;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
-import control.ItemTypeControl;
-import control.RecyclablesControl;
-import view.ItemTypeTable;
-import view.RecyclablesTable;
+import ecoreGui.control.ItemTypeControl;
+import ecoreGui.control.RecyclablesControl;
+import ecoreGui.view.ItemTypeTable;
+import ecoreGui.view.RecyclablesTable;
 import ecore.RMOS;
 
 /**

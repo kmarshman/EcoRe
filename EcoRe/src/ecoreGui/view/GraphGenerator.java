@@ -1,9 +1,11 @@
-package view;
+package ecoreGui.view;
 
 import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import ecore.RMOS;
 
 /**
  * Usage statistics visualization panel
@@ -13,12 +15,18 @@ import javax.swing.border.EmptyBorder;
 public class GraphGenerator extends GraphicDisplay{
 
 	private static final long serialVersionUID = 1L;
-
+	
 	/**
-	 * Creates new graph panel
-	 * TODO: this class is still in process
+	 * Default constructor
 	 */
 	public GraphGenerator(){
+		new GraphGenerator(new RMOS());
+	}
+	
+	/**
+	 * Creates new statistics graph panel
+	 */
+	public GraphGenerator(RMOS rmos){
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(500, 1000));
 		
@@ -46,7 +54,7 @@ public class GraphGenerator extends GraphicDisplay{
 		
 		add(graphAxis, BorderLayout.EAST);
 		
-		BarGraph graph = new BarGraph();	
+		BarGraph graph = new BarGraph(rmos);	
 		add(graph, BorderLayout.CENTER);
 		
 	}

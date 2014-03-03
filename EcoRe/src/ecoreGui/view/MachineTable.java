@@ -1,4 +1,4 @@
-package view;
+package ecoreGui.view;
 
 import java.awt.BorderLayout;
 

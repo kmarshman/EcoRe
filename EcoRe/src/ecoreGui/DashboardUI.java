@@ -2,9 +2,9 @@ package ecoreGui;
 
 import javax.swing.*;
 
-import view.ActiveMachineTable;
-import view.GraphGenerator;
-import view.ItemChart;
+import ecoreGui.view.ActiveMachineTable;
+import ecoreGui.view.GraphGenerator;
+import ecoreGui.view.ItemChart;
 import ecore.RMOS;
 
 /**
@@ -32,7 +32,7 @@ public class DashboardUI extends JPanel{
 		DashboardUI.rmos = rmos;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
-		GraphGenerator graph = new GraphGenerator();
+		GraphGenerator graph = new GraphGenerator(rmos);
 		add(graph);
 		
 		JPanel wrapper = new JPanel();

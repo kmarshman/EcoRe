@@ -13,7 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ecore.RMOS;
-import view.Login;
+import ecoreGui.view.Login;
 
 public class RmosWelcomeUI extends JPanel{
 	

@@ -1,4 +1,4 @@
-package view;
+package ecoreGui.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -11,6 +11,8 @@ import java.util.Arrays;
 
 import javax.swing.border.EmptyBorder;
 
+import ecore.RMOS;
+
 public class BarGraph extends GraphicDisplay {
 
 	private static final long serialVersionUID = 1L;
@@ -19,7 +21,8 @@ public class BarGraph extends GraphicDisplay {
 	private ArrayList<Double> values;
 	private String title;
 
-	public BarGraph(){
+	public BarGraph(RMOS rmos){
+		setRmos(rmos);
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
 	}
 	

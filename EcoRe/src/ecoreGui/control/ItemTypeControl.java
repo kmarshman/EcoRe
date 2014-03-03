@@ -1,4 +1,4 @@
-package control;
+package ecoreGui.control;
 
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;

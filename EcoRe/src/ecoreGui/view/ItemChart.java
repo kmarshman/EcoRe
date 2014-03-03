@@ -1,4 +1,4 @@
-package view;
+package ecoreGui.view;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -29,9 +29,14 @@ public class ItemChart extends GraphicDisplay{
 	}
 	
 	public ItemChart(RMOS rmos){
+		setRmos(rmos);
 		setPreferredSize(new Dimension(250, 250));
 		setBorder(new EmptyBorder(50, 50, 50, 50));
+		getSlices();
 		
+	}
+	
+	private void getSlices(){
 		slices[0] = new Slice(getAluminum(), new Color(85, 255, 47), "Aluminum");
 		slices[1] = new Slice(getGlass(), new Color(68, 204, 37), "Glass");;
 	}
@@ -39,10 +44,11 @@ public class ItemChart extends GraphicDisplay{
 	@Override
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		drawPie((Graphics2D)g, getBounds(), slices);
+		getSlices();
+		drawPie((Graphics2D)g, getBounds());
 	}
 	
-	private void drawPie(Graphics2D g, Rectangle area, Slice[] slices){
+	private void drawPie(Graphics2D g, Rectangle area){
 		double total = 0.0D;
 	    for (Slice s: slices) {
 	    	total += s.value;

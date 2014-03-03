@@ -4,8 +4,8 @@ import java.awt.BorderLayout;
 
 import javax.swing.*;
 
-import control.MachineControl;
-import view.MachineTable;
+import ecoreGui.control.MachineControl;
+import ecoreGui.view.MachineTable;
 import ecore.RMOS;
 
 /**
