@@ -49,7 +49,7 @@ public class RecycleSessionUI extends JPanel {
 		rightPanel.add(messagelabel);
 
 		String aluminiumIcsPath[] =  {
-				"C:/Users/Shweta/git/EcoRe/EcoRe/src/Images/coca-cola.jpg",
+			"EcoRe/EcoRe/src/Images/coca-cola.jpg",
 		};
 		int aluminiumIcsCount = aluminiumIcsPath.length;
 		ImageIcon icsObj[] = new ImageIcon[aluminiumIcsCount];

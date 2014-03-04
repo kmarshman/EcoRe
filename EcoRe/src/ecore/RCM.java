@@ -113,5 +113,9 @@ public class RCM extends Observable{
 	public void setStatus(Status status){
 		this.status = status;
 	}
+	
+	public void addCash(double cash){
+		this.cash += cash;
+	}
 
 }
