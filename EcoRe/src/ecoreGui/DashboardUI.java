@@ -2,8 +2,8 @@ package ecoreGui;
 
 import javax.swing.*;
 
+import ecoreGui.control.GraphGenerator;
 import ecoreGui.view.ActiveMachineTable;
-import ecoreGui.view.GraphGenerator;
 import ecoreGui.view.ItemChart;
 import ecore.RMOS;
 
@@ -28,7 +28,7 @@ public class DashboardUI extends JPanel{
 	 * Creates new dashboard display for given RMOS
 	 * @param rmos
 	 */
-	public DashboardUI(RMOS rmos){
+	public DashboardUI(RMOS rmos){		
 		DashboardUI.rmos = rmos;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		

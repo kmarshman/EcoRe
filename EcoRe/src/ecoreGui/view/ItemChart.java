@@ -37,8 +37,8 @@ public class ItemChart extends GraphicDisplay{
 	}
 	
 	private void getSlices(){
-		slices[0] = new Slice(getAluminum(), new Color(85, 255, 47), "Aluminum");
-		slices[1] = new Slice(getGlass(), new Color(68, 204, 37), "Glass");;
+		slices[0] = new Slice(getRmos().getTotalAluminumWeight(), new Color(85, 255, 47), "Aluminum");
+		slices[1] = new Slice(getRmos().getTotalGlassWeight(), new Color(68, 204, 37), "Glass");;
 	}
 	
 	@Override
@@ -81,13 +81,5 @@ public class ItemChart extends GraphicDisplay{
 	    g.setColor(Color.BLACK);
 	    g.setFont(new Font("SansSerif", Font.BOLD, 14));
 		g.drawString("% Contributions by Material", 30, 25);
-	}
-	
-	private double getAluminum(){
-		return 80;
-	}
-	
-	private double getGlass(){
-		return 20;
 	}
 }

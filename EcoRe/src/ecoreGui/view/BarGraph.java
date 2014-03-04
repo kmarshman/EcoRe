@@ -21,15 +21,15 @@ public class BarGraph extends GraphicDisplay {
 	private ArrayList<Double> values;
 	private String title;
 
-	public BarGraph(RMOS rmos){
+	public BarGraph(RMOS rmos, String title){
 		setRmos(rmos);
+		this.title = title;
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
 	}
 	
 	private void setData(){
 		ids = new ArrayList<String>(Arrays.asList("1234", "2334", "1212", "24242", "23112", "1231", "3213"));
 		values = new ArrayList<Double>(Arrays.asList(21.4, 43.3, 64.54, 34.23, 54.12, 52.176));
-		title = "Chart Title";
 	}
 	@Override
 	public void paintComponent(Graphics g){

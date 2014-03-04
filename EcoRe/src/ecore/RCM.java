@@ -29,7 +29,7 @@ public class RCM extends Observable{
 	 *
 	 */
 	public enum State {
-		FULL, NEAR_CAPACITY, NEED_CASH, NEED_COUPONS, OPERATING;
+		OPERATIONAL, NONOPERATIONAL;
 	}
 	
 	private String id;
@@ -48,8 +48,8 @@ public class RCM extends Observable{
 	public RCM(String location){
 		id = String.valueOf(random.nextInt(9999-1000) + 1000);
 		this.location = location;
-		status = Status.ACTIVE;
-		state = State.OPERATING;
+		status = Status.INACTIVE;
+		state = State.OPERATIONAL;
 		capacity = 250;
 		weight = 0;
 		cash = 500;
@@ -61,7 +61,7 @@ public class RCM extends Observable{
 		id = "423423";
 		location = "not set";
 		status = Status.INACTIVE;
-		state = State.OPERATING;
+		state = State.OPERATIONAL;
 		capacity = 250;
 		weight = 0;
 		cash = 500;

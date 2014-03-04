@@ -1,4 +1,4 @@
-package ecoreGui.view;
+package ecoreGui.control;
 
 import java.awt.*;
 
@@ -6,6 +6,8 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import ecore.RMOS;
+import ecoreGui.view.BarGraph;
+import ecoreGui.view.GraphicDisplay;
 
 /**
  * Usage statistics visualization panel
@@ -54,7 +56,7 @@ public class GraphGenerator extends GraphicDisplay{
 		
 		add(graphAxis, BorderLayout.EAST);
 		
-		BarGraph graph = new BarGraph(rmos);	
+		BarGraph graph = new BarGraph(rmos, "Chart Title");	
 		add(graph, BorderLayout.CENTER);
 		
 	}

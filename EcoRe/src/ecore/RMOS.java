@@ -17,6 +17,9 @@ public class RMOS extends Observable{
 	private ItemType[] itemTypes = new ItemType[2];
 	private ArrayList<Item> acceptedItems = new ArrayList<Item>();
 	
+	private double totalAluminum;
+	private double totalGlass;
+	
 	/**
 	 * Creates new RMOS with default managers and item types
 	 */
@@ -26,6 +29,9 @@ public class RMOS extends Observable{
 		
 		itemTypes[0] = new ItemType("Glass", 1.00);
 		itemTypes[1] = new ItemType("Aluminum", 0.75);
+		
+		totalAluminum = 80;
+		totalGlass = 20;
 	}
 	
 	/**
@@ -158,5 +164,19 @@ public class RMOS extends Observable{
 		setChanged();
 		notifyObservers(this);
 	}
-
+	
+	public double getTotalAluminumWeight(){
+		return totalAluminum;
+	}
+	
+	public double getTotalGlassWeight(){
+		return totalGlass;
+	}
+	
+	public void resetItemStatistics(){
+		totalAluminum = 60;
+		totalGlass = 40;
+		setChanged();
+		notifyObservers(this);
+	}
 }
