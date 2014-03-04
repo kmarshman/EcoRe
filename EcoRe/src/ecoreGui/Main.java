@@ -32,7 +32,7 @@ public class Main extends JFrame {
 		
 		setLayout(new GridLayout(1,2));
 		
-		RcmUI rcmUI = new RcmUI();
+		RcmUI rcmUI = new RcmUI(rmos);
 		RmosUI rmosUI = new RmosUI(rmos);
     	
     	getContentPane().add(rmosUI);
