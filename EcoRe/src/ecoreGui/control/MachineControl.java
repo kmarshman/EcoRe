@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -11,13 +12,13 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import ecore.RCM;
 import ecore.RMOS;
 import ecore.RCM.Status;
+import ecoreGui.view.MachineTable;
 
 /**
  * RCM group control panel
@@ -28,12 +29,13 @@ public class MachineControl extends JPanel {
 	
 	private static final long serialVersionUID = 1L;
 	private JComboBox<String> actions;
+	private Random random = new Random();
 
 	/**
 	 * Default Constructor
 	 */
 	public MachineControl(){
-		new MachineControl(new RMOS(), new JTable());
+		new MachineControl(new RMOS(), new MachineTable());
 	}
 	
 	/**
@@ -41,7 +43,7 @@ public class MachineControl extends JPanel {
 	 * @param rmos
 	 * @param table table with user selections
 	 */
-	public MachineControl(final RMOS rmos, final JTable table){
+	public MachineControl(final RMOS rmos, final MachineTable table){
 		setLayout(new BorderLayout());
 		
 		String[] options = {"I want to...", "Activate", "Deactivate", "Remove"};
@@ -49,9 +51,9 @@ public class MachineControl extends JPanel {
 		actions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				ArrayList<String> selectedRows = new ArrayList<String>();
-				for(int i = 0; i < table.getRowCount(); i++) {
-				     if((Boolean) table.getValueAt(i, 0)) {
-				         selectedRows.add((String)table.getValueAt(i, 1));
+				for(int i = 0; i < table.getTable().getRowCount(); i++) {
+				     if((Boolean) table.getTable().getValueAt(i, 0)) {
+				         selectedRows.add((String)table.getTable().getValueAt(i, 1));
 				     }
 				}
 				switch(actions.getSelectedIndex()){
@@ -82,7 +84,19 @@ public class MachineControl extends JPanel {
 				JOptionPane.showMessageDialog(null, inputs, "Add New Machine", JOptionPane.PLAIN_MESSAGE);
 				String newLocation = location.getText().trim();
 				if(newLocation.length() > 0){
-					rmos.addRCM(new RCM(newLocation));
+					String id = null;
+					while(id == null){
+						String temp = String.valueOf(random.nextInt(9999-1000) + 1000);
+						boolean taken = false;
+						for(RCM rcm : rmos.getRCMGroup()){
+							if (rcm.getID().equals(temp)){
+								taken = true;
+								break;
+							}
+						}
+						if(!taken) id = temp;
+					}
+					rmos.addRCM(new RCM(newLocation, id));
 				}else{
 					JOptionPane.showMessageDialog(null,"Please enter a location for the machine.", "Add New Machine Failed", JOptionPane.ERROR_MESSAGE);
 				}

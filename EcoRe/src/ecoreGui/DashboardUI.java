@@ -1,5 +1,6 @@
 package ecoreGui;
 
+
 import javax.swing.*;
 
 import ecoreGui.control.GraphGenerator;
@@ -28,7 +29,7 @@ public class DashboardUI extends JPanel{
 	 * Creates new dashboard display for given RMOS
 	 * @param rmos
 	 */
-	public DashboardUI(RMOS rmos){		
+	public DashboardUI(RMOS rmos){
 		DashboardUI.rmos = rmos;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		

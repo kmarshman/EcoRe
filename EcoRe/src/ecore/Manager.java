@@ -1,12 +1,15 @@
 package ecore;
 
+import java.io.Serializable;
+
 /**
  * Represents an RMOS manager
  * @author Kelsey
  *
  */
-public class Manager {
+public class Manager implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private String username;
 	private String password;
 	

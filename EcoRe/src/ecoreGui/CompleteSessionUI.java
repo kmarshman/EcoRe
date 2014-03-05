@@ -6,13 +6,16 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
+
 import ecore.RMOS;
 
 public class CompleteSessionUI extends JPanel {
@@ -36,7 +39,8 @@ public class CompleteSessionUI extends JPanel {
 		JPanel centrePanel = new JPanel(new BorderLayout());
 		centrePanel.setBackground(Color.cyan);
 		//Hardcoded values
-		JLabel messagelabel = new JLabel("<html>You Deposited : <br>Glass : 2.3lb <br> Aluminium : 1.43lb <br> Plastic : 0.56lb </html>");
+		JLabel messagelabel = new JLabel("<html><center>You Deposited: <center>Glass : 2.3lb <br> Aluminium : 1.43lb <br> Plastic : 0.56lb </html>");
+		messagelabel.setHorizontalAlignment(SwingConstants.CENTER);
 		//JLabel glass = new JLabel("<html>Glass : 2.3lb <br> Aluminium : 1.43lb <br> Plastic : 0.56lb");
 		//JLabel aluminium = new JLabel("Aluminium : 1.43lb");
 		//JLabel plastic = new JLabel("Plastic : 0.56lb");

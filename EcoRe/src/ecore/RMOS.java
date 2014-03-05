@@ -1,5 +1,6 @@
 package ecore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 
@@ -10,8 +11,9 @@ import ecore.RCM.Status;
  * @author Kelsey
  *
  */
-public class RMOS extends Observable{
+public class RMOS extends Observable implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private Manager[] managers = new Manager[2];
 	private ArrayList<RCM> rcmGroup = new ArrayList<RCM>();
 	private ItemType[] itemTypes = new ItemType[2];
@@ -115,6 +117,7 @@ public class RMOS extends Observable{
 	 */
 	public void addItem(Item newItem){
 		acceptedItems.add(newItem);
+		rcmGroup.get(0).getAcceptedItems().add(newItem);
 		setChanged();
 		notifyObservers(this);
 	}
@@ -129,6 +132,7 @@ public class RMOS extends Observable{
 			if (i.getName().equals(name)) itemToRemove = i;
 		}
 		acceptedItems.remove(itemToRemove);
+		rcmGroup.get(0).getAcceptedItems().remove(itemToRemove);
 		setChanged();
 		notifyObservers(this);
 	}
@@ -173,7 +177,7 @@ public class RMOS extends Observable{
 		return totalGlass;
 	}
 	
-	public void resetItemStatistics(){
+	public void setItemStatistics(){
 		totalAluminum = 60;
 		totalGlass = 40;
 		setChanged();

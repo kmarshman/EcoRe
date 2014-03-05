@@ -39,7 +39,7 @@ public class RecyclablesManagerUI extends JPanel{
 		RecyclablesTable tableView = new RecyclablesTable(rmos);
 		tableView.setBorder(new EmptyBorder(10, 10, 10, 10));
 		RecyclablesManagerUI.rmos.addObserver(tableView);
-		RecyclablesControl control = new RecyclablesControl(rmos, tableView.getTable());
+		RecyclablesControl control = new RecyclablesControl(rmos, tableView);
 		control.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		add(tableView);
@@ -50,7 +50,7 @@ public class RecyclablesManagerUI extends JPanel{
 		ItemTypeTable itemTableView = new ItemTypeTable(rmos);
 		itemTableView.setBorder(new EmptyBorder(10, 10, 10, 10));
 		RecyclablesManagerUI.rmos.addObserver(itemTableView);
-		ItemTypeControl itemControl = new ItemTypeControl(rmos, itemTableView.getTable());
+		ItemTypeControl itemControl = new ItemTypeControl(rmos, itemTableView);
 		itemControl.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
 		add(itemTableView);

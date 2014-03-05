@@ -1,11 +1,17 @@
 package ecoreGui;
 
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 import javax.swing.*;
 
-import ecore.Item;
-import ecore.RCM;
 import ecore.RMOS;
 
 /**
@@ -21,7 +27,7 @@ public class Main extends JFrame {
 	 * Creates main window split into 2 panels: left for RMOS and right for RCMs
 	 * @param rmos instance of model represented by UI
 	 */
-	public Main(RMOS rmos){
+	public Main(final RMOS rmos, final File rmosFile){
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setTitle("EcoRe");
 		
@@ -39,24 +45,48 @@ public class Main extends JFrame {
     	getContentPane().add(rcmUI);
     	
     	setVisible(true);
+    	
+    	addWindowListener(new WindowAdapter() {
+    		public void windowClosing(WindowEvent e) {
+    			try{
+    				FileOutputStream fileOut = new FileOutputStream(rmosFile, false); 
+			        ObjectOutputStream out = new ObjectOutputStream(fileOut);
+			        out.writeObject(rmos);
+			        out.close();
+			        fileOut.close();
+			   }catch(IOException i){
+			        i.printStackTrace();
+			   }
+    		}
+    	});
 	}
 	
-	/**
-	 * TODO: RCMs and Items are hardcoded for testing purposes
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		RMOS rmos = new RMOS();
+		RMOS rmos = null;
+	    try{
+	    	FileInputStream fileIn = new FileInputStream("rmos.ser");
+	    	ObjectInputStream in = new ObjectInputStream(fileIn);
+	    	rmos = (RMOS) in.readObject();
+	    	in.close();
+	    	fileIn.close();
+	    }catch(IOException i){
+	    	i.printStackTrace();
+	    	return;
+	    }catch(ClassNotFoundException c){
+	    	System.out.println("RMOS class not found");
+	    	c.printStackTrace();
+	    	return;
+	    }
 		
-		rmos.addRCM(new RCM("test location"));
-		rmos.addRCM(new RCM("test location2"));
-		rmos.addRCM(new RCM("test location3"));
-		rmos.addRCM(new RCM());
-		
-		rmos.addItem(new Item("Soda Can", rmos.getAluminum(), .5));
-		rmos.addItem(new Item("Pop-top Soup Can", rmos.getAluminum(), .53));
-		rmos.addItem(new Item("Jam Jar", rmos.getGlass(), .74));
-
-		new Main(rmos);
+	   	File file = new File("rmos.ser");
+	   	if(!file.exists()) {
+	   	    try {
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+	   	}
+   	 
+		new Main(rmos, file);
 	}
 }

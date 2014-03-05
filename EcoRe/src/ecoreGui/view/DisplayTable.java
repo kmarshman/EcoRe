@@ -34,6 +34,7 @@ public abstract class DisplayTable extends JPanel implements Observer {
 	
 	@Override
 	public void update(Observable o, Object arg) {
+		//System.out.println("update");
 		rmos = (RMOS)arg;
 		this.display();
 	}

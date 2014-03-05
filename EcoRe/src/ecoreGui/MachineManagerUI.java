@@ -35,7 +35,7 @@ public class MachineManagerUI extends JPanel{
 		
 		MachineTable tableView = new MachineTable(rmos);
 		MachineManagerUI.rmos.addObserver(tableView);
-		MachineControl control = new MachineControl(rmos, tableView.getTable());
+		MachineControl control = new MachineControl(rmos, tableView);
 		
 		add(tableView, BorderLayout.CENTER);
 		add(control, BorderLayout.SOUTH);	

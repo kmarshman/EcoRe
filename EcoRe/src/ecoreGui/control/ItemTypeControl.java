@@ -10,11 +10,11 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import ecore.RMOS;
+import ecoreGui.view.ItemTypeTable;
 
 /**
  * Control panel for item types
@@ -29,7 +29,7 @@ public class ItemTypeControl extends JPanel {
 	 * Default Constructor
 	 */
 	public ItemTypeControl(){
-		new ItemTypeControl(new RMOS(), new JTable());
+		new ItemTypeControl(new RMOS(), new ItemTypeTable());
 	}
 	
 	/**
@@ -37,7 +37,7 @@ public class ItemTypeControl extends JPanel {
 	 * @param rmos
 	 * @param table
 	 */
-	public ItemTypeControl(final RMOS rmos, final JTable table){
+	public ItemTypeControl(final RMOS rmos, final ItemTypeTable table){
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 75, 200, 75) );
 		
@@ -45,9 +45,9 @@ public class ItemTypeControl extends JPanel {
 		changePrice.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				ArrayList<String> selectedRows = new ArrayList<String>();
-				for(int i = 0; i < table.getRowCount(); i++) {
-				     if((Boolean) table.getValueAt(i, 0)) {
-				         selectedRows.add((String)table.getValueAt(i, 1));
+				for(int i = 0; i < table.getTable().getRowCount(); i++) {
+				     if((Boolean) table.getTable().getValueAt(i, 0)) {
+				         selectedRows.add((String)table.getTable().getValueAt(i, 1));
 				     }
 				}
 				changePrice(selectedRows, rmos);

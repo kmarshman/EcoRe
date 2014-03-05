@@ -11,13 +11,13 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import ecore.Item;
 import ecore.ItemType;
 import ecore.RMOS;
+import ecoreGui.view.RecyclablesTable;
 
 /**
  * Control panel for recyclable items
@@ -32,7 +32,7 @@ public class RecyclablesControl extends JPanel {
 	 * Default Constructor
 	 */
 	public RecyclablesControl(){
-		new RecyclablesControl(new RMOS(), new JTable());
+		new RecyclablesControl(new RMOS(), new RecyclablesTable());
 	}
 	
 	/**
@@ -40,7 +40,7 @@ public class RecyclablesControl extends JPanel {
 	 * @param rmos
 	 * @param table
 	 */
-	public RecyclablesControl(final RMOS rmos, final JTable table){
+	public RecyclablesControl(final RMOS rmos, final RecyclablesTable table){
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 75, 200, 75) );
 		
@@ -48,9 +48,9 @@ public class RecyclablesControl extends JPanel {
 		removeRecyclable.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				ArrayList<String> selectedRows = new ArrayList<String>();
-				for(int i = 0; i < table.getRowCount(); i++) {
-				     if((Boolean) table.getValueAt(i, 0)) {
-				         selectedRows.add((String)table.getValueAt(i, 1));
+				for(int i = 0; i < table.getTable().getRowCount(); i++) {
+				     if((Boolean) table.getTable().getValueAt(i, 0)) {
+				         selectedRows.add((String)table.getTable().getValueAt(i, 1));
 				     }
 				}
 				removeItems(selectedRows, rmos);

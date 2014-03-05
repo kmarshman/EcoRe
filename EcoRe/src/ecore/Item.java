@@ -1,12 +1,15 @@
 package ecore;
 
+import java.io.Serializable;
+
 /**
  * Represents recyclable item
  * @author Kelsey
  *
  */
-public class Item {
+public class Item implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
 	private String name;
 	private ItemType type;
 	/**

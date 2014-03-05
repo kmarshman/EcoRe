@@ -1,17 +1,19 @@
 package ecore;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Observable;
-import java.util.Random;
 
 /**
  * Represents recycling machine
  * @author Kelsey
  *
  */
-public class RCM extends Observable{
+public class RCM extends Observable implements Serializable{
 	
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * Status options for RCM
 	 * Default: INACTIVE
@@ -39,14 +41,15 @@ public class RCM extends Observable{
 	private double capacity, weight, cash;
 	private int couponPaper;
 	private Date timeLastEmptied;
-	private Random random = new Random();
+	
+	private ArrayList<Item> sessionItems;
 	/**
 	 * shared array list of accepted items
 	 */
 	private static ArrayList<Item> acceptedItems = new ArrayList<Item>();
 	
-	public RCM(String location){
-		id = String.valueOf(random.nextInt(9999-1000) + 1000);
+	public RCM(String location, String id){
+		this.id = id;
 		this.location = location;
 		status = Status.INACTIVE;
 		state = State.OPERATIONAL;
@@ -58,15 +61,7 @@ public class RCM extends Observable{
 	}
 	
 	public RCM(){
-		id = "423423";
-		location = "not set";
-		status = Status.INACTIVE;
-		state = State.OPERATIONAL;
-		capacity = 250;
-		weight = 0;
-		cash = 500;
-		couponPaper= 100;
-		timeLastEmptied = new Date();
+		new RCM("not set", "-1");
 	}
 	
 	public String getID(){
@@ -116,6 +111,19 @@ public class RCM extends Observable{
 	
 	public void addCash(double cash){
 		this.cash += cash;
+	}
+	
+	public void recycleItem(Item item){
+		sessionItems.add(item);
+	}
+	
+	public double finishSession(){
+		double value = 0;
+		for(Item i : sessionItems){
+			value += i.getValue();
+		}
+		sessionItems = new ArrayList<Item>();
+		return value;
 	}
 
 }
