@@ -16,17 +16,22 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import ecore.RMOS;
+import ecore.RCM;
 
 public class CompleteSessionUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private static RMOS rmos;
-	protected Object cards;
-	protected Object cardPanel;
+	private RCM rcm;
+	private final CardLayout cards;
+	private final JPanel cardPanel;
 
-	public CompleteSessionUI(RMOS rmos,final CardLayout cards, final JPanel cardPanel){
-		CompleteSessionUI.rmos = rmos;
+	public CompleteSessionUI(RCM rcm,final CardLayout cards, final JPanel cardPanel){
+		this.rcm = rcm;
+		this.cards = cards;
+		this.cardPanel = cardPanel;
+	}
+	
+	public void display(){
 		//setBackground(Color.cyan);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setPreferredSize(new Dimension(590,620));
@@ -116,5 +121,11 @@ public class CompleteSessionUI extends JPanel {
 
 
 
+	}
+	
+	public void setRCM(RCM rcm){
+		this.rcm = rcm;
+		removeAll();
+		display();
 	}
 }

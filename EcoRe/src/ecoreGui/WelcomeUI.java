@@ -7,20 +7,30 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import ecore.RMOS;
+import ecore.RCM;
 
 public class WelcomeUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private RCM rcm;
+	private final CardLayout cards;
+	private final JPanel cardPanel;
 
-	public WelcomeUI(RMOS rmos, final CardLayout cards, final JPanel cardPanel)
+	public WelcomeUI(RCM rcm, CardLayout cards, JPanel cardPanel)
 	{
+		this.rcm = rcm;
+		this.cards = cards;
+		this.cardPanel = cardPanel;
+	}
+	
+	public void display(){
 		JPanel headingPanel = new JPanel(new BorderLayout());
 		JLabel WelcomeLabel = new JLabel("<html>Welcome to EcoRe <br> Recycle your aluminium , glass and plastic here </html>");
 		WelcomeLabel.setFont(new Font("Serif", Font.BOLD, 14));
@@ -83,6 +93,12 @@ public class WelcomeUI extends JPanel {
 
 
 
+	}
+	
+	public void setRCM(RCM rcm){
+		this.rcm = rcm;
+		removeAll();
+		display();
 	}
 
 }

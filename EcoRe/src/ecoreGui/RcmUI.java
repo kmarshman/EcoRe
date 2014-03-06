@@ -5,6 +5,7 @@ import java.awt.*;
 import javax.swing.*;
 
 import ecore.RMOS;
+import ecoreGui.control.RcmSelector;
 
 public class RcmUI extends JPanel {
 
@@ -14,15 +15,15 @@ public class RcmUI extends JPanel {
 		CardLayout cards = new CardLayout();
 		this.setLayout(cards);
 
-		WelcomeUI welcome = new WelcomeUI(rmos, cards, this);
-		RecycleSessionUI recycle = new RecycleSessionUI(rmos,cards, this);
-		CompleteSessionUI finish = new CompleteSessionUI(rmos,cards, this);
-		Thankyou thanks = new Thankyou(rmos, cards, this);
+		WelcomeUI welcome = new WelcomeUI(null, cards, this);
+		RecycleSessionUI recycle = new RecycleSessionUI(null,cards, this);
+		CompleteSessionUI finish = new CompleteSessionUI(null,cards, this);
+		RcmSelector selector = new RcmSelector(rmos, cards, this, welcome, recycle, finish);
 
+		add(selector, "RCM Selector");
 		add(welcome, "Welcome");
 		add(recycle, "Recycle");
 		add(finish, "Finish");
-		add(thanks, "Thankyou Message"); //new card
 	}
 	
 	

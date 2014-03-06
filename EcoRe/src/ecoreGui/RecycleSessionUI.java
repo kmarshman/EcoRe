@@ -16,22 +16,24 @@ import javax.swing.JTextArea;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import ecore.RMOS;
+import ecore.RCM;
 
 public class RecycleSessionUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private static RMOS rmos;
+	private RCM rcm;
+	private final CardLayout cards;
+	private final JPanel cardPanel;
 
-	public RecycleSessionUI()
+	public RecycleSessionUI(RCM rcm, CardLayout cards, JPanel cardPanel) 
 	{
-		new RecycleSessionUI(new RMOS(), null, null);
-	}
-	public RecycleSessionUI(RMOS rmos,final CardLayout cards, final JPanel cardPanel) 
-	{
-		this.rmos = rmos;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
+		this.rcm = rcm;
+		this.cards = cards;
+		this.cardPanel = cardPanel;
+	}
+	
+	public void display(){
 
 		JPanel panOuter = new JPanel(new BorderLayout());
 		JPanel leftPanel = new JPanel(new BorderLayout());
@@ -117,5 +119,11 @@ public class RecycleSessionUI extends JPanel {
 
 
 
+	}
+	
+	public void setRCM(RCM rcm){
+		this.rcm = rcm;
+		removeAll();
+		display();
 	}
 }
