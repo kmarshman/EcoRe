@@ -117,10 +117,6 @@ public class CompleteSessionUI extends JPanel {
 		bottomPanel.add(exitButton,BorderLayout.PAGE_END);
 		mainPanel.add(bottomPanel,BorderLayout.SOUTH);
 		add(mainPanel);
-
-
-
-
 	}
 	
 	public void setRCM(RCM rcm){

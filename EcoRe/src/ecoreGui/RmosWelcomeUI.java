@@ -31,7 +31,7 @@ public class RmosWelcomeUI extends JPanel{
 		cons.gridx = 2;
 		cons.gridy = 0;
 		cons.anchor = GridBagConstraints.PAGE_START;
-		JLabel welcome = new JLabel("<html><center>Welcome to EcoRe!<br>Enter your login informaiton to get started.<center><html>");
+		JLabel welcome = new JLabel("<html><center>Welcome to EcoRe!<br>Enter your login information to get started.<center><html>");
 		welcome.setFont(new Font("Serif", Font.BOLD, 14));
 		add(welcome, cons);
 		
