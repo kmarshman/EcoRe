@@ -6,6 +6,8 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Observable;
+import java.util.Observer;
 
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -18,16 +20,33 @@ import ecoreGui.CompleteSessionUI;
 import ecoreGui.RecycleSessionUI;
 import ecoreGui.WelcomeUI;
 
-public class RcmSelector extends JPanel{
+public class RcmSelector extends JPanel implements Observer{
 	
 	private static final long serialVersionUID = 1L;
 	private JComboBox<String> rcmChoice;
+	private GridBagConstraints cons;
+	private RMOS rmos;
+	private CardLayout cards;
+	private JPanel cardPanel;
+	private WelcomeUI welcome;
+	private RecycleSessionUI recycle;
+	private CompleteSessionUI complete;
 
-	public RcmSelector(final RMOS rmos, final CardLayout cards, final JPanel cardPanel, final WelcomeUI welcome, final RecycleSessionUI recycle, final CompleteSessionUI complete){
+	public RcmSelector(RMOS rmos, CardLayout cards, JPanel cardPanel, WelcomeUI welcome, RecycleSessionUI recycle, CompleteSessionUI complete){
 		setLayout(new GridBagLayout());
-		GridBagConstraints cons = new GridBagConstraints();
+		this.rmos = rmos;
+		this.cards = cards;
+		this.cardPanel = cardPanel;
+		this.welcome = welcome;
+		this.recycle = recycle;
+		this.complete = complete;
+		cons = new GridBagConstraints();
 		cons.fill = GridBagConstraints.NONE;
 		
+		display();
+	}
+	
+	public void display(){
 		cons.gridx = 2;
 		cons.gridy = 0;
 		cons.anchor = GridBagConstraints.PAGE_START;
@@ -62,5 +81,13 @@ public class RcmSelector extends JPanel{
 			}
 		});
 		selection.add(rcmChoice);
+	}
+
+	@Override
+	public void update(Observable arg0, Object arg1) {
+		this.rmos = (RMOS)arg1;
+		removeAll();
+		display();
+		
 	}
 }
