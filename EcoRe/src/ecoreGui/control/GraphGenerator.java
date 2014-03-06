@@ -1,22 +1,25 @@
 package ecoreGui.control;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
 import ecore.RMOS;
 import ecoreGui.view.BarGraph;
-import ecoreGui.view.GraphicDisplay;
 
 /**
  * Usage statistics visualization panel
  * @author Kelsey
  *
  */
-public class GraphGenerator extends GraphicDisplay{
+public class GraphGenerator extends JPanel{
 
 	private static final long serialVersionUID = 1L;
+	private JComboBox<String> metrics;
+	private JComboBox<String> timeframes;
 	
 	/**
 	 * Default constructor
@@ -28,7 +31,7 @@ public class GraphGenerator extends GraphicDisplay{
 	/**
 	 * Creates new statistics graph panel
 	 */
-	public GraphGenerator(RMOS rmos){
+	public GraphGenerator(final RMOS rmos){
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(500, 1000));
 		
@@ -40,7 +43,7 @@ public class GraphGenerator extends GraphicDisplay{
 		cons.gridx = 1;
 		cons.gridy = 1;
 		String[] metricOptions = {"Value", "Weight"};
-		JComboBox<String> metrics = new JComboBox<String>(metricOptions);
+		metrics = new JComboBox<String>(metricOptions);
 		graphAxis.add(metrics, cons);
 		
 		cons.gridx = 1;
@@ -51,12 +54,30 @@ public class GraphGenerator extends GraphicDisplay{
 		cons.gridx = 1;
 		cons.gridy = 3;
 		String[] timeframeOptions = {"Day", "Week", "Month"};
-		JComboBox<String> timeframes = new JComboBox<String>(timeframeOptions);
+		timeframes = new JComboBox<String>(timeframeOptions);
 		graphAxis.add(timeframes, cons);
+		
+		cons.gridx = 1;
+		cons.gridy = 4;
+		graphAxis.add(blank, cons);
+		
+		cons.gridx = 1;
+		cons.gridy = 5;
+		JButton create = new JButton("Go");
+		create.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
+				String metric = metrics.getItemAt(metrics.getSelectedIndex());
+				String time = timeframes.getItemAt(timeframes.getSelectedIndex());
+				rmos.setChart((metric + " by " + time), metric, time);
+			}
+		});
+		graphAxis.add(create, cons);
+		
 		
 		add(graphAxis, BorderLayout.EAST);
 		
-		BarGraph graph = new BarGraph(rmos, "Chart Title");	
+		BarGraph graph = new BarGraph(rmos);
+		rmos.addObserver(graph);
 		add(graph, BorderLayout.CENTER);
 		
 	}

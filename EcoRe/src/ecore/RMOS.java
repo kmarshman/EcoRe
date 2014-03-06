@@ -22,6 +22,10 @@ public class RMOS extends Observable implements Serializable{
 	private double totalAluminum;
 	private double totalGlass;
 	
+	private transient String metric;
+	private transient String timeframe;
+	private transient String chartTitle;
+	
 	/**
 	 * Creates new RMOS with default managers and item types
 	 */
@@ -34,6 +38,10 @@ public class RMOS extends Observable implements Serializable{
 		
 		totalAluminum = 80;
 		totalGlass = 20;
+		
+		metric = "Value";
+		timeframe = "Day";
+		chartTitle = "Value By Day";
 	}
 	
 	/**
@@ -183,4 +191,25 @@ public class RMOS extends Observable implements Serializable{
 		setChanged();
 		notifyObservers(this);
 	}
+
+	public String getMetric() {
+		return metric;
+	}
+
+	public String getTimeframe() {
+		return timeframe;
+	}
+
+	public String getChartTitle() {
+		return chartTitle;
+	}
+	
+	public void setChart(String title, String metric, String timeframe){
+		chartTitle = title;
+		this.metric = metric;
+		this.timeframe = timeframe;
+		setChanged();
+		notifyObservers(this);
+	}
+
 }

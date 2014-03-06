@@ -67,11 +67,11 @@ public class Main extends JFrame {
 	    	FileInputStream fileIn = new FileInputStream("rmos.ser");
 	    	ObjectInputStream in = new ObjectInputStream(fileIn);
 	    	rmos = (RMOS) in.readObject();
+	    	rmos.setChart("Value by Day", "Value", "Day");
 	    	in.close();
 	    	fileIn.close();
 	    }catch(IOException i){
-	    	i.printStackTrace();
-	    	return;
+	    	rmos = new RMOS();
 	    }catch(ClassNotFoundException c){
 	    	System.out.println("RMOS class not found");
 	    	c.printStackTrace();

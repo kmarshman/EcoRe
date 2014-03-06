@@ -31,9 +31,7 @@ public class ItemChart extends GraphicDisplay{
 	public ItemChart(RMOS rmos){
 		setRmos(rmos);
 		setPreferredSize(new Dimension(250, 250));
-		setBorder(new EmptyBorder(50, 50, 50, 50));
-		getSlices();
-		
+		setBorder(new EmptyBorder(50, 50, 50, 50));		
 	}
 	
 	private void getSlices(){

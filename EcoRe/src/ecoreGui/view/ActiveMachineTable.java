@@ -56,7 +56,7 @@ public class ActiveMachineTable extends DisplayTable{
 		setFont(new Font("SansSerif", Font.BOLD, 14));
 		tableTitle.setFont(new Font("Serif", Font.BOLD, 14));
 		
-		String[] columnNames = {"ID", "Location", "Status", "Notes"};
+		String[] columnNames = {"ID", "Location", "State"};
 		
 		Object[][] rcms = getMachines();
 		
@@ -94,15 +94,14 @@ public class ActiveMachineTable extends DisplayTable{
 	 */
 	private Object[][] getMachines(){
 		int size = super.getRmos().getNumActiveRCMs();
-		Object[][] items = new Object[size][4];
+		Object[][] items = new Object[size][3];
 		
 		int count = 0;
 		for (RCM machine: super.getRmos().getRCMGroup()){
 			if (machine.getStatus() == Status.ACTIVE){
 				items[count][0] = machine.getID();
 				items[count][1] = machine.getLocation();
-				items[count][2] = machine.getStatus();
-				items[count][3] = machine.getState();
+				items[count][2] = machine.getState();
 				count++;
 			}
 		}
