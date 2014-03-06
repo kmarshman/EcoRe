@@ -211,5 +211,21 @@ public class RMOS extends Observable implements Serializable{
 		setChanged();
 		notifyObservers(this);
 	}
+	
+	public ArrayList<String> getIDs(){
+		ArrayList<String> ids = new ArrayList<String>();
+		for(RCM m: rcmGroup){
+			ids.add(m.getID());
+		}
+		return ids;
+	}
+	
+	public ArrayList<Double> getValues(){
+		ArrayList<Double> values = new ArrayList<Double>();
+		for(RCM m: rcmGroup){
+			values.add(1000 + Double.parseDouble(m.getID()));
+		}
+		return values;
+	}
 
 }
