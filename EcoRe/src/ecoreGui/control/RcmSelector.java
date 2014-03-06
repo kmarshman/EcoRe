@@ -6,6 +6,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Observable;
 import java.util.Observer;
 
@@ -15,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ecore.RCM;
+import ecore.RCM.Status;
 import ecore.RMOS;
 import ecoreGui.CompleteSessionUI;
 import ecoreGui.RecycleSessionUI;
@@ -31,6 +33,7 @@ public class RcmSelector extends JPanel implements Observer{
 	private WelcomeUI welcome;
 	private RecycleSessionUI recycle;
 	private CompleteSessionUI complete;
+	private ArrayList<RCM> activeMachines;
 
 	public RcmSelector(RMOS rmos, CardLayout cards, JPanel cardPanel, WelcomeUI welcome, RecycleSessionUI recycle, CompleteSessionUI complete){
 		setLayout(new GridBagLayout());
@@ -61,17 +64,24 @@ public class RcmSelector extends JPanel implements Observer{
 		selection.setBorder(new EmptyBorder(10, 10, 0, 10));
 		add(selection, cons);
 		
-		int size = rmos.getRCMGroup().size();
+		activeMachines = new ArrayList<RCM>();
+		for(RCM m: rmos.getRCMGroup()){
+			if(m.getStatus() == Status.ACTIVE){
+				activeMachines.add(m);
+			}
+		}
+		
+		int size = activeMachines.size();
 		String[] rcmList = new String[size + 1];
 		rcmList[0] = "Machine...";
 		for(int i = 0; i < size; i++){
-			rcmList[i+1] = rmos.getRCMGroup().get(i).getLocation() + ": "+ rmos.getRCMGroup().get(i).getID();
+			rcmList[i+1] = activeMachines.get(i).getLocation() + ": "+ activeMachines.get(i).getID();
 		}
 		rcmChoice = new JComboBox<String>(rcmList);
 		rcmChoice.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(rcmChoice.getSelectedIndex() != 0){
-					RCM rcm = rmos.getRCMGroup().get(rcmChoice.getSelectedIndex()-1);
+					RCM rcm = activeMachines.get(rcmChoice.getSelectedIndex()-1);
 					welcome.setRCM(rcm);
 					recycle.setRCM(rcm);
 					complete.setRCM(rcm);
