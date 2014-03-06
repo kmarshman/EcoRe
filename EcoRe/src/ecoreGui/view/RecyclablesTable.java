@@ -55,6 +55,12 @@ public class RecyclablesTable extends DisplayTable {
 	      
 		super.setTable(new JTable(model));
 		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(5);
+		super.getTable().getColumnModel().getColumn(1).setPreferredWidth(220);
+		super.getTable().getColumnModel().getColumn(2).setPreferredWidth(130);
+		super.getTable().getColumnModel().getColumn(3).setPreferredWidth(130);
+		
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(super.getTable().getModel());
+		super.getTable().setRowSorter(sorter);
 		
 		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		

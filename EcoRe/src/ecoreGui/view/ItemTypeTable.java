@@ -34,7 +34,7 @@ public class ItemTypeTable extends DisplayTable {
 		super.setRmos(rmos);
 		
 		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(100, 100));
+		setPreferredSize(new Dimension(200, 75));
 		
 		display();
 	}
@@ -44,7 +44,7 @@ public class ItemTypeTable extends DisplayTable {
 		this.removeAll();
 		this.updateUI();
 		
-		String[] columnNames = {"", "Type", "Price"};
+		String[] columnNames = {"", "Type", "Price per lb"};
 		Object[][] items = getTypes();
 		
 	    DefaultTableModel model = new DefaultTableModel(items, columnNames) {

@@ -45,7 +45,9 @@ public class RecyclablesManagerUI extends JPanel{
 		add(tableView);
 		add(control);
 		
-		add(Box.createRigidArea(new Dimension(10, 30)));
+		add(Box.createRigidArea(new Dimension(10, 50)));
+		
+		JPanel itemTypes = new JPanel();
 		
 		ItemTypeTable itemTableView = new ItemTypeTable(rmos);
 		itemTableView.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -53,9 +55,11 @@ public class RecyclablesManagerUI extends JPanel{
 		ItemTypeControl itemControl = new ItemTypeControl(rmos, itemTableView);
 		itemControl.setBorder(new EmptyBorder(10, 10, 10, 10));
 		
-		add(itemTableView);
-		add(itemControl);
+		itemTypes.add(itemTableView);
+		itemTypes.add(itemControl);
 		
-		add(Box.createVerticalGlue());
+		add(itemTypes);
+		
+		add(Box.createRigidArea(new Dimension(10, 50)));
 	}
 }

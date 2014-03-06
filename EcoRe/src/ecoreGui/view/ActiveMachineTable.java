@@ -9,6 +9,8 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import ecore.RCM;
 import ecore.RMOS;
@@ -72,6 +74,10 @@ public class ActiveMachineTable extends DisplayTable{
 		super.getTable().getColumnModel().getColumn(1).setPreferredWidth(200);
 		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(30);
 		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(30);
+		
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(super.getTable().getModel());
+		super.getTable().setRowSorter(sorter);
+		
 		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		
 		machineTable.add(tableTitle, BorderLayout.NORTH);

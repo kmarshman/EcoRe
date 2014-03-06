@@ -5,6 +5,8 @@ import java.awt.BorderLayout;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 
 import ecore.RCM;
 import ecore.RMOS;
@@ -56,10 +58,13 @@ public class MachineTable extends DisplayTable {
 	        }
 	      };
 		super.setTable(new JTable(model));
-		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(5);
+		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(10);
 		super.getTable().getColumnModel().getColumn(2).setPreferredWidth(100);
 		super.getTable().getColumnModel().getColumn(6).setPreferredWidth(100);
 		super.getTable().getColumnModel().getColumn(9).setPreferredWidth(100);
+		
+		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(super.getTable().getModel());
+		super.getTable().setRowSorter(sorter);
 		
 		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 		super.getTable().setAutoResizeMode(JTable.AUTO_RESIZE_OFF);

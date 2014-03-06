@@ -14,6 +14,7 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
+import ecore.ItemType;
 import ecore.RCM;
 
 public class WelcomeUI extends JPanel {
