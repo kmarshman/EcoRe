@@ -72,7 +72,7 @@ public class WelcomeUI extends JPanel {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				cards.show(cardPanel, "Recycle");
+				cards.next(cardPanel);
 			}
 
 
@@ -84,7 +84,9 @@ public class WelcomeUI extends JPanel {
 			public void actionPerformed(ActionEvent e)
 			{
 				//cards.show(cardPanel,maintain);
-				cards.show(cardPanel, "Maintenance");
+				cards.next(cardPanel);
+				cards.next(cardPanel);
+				cards.next(cardPanel);
 			}
 
 

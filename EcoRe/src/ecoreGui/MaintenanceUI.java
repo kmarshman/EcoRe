@@ -27,8 +27,7 @@ public class MaintenanceUI extends JPanel {
 		this.cardPanel = cardPanel;
 	}
 	
-	private void display(){
-		
+	private void display(){		
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
 		
@@ -64,7 +63,7 @@ public class MaintenanceUI extends JPanel {
 		}
 		public boolean authenticate()
 		{
-			return rcmObj.aunthenticateWorker(maintanenceKey.getText());
+			return rcmObj.aunthenticateWorker(maintanenceKey.getText().trim());
 		}
 		public void loginFailed(){
 			JOptionPane.showMessageDialog(this, "The key entered is wrong. Please try again", "Login Failed", JOptionPane.ERROR_MESSAGE);

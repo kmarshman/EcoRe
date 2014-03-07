@@ -39,6 +39,8 @@ public class RecycleSessionUI extends JPanel implements DropTargetListener   {
 	private RCM rcmObj;
 	private ItemType itemTypeObj = null;
 	private double FinalValue = 0;
+	private CardLayout cards;
+	private JPanel cardPanel;
 	JLabel totalvalue = new JLabel("Total Value:");
 
 	JTextArea receptacleArea = new JTextArea(5,10);
@@ -50,9 +52,12 @@ public class RecycleSessionUI extends JPanel implements DropTargetListener   {
 	public RecycleSessionUI(RCM rcm,final CardLayout cards, final JPanel cardPanel) //throws TooManyListenersException 
 	{
 		this.rcmObj = rcm;
+		this.cards = cards;
+		this.cardPanel = cardPanel;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-
+	}
+	
+	private void display(){	
 		JPanel panOuter = new JPanel(new BorderLayout());
 		JPanel leftPanel = new JPanel(new BorderLayout());
 		JPanel rightPanel = new JPanel(new BorderLayout());
@@ -212,6 +217,8 @@ public class RecycleSessionUI extends JPanel implements DropTargetListener   {
 	
 	public void setRCM(RCM rcm){
 		rcmObj = rcm;
+		removeAll();
+		display();
 	}
 }
 

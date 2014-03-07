@@ -90,7 +90,8 @@ public class RcmSelector extends JPanel implements Observer{
 					complete.setRCM(rcm);
 					maintenance.setRCM(rcm);
 					rcmChoice.setSelectedIndex(0);
-					cards.show(cardPanel, "Welcome");
+					cards.next(cardPanel);
+					//cards.show(cardPanel, "Welcome");
 				}
 			}
 		});
