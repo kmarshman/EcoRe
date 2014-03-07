@@ -19,6 +19,7 @@ import ecore.RCM;
 import ecore.RCM.Status;
 import ecore.RMOS;
 import ecoreGui.CompleteSessionUI;
+import ecoreGui.MaintenanceUI;
 import ecoreGui.RecycleSessionUI;
 import ecoreGui.WelcomeUI;
 
@@ -33,9 +34,10 @@ public class RcmSelector extends JPanel implements Observer{
 	private WelcomeUI welcome;
 	private RecycleSessionUI recycle;
 	private CompleteSessionUI complete;
+	private MaintenanceUI maintenance;
 	private ArrayList<RCM> activeMachines;
 
-	public RcmSelector(RMOS rmos, CardLayout cards, JPanel cardPanel, WelcomeUI welcome, RecycleSessionUI recycle, CompleteSessionUI complete){
+	public RcmSelector(RMOS rmos, CardLayout cards, JPanel cardPanel, WelcomeUI welcome, RecycleSessionUI recycle, CompleteSessionUI complete, MaintenanceUI maintenance){
 		setLayout(new GridBagLayout());
 		this.rmos = rmos;
 		this.cards = cards;
@@ -43,6 +45,7 @@ public class RcmSelector extends JPanel implements Observer{
 		this.welcome = welcome;
 		this.recycle = recycle;
 		this.complete = complete;
+		this.maintenance = maintenance;
 		cons = new GridBagConstraints();
 		cons.fill = GridBagConstraints.NONE;
 		
@@ -85,8 +88,9 @@ public class RcmSelector extends JPanel implements Observer{
 					welcome.setRCM(rcm);
 					recycle.setRCM(rcm);
 					complete.setRCM(rcm);
+					maintenance.setRCM(rcm);
 					rcmChoice.setSelectedIndex(0);
-					cards.next(cardPanel);
+					cards.show(cardPanel, "Welcome");
 				}
 			}
 		});

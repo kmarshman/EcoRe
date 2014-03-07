@@ -1,3 +1,4 @@
+//CompleteSessionUI
 package ecoreGui;
 
 import java.awt.BorderLayout;
@@ -12,26 +13,21 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
-import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import ecore.RCM;
+import ecore.RMOS;
 
 public class CompleteSessionUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private RCM rcm;
-	private final CardLayout cards;
-	private final JPanel cardPanel;
+	private static RCM rcm;
+	protected Object cards;
+	protected Object cardPanel;
 
 	public CompleteSessionUI(RCM rcm,final CardLayout cards, final JPanel cardPanel){
 		this.rcm = rcm;
-		this.cards = cards;
-		this.cardPanel = cardPanel;
-	}
-	
-	public void display(){
 		//setBackground(Color.cyan);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setPreferredSize(new Dimension(590,620));
@@ -44,15 +40,8 @@ public class CompleteSessionUI extends JPanel {
 		JPanel centrePanel = new JPanel(new BorderLayout());
 		centrePanel.setBackground(Color.cyan);
 		//Hardcoded values
-		JLabel messagelabel = new JLabel("<html><center>You Deposited: <center>Glass : 2.3lb <br> Aluminium : 1.43lb <br> Plastic : 0.56lb </html>");
-		messagelabel.setHorizontalAlignment(SwingConstants.CENTER);
-		//JLabel glass = new JLabel("<html>Glass : 2.3lb <br> Aluminium : 1.43lb <br> Plastic : 0.56lb");
-		//JLabel aluminium = new JLabel("Aluminium : 1.43lb");
-		//JLabel plastic = new JLabel("Plastic : 0.56lb");
+		JLabel messagelabel = new JLabel("<html>You Deposited : <br>Glass : 2.3lb <br> Aluminium : 1.43lb <br> Plastic : 0.56lb </html>");
 		centrePanel.add(messagelabel,BorderLayout.CENTER);
-		//centrePanel.add(glass,BorderLayout.CENTER);
-		//centrePanel.add(aluminium);
-		//centrePanel.add(plastic); */
 		mainPanel.add(centrePanel,BorderLayout.CENTER);
 
 
@@ -89,7 +78,7 @@ public class CompleteSessionUI extends JPanel {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cards.next(cardPanel);
+				cards.show(cardPanel, "RCM Selector");
 
 			}
 
@@ -121,7 +110,5 @@ public class CompleteSessionUI extends JPanel {
 	
 	public void setRCM(RCM rcm){
 		this.rcm = rcm;
-		removeAll();
-		display();
 	}
 }

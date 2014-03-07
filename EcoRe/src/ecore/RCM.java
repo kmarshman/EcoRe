@@ -42,6 +42,8 @@ public class RCM extends Observable implements Serializable{
 	private int couponPaper;
 	private Date timeLastEmptied;
 	
+	private String maintenanceKey;
+	
 	private ArrayList<Item> sessionItems;
 	/**
 	 * shared array list of accepted items
@@ -58,6 +60,7 @@ public class RCM extends Observable implements Serializable{
 		cash = 500;
 		couponPaper= 100;
 		timeLastEmptied = new Date();
+		maintenanceKey = "1234";
 	}
 	
 	public RCM(){
@@ -124,6 +127,10 @@ public class RCM extends Observable implements Serializable{
 		}
 		sessionItems = new ArrayList<Item>();
 		return value;
+	}
+	
+	public boolean aunthenticateWorker(String key){
+		return key.equals(maintenanceKey);
 	}
 
 }

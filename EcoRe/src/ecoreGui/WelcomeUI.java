@@ -1,3 +1,4 @@
+//The main screen of the RCM part ...
 package ecoreGui;
 
 import java.awt.BorderLayout;
@@ -14,24 +15,18 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-import ecore.ItemType;
 import ecore.RCM;
+import ecore.RMOS;
 
 public class WelcomeUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private MaintenanceUI maintain ;
 	private RCM rcm;
-	private final CardLayout cards;
-	private final JPanel cardPanel;
 
-	public WelcomeUI(RCM rcm, CardLayout cards, JPanel cardPanel)
+	public WelcomeUI(RCM rcm, final CardLayout cards, final JPanel cardPanel)
 	{
 		this.rcm = rcm;
-		this.cards = cards;
-		this.cardPanel = cardPanel;
-	}
-	
-	public void display(){
 		JPanel headingPanel = new JPanel(new BorderLayout());
 		JLabel WelcomeLabel = new JLabel("<html>Welcome to EcoRe <br> Recycle your aluminium , glass and plastic here </html>");
 		WelcomeLabel.setFont(new Font("Serif", Font.BOLD, 14));
@@ -70,7 +65,7 @@ public class WelcomeUI extends JPanel {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				cards.next(cardPanel);
+				cards.show(cardPanel, "Recycle");
 			}
 
 
@@ -81,7 +76,8 @@ public class WelcomeUI extends JPanel {
 		{
 			public void actionPerformed(ActionEvent e)
 			{
-				cards.next(cardPanel);
+				//cards.show(cardPanel,maintain);
+				cards.show(cardPanel, "Maintenance");
 			}
 
 
@@ -98,8 +94,6 @@ public class WelcomeUI extends JPanel {
 	
 	public void setRCM(RCM rcm){
 		this.rcm = rcm;
-		removeAll();
-		display();
 	}
 
 }
