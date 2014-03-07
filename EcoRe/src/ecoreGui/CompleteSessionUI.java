@@ -23,11 +23,16 @@ public class CompleteSessionUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
 	private static RCM rcm;
-	protected Object cards;
-	protected Object cardPanel;
+	protected CardLayout cards;
+	protected JPanel cardPanel;
 
 	public CompleteSessionUI(RCM rcm,final CardLayout cards, final JPanel cardPanel){
 		this.rcm = rcm;
+		this.cards = cards;
+		this.cardPanel = cardPanel;
+	}
+	
+	private void display(){
 		//setBackground(Color.cyan);
 		JPanel mainPanel = new JPanel(new BorderLayout());
 		mainPanel.setPreferredSize(new Dimension(590,620));
@@ -110,5 +115,7 @@ public class CompleteSessionUI extends JPanel {
 	
 	public void setRCM(RCM rcm){
 		this.rcm = rcm;
+		removeAll();
+		display();
 	}
 }

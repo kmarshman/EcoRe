@@ -23,20 +23,24 @@ public class WelcomeUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private MaintenanceUI maintain ;
 	private RCM rcm;
-	
-	
+	private CardLayout cards;
+	private JPanel cardPanel;
+
 	public WelcomeUI(RCM rcm, final CardLayout cards, final JPanel cardPanel)
 	{
 		this.rcm = rcm;
+		this.cards = cards;
+		this.cardPanel = cardPanel;
+	}
+	
+	private void display(){
 		JPanel headingPanel = new JPanel(new BorderLayout());
-		JLabel testpanel = new JLabel(rcm.getID());
-		headingPanel.add(testpanel);
 		JLabel WelcomeLabel = new JLabel("<html>Welcome to EcoRe <br> Recycle your aluminium , glass and plastic here </html>");
 		WelcomeLabel.setFont(new Font("Serif", Font.BOLD, 14));
 		headingPanel.add(WelcomeLabel,BorderLayout.NORTH);
 		add(headingPanel);
 
-
+		
 		//Main panel
 		JPanel mainpanel = new JPanel(new GridLayout(1,2));
 		mainpanel.setPreferredSize(new Dimension(500,500));
@@ -94,9 +98,11 @@ public class WelcomeUI extends JPanel {
 
 
 	}
-
+	
 	public void setRCM(RCM rcm){
 		this.rcm = rcm;
+		removeAll();
+		display();
 	}
 
 }

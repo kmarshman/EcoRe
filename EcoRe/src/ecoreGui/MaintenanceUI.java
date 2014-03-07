@@ -15,11 +15,19 @@ public class MaintenanceUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private RCM rcmObj;
 	private JTextField maintanenceKey;
+	private CardLayout cards;
+	private JPanel cardPanel;
 	
-	public MaintenanceUI(RMOS rmos, final CardLayout cards, final JPanel cardPanel)
+	public MaintenanceUI(RCM rcm, final CardLayout cards, final JPanel cardPanel)
 	{
 	
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		this.rcmObj = rcm;
+		this.cards = cards;
+		this.cardPanel = cardPanel;
+	}
+	
+	private void display(){
 		
 		JPanel mainPanel = new JPanel();
 		mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.Y_AXIS));
@@ -65,6 +73,8 @@ public class MaintenanceUI extends JPanel {
 		
 		public void setRCM(RCM rcm){
 			rcmObj = rcm;
+			removeAll();
+			display();
 		}
 		
 }
