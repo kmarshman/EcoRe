@@ -1,110 +1,100 @@
 //The main screen of the RCM part ...
 package ecoreGui;
 
-import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.GridLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.SwingConstants;
 
-import ecore.RCM;
 import ecore.RMOS;
+import ecoreGui.view.RcmItemTable;
 
 public class WelcomeUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
-	private MaintenanceUI maintain ;
-	private RCM rcm;
 	private CardLayout cards;
 	private JPanel cardPanel;
+	private RMOS rmos;
+	private GridBagConstraints cons;
 
-	public WelcomeUI(RCM rcm, final CardLayout cards, final JPanel cardPanel)
+	public WelcomeUI(RMOS rmos, final CardLayout cards, final JPanel cardPanel)
 	{
-		this.rcm = rcm;
+		this.rmos = rmos;
 		this.cards = cards;
 		this.cardPanel = cardPanel;
+		
+		setLayout(new GridBagLayout());
+		cons = new GridBagConstraints();
+		cons.fill = GridBagConstraints.NONE;
+		display();
 	}
 	
 	private void display(){
-		JPanel headingPanel = new JPanel(new BorderLayout());
-		JLabel WelcomeLabel = new JLabel("<html>Welcome to EcoRe <br> Recycle your aluminium , glass and plastic here </html>");
-		WelcomeLabel.setFont(new Font("Serif", Font.BOLD, 14));
-		headingPanel.add(WelcomeLabel,BorderLayout.NORTH);
-		add(headingPanel);
+		cons.gridx = 2;
+		cons.gridy = 0;
+		cons.anchor = GridBagConstraints.PAGE_START;
+		cons.gridwidth = 3;
+		cons.insets = new Insets(0,0,100,0);
+		JLabel welcomeLabel = new JLabel("<html><center>Welcome to EcoRe <br> Recycle your aluminium , glass and plastic here</center></html>");
+		welcomeLabel.setFont(new Font("Sans Serif", Font.BOLD, 14));
+		welcomeLabel.setAlignmentX(SwingConstants.CENTER);
+		add(welcomeLabel, cons);
 
+		cons.gridx = 1;
+		cons.gridy = 3;
+		cons.anchor = GridBagConstraints.CENTER;
+		cons.gridwidth = 3;
+		cons.insets = new Insets(0,50,0,0);
+		JPanel tablePanel = new JPanel();
+		tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
+		JLabel tableLabel = new JLabel("Get Cash for your Trash");
+		tableLabel.setFont(new Font("Sans Serif", Font.BOLD, 14));
+		RcmItemTable table = new RcmItemTable(rmos);
+		rmos.addObserver(table);
+		tablePanel.add(tableLabel);
+		tablePanel.add(table);
+		add(tablePanel, cons);
 		
-		//Main panel
-		JPanel mainpanel = new JPanel(new GridLayout(1,2));
-		mainpanel.setPreferredSize(new Dimension(500,500));
-		JPanel fortabelpanel = new JPanel(new BorderLayout());
-		//fortabelpanel.setPreferredSize(new Dimension(580,570)); 
-		JLabel tablelabel = new JLabel("Get Cash for your Trash");
 
-		DefaultTableModel model = new DefaultTableModel(); 
-		JTable table = new JTable(model); 
-		table.setPreferredSize(new Dimension(50,10));
-		// Create a couple of columns 
-		model.addColumn("Recyclable"); 
-		model.addColumn("Price per lb"); 
-
-		// Append a row 
-		model.addRow(new Object[]{"Aluminium", "$1.25"});
-		model.addRow(new Object[]{"Glass","$1.90"});
-		model.addRow(new Object[]{"Plastic","$2.12"});
-
-		fortabelpanel.add(tablelabel,BorderLayout.NORTH);
-		fortabelpanel.add(table,BorderLayout.CENTER);
-
-		mainpanel.add(fortabelpanel);
-
-		JPanel rightPanel = new JPanel(new BorderLayout());
+		cons.gridx = 3;
+		cons.gridy = 3;
+		cons.anchor = GridBagConstraints.CENTER;
+		cons.ipady = 40;
+		cons.ipadx = 40;
+		cons.insets = new Insets(0,250,0,10);
 		JButton start = new JButton("Start");
-
-		start.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
+		start.setSize(new Dimension(100, 100));
+		start.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
 				cards.next(cardPanel);
 			}
-
-
 		});
+		add(start, cons);
 
-		JButton maintanence = new JButton("Maintanence");
-		maintanence.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				//cards.show(cardPanel,maintain);
+		cons.gridx = 4;
+		cons.gridy = 5;
+		cons.anchor = GridBagConstraints.LAST_LINE_END;
+		cons.ipady = 0;
+		cons.ipadx = 0;
+		cons.insets = new Insets(400,0,0,0);
+		JButton maintenance = new JButton("Maintanence");
+		maintenance.addActionListener(new ActionListener(){
+			public void actionPerformed(ActionEvent e){
 				cards.next(cardPanel);
 				cards.next(cardPanel);
 				cards.next(cardPanel);
 			}
-
-
 		});
-
-		rightPanel.add(start,BorderLayout.CENTER);
-		rightPanel.add(maintanence, BorderLayout.PAGE_END);
-		mainpanel.add(rightPanel);
-		add(mainpanel);
-
-
-
+		add(maintenance, cons);
 	}
-	
-	public void setRCM(RCM rcm){
-		this.rcm = rcm;
-		removeAll();
-		display();
-	}
-
 }

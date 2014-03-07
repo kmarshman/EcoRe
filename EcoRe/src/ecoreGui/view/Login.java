@@ -42,12 +42,14 @@ public class Login extends JPanel {
 		JPanel name = new JPanel(new FlowLayout());		
 		JLabel usernameLabel = new JLabel("Username:");
 		username = new JTextField(20);
+		name.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		name.add(usernameLabel);
 		name.add(username);
 		
 		JPanel pass = new JPanel(new FlowLayout());
 		JLabel passwordLabel = new JLabel("Password:");
 		password = new JPasswordField(20);
+		password.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		password.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(authenticate()){

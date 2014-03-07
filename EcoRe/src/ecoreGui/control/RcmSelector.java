@@ -85,7 +85,6 @@ public class RcmSelector extends JPanel implements Observer{
 			public void actionPerformed(ActionEvent e){
 				if(rcmChoice.getSelectedIndex() != 0){
 					RCM rcm = activeMachines.get(rcmChoice.getSelectedIndex()-1);
-					welcome.setRCM(rcm);
 					recycle.setRCM(rcm);
 					complete.setRCM(rcm);
 					maintenance.setRCM(rcm);

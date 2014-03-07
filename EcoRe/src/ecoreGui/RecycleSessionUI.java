@@ -73,7 +73,7 @@ public class RecycleSessionUI extends JPanel implements DropTargetListener   {
 
 		rightPanel.add(messagelabel);
 
-
+		/*
 		ImageIcon icon = new ImageIcon("C:/Users/Shweta/git/EcoRe/EcoRe/src/Images/coke.jpg");
 		JLabel imagelabel = new JLabel();
 		imagelabel.setIcon(icon);
@@ -87,11 +87,11 @@ public class RecycleSessionUI extends JPanel implements DropTargetListener   {
 		aluminumPanel.add(imagelabel,BorderLayout.EAST);
 		aluminumPanel.add(Aluminium, BorderLayout.WEST);
 
-
+		
 		rightPanel.add(aluminumPanel);
 		aluminumPanel.setBorder((new TitledBorder(new EtchedBorder(), "Aluminium")));
 
-
+		*/
 
 		JPanel plasticPanel = new JPanel();
 		plasticPanel.setBorder((new TitledBorder(new EtchedBorder(), "Plastic")));

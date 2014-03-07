@@ -15,7 +15,7 @@ public class RcmUI extends JPanel {
 		CardLayout cards = new CardLayout();
 		this.setLayout(cards);
 
-		WelcomeUI welcome = new WelcomeUI(null, cards, this);
+		WelcomeUI welcome = new WelcomeUI(rmos, cards, this);
 		RecycleSessionUI recycle = new RecycleSessionUI(null,cards, this);
 		CompleteSessionUI finish = new CompleteSessionUI(null,cards, this);
 		MaintenanceUI maintenance = new MaintenanceUI(null, cards, this);
