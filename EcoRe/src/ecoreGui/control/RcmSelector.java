@@ -21,7 +21,6 @@ import ecore.RMOS;
 import ecoreGui.CompleteSessionUI;
 import ecoreGui.MaintenanceUI;
 import ecoreGui.RecycleSessionUI;
-import ecoreGui.WelcomeUI;
 
 public class RcmSelector extends JPanel implements Observer{
 	
@@ -30,19 +29,17 @@ public class RcmSelector extends JPanel implements Observer{
 	private GridBagConstraints cons;
 	private RMOS rmos;
 	private CardLayout cards;
-	private JPanel cardPanel;
-	private WelcomeUI welcome;
+	private JPanel cardPanel;;
 	private RecycleSessionUI recycle;
 	private CompleteSessionUI complete;
 	private MaintenanceUI maintenance;
 	private ArrayList<RCM> activeMachines;
 
-	public RcmSelector(RMOS rmos, CardLayout cards, JPanel cardPanel, WelcomeUI welcome, RecycleSessionUI recycle, CompleteSessionUI complete, MaintenanceUI maintenance){
+	public RcmSelector(RMOS rmos, CardLayout cards, JPanel cardPanel, RecycleSessionUI recycle, CompleteSessionUI complete, MaintenanceUI maintenance){
 		setLayout(new GridBagLayout());
 		this.rmos = rmos;
 		this.cards = cards;
 		this.cardPanel = cardPanel;
-		this.welcome = welcome;
 		this.recycle = recycle;
 		this.complete = complete;
 		this.maintenance = maintenance;

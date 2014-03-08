@@ -19,7 +19,7 @@ public class RcmUI extends JPanel {
 		RecycleSessionUI recycle = new RecycleSessionUI(null,cards, this);
 		CompleteSessionUI finish = new CompleteSessionUI(null,cards, this);
 		MaintenanceUI maintenance = new MaintenanceUI(null, cards, this);
-		RcmSelector selector = new RcmSelector(rmos, cards, this, welcome, recycle, finish, maintenance);
+		RcmSelector selector = new RcmSelector(rmos, cards, this, recycle, finish, maintenance);
 		rmos.addObserver(selector);
 
 		add(selector, "RCM Selector");
