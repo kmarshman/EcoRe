@@ -49,7 +49,7 @@ public class WelcomeUI extends JPanel {
 		cons.gridwidth = 3;
 		cons.insets = new Insets(0,0,100,0);
 		JLabel welcomeLabel = new JLabel("<html><center>Welcome to EcoRe <br> Recycle your aluminium , glass and plastic here</center></html>");
-		welcomeLabel.setFont(new Font("Sans Serif", Font.BOLD, 14));
+		welcomeLabel.setFont(new Font("Sans Serif", Font.BOLD, 16));
 		welcomeLabel.setAlignmentX(SwingConstants.CENTER);
 		add(welcomeLabel, cons);
 

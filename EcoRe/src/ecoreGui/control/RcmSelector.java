@@ -54,7 +54,7 @@ public class RcmSelector extends JPanel implements Observer{
 		cons.gridy = 0;
 		cons.anchor = GridBagConstraints.PAGE_START;
 		JLabel welcomeLabel = new JLabel("<html><center>Welcome to EcoRe!<br>Select a machine to get started.<center><html>");
-		welcomeLabel.setFont(new Font("Serif", Font.BOLD, 14));
+		welcomeLabel.setFont(new Font("Sans Serif", Font.BOLD, 18));
 		add(welcomeLabel, cons);
 		
 		cons.gridx = 2;
@@ -73,7 +73,7 @@ public class RcmSelector extends JPanel implements Observer{
 		
 		int size = activeMachines.size();
 		String[] rcmList = new String[size + 1];
-		rcmList[0] = "Machine...";
+		rcmList[0] = "Select...";
 		for(int i = 0; i < size; i++){
 			rcmList[i+1] = activeMachines.get(i).getLocation() + ": "+ activeMachines.get(i).getID();
 		}
@@ -87,7 +87,6 @@ public class RcmSelector extends JPanel implements Observer{
 					maintenance.setRCM(rcm);
 					rcmChoice.setSelectedIndex(0);
 					cards.next(cardPanel);
-					//cards.show(cardPanel, "Welcome");
 				}
 			}
 		});

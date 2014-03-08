@@ -227,5 +227,10 @@ public class RMOS extends Observable implements Serializable{
 		}
 		return values;
 	}
+	
+	public void rcmUpdate(){
+		setChanged();
+		notifyObservers(this);
+	}
 
 }

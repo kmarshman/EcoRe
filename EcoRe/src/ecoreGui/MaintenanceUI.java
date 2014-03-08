@@ -11,15 +11,18 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Calendar;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
 
 import ecore.RCM;
+import ecore.RMOS;
 
 public class MaintenanceUI extends JPanel {
 
 	private static final long serialVersionUID = 1L;
+	private RMOS rmos;
 	private RCM rcm;
 	private CardLayout cards;
 	private JPanel cardPanel;
@@ -27,9 +30,10 @@ public class MaintenanceUI extends JPanel {
 	private String state, weight, capacity, currentCash, currentCoupons;
 	private JLabel statusLabel;
 	
-	public MaintenanceUI(RCM rcm, final CardLayout cards, final JPanel cardPanel)
+	public MaintenanceUI(RMOS rmos, RCM rcm, final CardLayout cards, final JPanel cardPanel)
 	{
 		this.rcm = rcm;
+		this.rmos = rmos;
 		this.cards = cards;
 		this.cardPanel = cardPanel;
 		statusLabel = new JLabel("");
@@ -64,7 +68,9 @@ public class MaintenanceUI extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				rcm.empty();
+				rcm.setTimeLastEmptied(Calendar.getInstance());
 				updateStatus();
+				rmos.rcmUpdate();
 			}
 		});
 		emptyWrapper.add(emptyLabel);
@@ -83,6 +89,7 @@ public class MaintenanceUI extends JPanel {
 					double add = Double.parseDouble(cash.getText().trim());
 					rcm.addCash(add);
 					updateStatus();
+					rmos.rcmUpdate();
 				}catch (NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null,"Please enter numbers only.", "Add Cash Failed", JOptionPane.ERROR_MESSAGE);
 				}
@@ -105,6 +112,7 @@ public class MaintenanceUI extends JPanel {
 				try{
 					int add = Integer.parseInt(coupon.getText().trim());
 					rcm.addCoupon(add);
+					rmos.rcmUpdate();
 					updateStatus();
 				}catch(NumberFormatException nfe){
 					JOptionPane.showMessageDialog(null,"Please a postive integer.", "Add Coupon Failed", JOptionPane.ERROR_MESSAGE);
@@ -162,7 +170,7 @@ public class MaintenanceUI extends JPanel {
 		currentCash = "$" + String.valueOf(rcm.getCash());
 		currentCoupons = String.valueOf(rcm.getCouponPaper());
 		
-		statusLabel.setText("<html>State: " + state + "<br>Weight: " + weight + "<br>Capacity: " + capacity + "<br>Cash: " + currentCash + "<br>Coupons: " + currentCoupons + "</html>");
+		statusLabel.setText("<html>" + state + "<br>Weight: " + weight + "<br>Capacity: " + capacity + "<br>Cash: " + currentCash + "<br>Coupons: " + currentCoupons + "</html>");
 	}
 		
 }

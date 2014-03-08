@@ -2,15 +2,14 @@ package ecore;
 
 import java.io.Serializable;
 import java.util.ArrayList;
-import java.util.Date;
-import java.util.Observable;
+import java.util.Calendar;
 
 /**
  * Represents recycling machine
  * @author Kelsey
  *
  */
-public class RCM extends Observable implements Serializable{
+public class RCM implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 
@@ -40,10 +39,11 @@ public class RCM extends Observable implements Serializable{
 	private State state;
 	private double capacity, weight, cash;
 	private int couponPaper;
-	private Date timeLastEmptied;
+	private Calendar timeLastEmptied;
 	
 	private String maintenanceKey;
-	
+	private double sessionWeight;
+	private double sessionValue;
 	private ArrayList<Item> sessionItems;
 	/**
 	 * shared array list of accepted items
@@ -59,8 +59,10 @@ public class RCM extends Observable implements Serializable{
 		weight = 0;
 		cash = 500;
 		couponPaper= 100;
-		timeLastEmptied = new Date();
+		timeLastEmptied = Calendar.getInstance();
 		maintenanceKey = "1234";
+		sessionValue = 0;
+		sessionWeight = 0;
 	}
 	
 	public RCM(){
@@ -100,7 +102,7 @@ public class RCM extends Observable implements Serializable{
 		return couponPaper;
 	}
 	
-	public Date getTimeLastEmptied(){
+	public Calendar getTimeLastEmptied(){
 		return timeLastEmptied;
 	}
 	
@@ -120,13 +122,14 @@ public class RCM extends Observable implements Serializable{
 		sessionItems.add(item);
 	}
 	
-	public double finishSession(){
-		double value = 0;
+	public void finishSession(){
+		sessionValue = 0;
+		sessionWeight = 0;
 		for(Item i : sessionItems){
-			value += i.getValue();
+			sessionValue += i.getValue();
+			sessionWeight += i.getWeight();
 		}
 		sessionItems = new ArrayList<Item>();
-		return value;
 	}
 	
 	public boolean aunthenticateWorker(String key){
@@ -138,7 +141,52 @@ public class RCM extends Observable implements Serializable{
 	}
 	
 	public void addCoupon(int coupon){
-		couponPaper += coupon;
+		couponPaper += coupon;;
+	}
+	
+	public double getSessionWeight(){
+		return sessionWeight;
+	}
+	
+	public double getSessionValue(){
+		return sessionValue;
+	}
+	
+	public void setTimeLastEmptied(Calendar emptied){
+		timeLastEmptied = emptied;
+	}
+	
+	public String printCash(){
+		cash -= sessionValue;
+
+		int ten, five, one, quarter, dime, nickel, penny;
+		ten = (int) (sessionValue/10);
+		sessionValue = sessionValue%10;
+
+		five = (int) (sessionValue/5);
+		sessionValue = sessionValue%5;
+
+		one = (int) (sessionValue/1);
+		sessionValue = sessionValue%1;
+
+		quarter = (int) (sessionValue/.25);
+		sessionValue = sessionValue%.25;
+
+		dime = (int) (sessionValue/.10);
+		sessionValue = sessionValue%.10;
+
+		nickel = (int) (sessionValue/.05);
+		sessionValue = sessionValue%.05;
+
+		penny = (int) (sessionValue/.01);
+		sessionValue = sessionValue%.01;
+		
+		return "<html>" + ten + " tens<br>" + five + " fives<br>"+ one + " ones<br>" + quarter + " quarters<br>" + dime + " dimes<br>"+ nickel + " nickels<br>" + penny + " pennys</html>";
+	}
+	
+	public String printCoupon(){
+		couponPaper --;
+		return "<html><center>This $" + sessionValue + " coupon is redeemable at common grocery outlets.<br>Visit ecore.org to see a complete list.</center<</html>";
 	}
 
 }
