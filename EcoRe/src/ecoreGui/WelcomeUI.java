@@ -12,8 +12,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import ecore.RMOS;
@@ -90,9 +93,20 @@ public class WelcomeUI extends JPanel {
 		JButton maintenance = new JButton("Maintanence");
 		maintenance.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
-				cards.next(cardPanel);
-				cards.next(cardPanel);
-				cards.next(cardPanel);
+				JTextField key = new JTextField();
+				final JComponent[] inputs = new JComponent[] {
+						new JLabel("Enter 4 Digit Access Key:"), key
+				};
+				
+				JOptionPane.showMessageDialog(null, inputs, "Enter Access Key", JOptionPane.PLAIN_MESSAGE);
+				String entered = key.getText().trim();
+				if(rmos.getRCMGroup().get(0).aunthenticateWorker(entered)){
+					cards.next(cardPanel);
+					cards.next(cardPanel);
+					cards.next(cardPanel);
+				}else{
+					JOptionPane.showMessageDialog(null,"Incorrect Key", "Add New Machine Failed", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		add(maintenance, cons);

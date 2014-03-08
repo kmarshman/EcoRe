@@ -132,5 +132,13 @@ public class RCM extends Observable implements Serializable{
 	public boolean aunthenticateWorker(String key){
 		return key.equals(maintenanceKey);
 	}
+	
+	public void empty(){
+		weight = 0;
+	}
+	
+	public void addCoupon(int coupon){
+		couponPaper += coupon;
+	}
 
 }
