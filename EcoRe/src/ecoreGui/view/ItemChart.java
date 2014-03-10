@@ -35,6 +35,7 @@ public class ItemChart extends GraphicDisplay{
 	}
 	
 	private void getSlices(){
+		getRmos().setTotalWeights();
 		slices[0] = new Slice(getRmos().getTotalAluminumWeight(), new Color(85, 255, 47), "Aluminum");
 		slices[1] = new Slice(getRmos().getTotalGlassWeight(), new Color(68, 204, 37), "Glass");;
 	}

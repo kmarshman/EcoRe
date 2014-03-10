@@ -24,7 +24,7 @@ public class UsageDataIO implements Serializable{
 				file.createNewFile();
 			}
 			
-			fop = new FileOutputStream(file);
+			fop = new FileOutputStream(file, true);
 			fip = new FileInputStream(file);
 		}catch (IOException e) {
 			e.printStackTrace();

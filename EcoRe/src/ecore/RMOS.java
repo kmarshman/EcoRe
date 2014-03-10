@@ -3,6 +3,7 @@ package ecore;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
+import java.util.Scanner;
 
 import usageDataIO.UsageDataIO;
 import ecore.RCM.Status;
@@ -180,11 +181,36 @@ public class RMOS extends Observable implements Serializable{
 		notifyObservers(this);
 	}
 	
-	public double getTotalAluminumWeight(){
+	public void setTotalWeights(){
+		String data = fileIO.read();
+		
+		Scanner scanner = new Scanner(data);
+		Scanner scan = scanner.useDelimiter(",|;");
+		
+		ArrayList<String> values = new ArrayList<String>();
+		while(scan.hasNext()){
+			values.add(scan.next());
+		}
+		
+		totalAluminum = 0;
+		for(int i = 3; i < values.size(); i+=5){
+			totalAluminum += Double.parseDouble(values.get(i));
+		}
+		
+		totalGlass = 0;
+		for(int i = 4; i < values.size(); i+=5){
+			totalGlass += Double.parseDouble(values.get(i));
+		}
+		
+		scanner.close();
+		scan.close();
+	}
+	
+	public double getTotalAluminumWeight(){		
 		return totalAluminum;
 	}
 	
-	public double getTotalGlassWeight(){
+	public double getTotalGlassWeight(){		
 		return totalGlass;
 	}
 	

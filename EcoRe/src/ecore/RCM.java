@@ -133,7 +133,7 @@ public class RCM implements Serializable{
 	public void finishSession(){
 		fileIO.open();
 		String timestamp = dateFormat.format(Calendar.getInstance().getTime());
-		String sessionData = timestamp + "," + sessionValue + "," + sessionAluminumWeight + "," + sessionGlassWeight;
+		String sessionData = getID() + "," + timestamp + "," + sessionValue + "," + sessionAluminumWeight + "," + sessionGlassWeight + ";";
 		fileIO.write(sessionData);
 		fileIO.close();
 		
