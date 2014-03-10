@@ -68,6 +68,7 @@ public class Main extends JFrame {
 	    	ObjectInputStream in = new ObjectInputStream(fileIn);
 	    	rmos = (RMOS) in.readObject();
 	    	rmos.setChart("Value by Day", "Value", "Day");
+	    	rmos.setIO();
 	    	in.close();
 	    	fileIn.close();
 	    }catch(IOException i){

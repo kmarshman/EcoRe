@@ -53,7 +53,7 @@ public class CompleteSessionUI extends JPanel {
 			error.setText("Out of coupons");
 		}
 		
-		JLabel title = new JLabel("<html><center>Woud you like to receive cash or coupon*?</center></html>");
+		JLabel title = new JLabel("<html><center>Woud you like to receive cash or coupon?</center></html>");
 		title.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -149,7 +149,7 @@ public class CompleteSessionUI extends JPanel {
 	}
 	
 	private void updateSession(){
-		weight = String.valueOf(rcm.getSessionWeight());
+		weight = String.valueOf(rcm.getSessionAluminumWeight() + rcm.getSessionGlassWeight());
 		value = String.valueOf(rcm.getSessionValue());
 	}
 }

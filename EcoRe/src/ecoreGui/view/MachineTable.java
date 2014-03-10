@@ -21,7 +21,7 @@ import ecore.RMOS;
 public class MachineTable extends DisplayTable {
 	
 	private static final long serialVersionUID = 1L;
-	DateFormat dateFormat = new SimpleDateFormat("mm/dd/yy hh:mm:ss a");
+	private DateFormat dateFormat = new SimpleDateFormat("mm/dd/yy hh:mm:ss a");
 
 	/**
 	 * Default Constructor

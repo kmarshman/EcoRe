@@ -1,8 +1,12 @@
 package ecore;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+
+import usageDataIO.UsageDataIO;
 
 /**
  * Represents recycling machine
@@ -42,13 +46,12 @@ public class RCM implements Serializable{
 	private Calendar timeLastEmptied;
 	
 	private String maintenanceKey;
-	private double sessionWeight;
+	private double sessionAluminumWeight;
+	private double sessionGlassWeight;
 	private double sessionValue;
 	private ArrayList<Item> sessionItems;
-	/**
-	 * shared array list of accepted items
-	 */
-	private static ArrayList<Item> acceptedItems = new ArrayList<Item>();
+	private transient UsageDataIO fileIO;
+	private DateFormat dateFormat = new SimpleDateFormat("mm/dd/yy hh:mm:ss a");
 	
 	public RCM(String location, String id){
 		this.id = id;
@@ -62,7 +65,10 @@ public class RCM implements Serializable{
 		timeLastEmptied = Calendar.getInstance();
 		maintenanceKey = "1234";
 		sessionValue = 0;
-		sessionWeight = 0;
+		sessionAluminumWeight = 0;
+		sessionGlassWeight = 0;
+		sessionItems = new ArrayList<Item>();
+		fileIO = new UsageDataIO();
 	}
 	
 	public RCM(){
@@ -106,10 +112,6 @@ public class RCM implements Serializable{
 		return timeLastEmptied;
 	}
 	
-	public ArrayList<Item> getAcceptedItems(){
-		return acceptedItems;
-	}
-	
 	public void setStatus(Status status){
 		this.status = status;
 	}
@@ -120,15 +122,24 @@ public class RCM implements Serializable{
 	
 	public void recycleItem(Item item){
 		sessionItems.add(item);
+		sessionValue += item.getValue();
+		if(item.getType().getName().equals("Aluminum")){
+			sessionAluminumWeight += item.getWeight();
+		}else{
+			sessionGlassWeight += item.getWeight();	
+		}
 	}
 	
 	public void finishSession(){
+		fileIO.open();
+		String timestamp = dateFormat.format(Calendar.getInstance().getTime());
+		String sessionData = timestamp + "," + sessionValue + "," + sessionAluminumWeight + "," + sessionGlassWeight;
+		fileIO.write(sessionData);
+		fileIO.close();
+		
 		sessionValue = 0;
-		sessionWeight = 0;
-		for(Item i : sessionItems){
-			sessionValue += i.getValue();
-			sessionWeight += i.getWeight();
-		}
+		sessionAluminumWeight = 0;
+		sessionGlassWeight = 0;
 		sessionItems = new ArrayList<Item>();
 	}
 	
@@ -144,8 +155,12 @@ public class RCM implements Serializable{
 		couponPaper += coupon;;
 	}
 	
-	public double getSessionWeight(){
-		return sessionWeight;
+	public double getSessionAluminumWeight(){
+		return sessionAluminumWeight;
+	}
+	
+	public double getSessionGlassWeight(){
+		return sessionGlassWeight;
 	}
 	
 	public double getSessionValue(){
@@ -154,6 +169,10 @@ public class RCM implements Serializable{
 	
 	public void setTimeLastEmptied(Calendar emptied){
 		timeLastEmptied = emptied;
+	}
+	
+	public void setIO(){
+		fileIO = new UsageDataIO();
 	}
 	
 	public String printCash(){

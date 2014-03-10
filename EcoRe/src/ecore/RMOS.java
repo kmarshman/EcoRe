@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Observable;
 
+import usageDataIO.UsageDataIO;
 import ecore.RCM.Status;
 
 /**
@@ -22,6 +23,8 @@ public class RMOS extends Observable implements Serializable{
 	private double totalAluminum;
 	private double totalGlass;
 	
+	private transient UsageDataIO fileIO;
+	
 	private transient String metric;
 	private transient String timeframe;
 	private transient String chartTitle;
@@ -36,8 +39,10 @@ public class RMOS extends Observable implements Serializable{
 		itemTypes[0] = new ItemType("Glass", 1.00);
 		itemTypes[1] = new ItemType("Aluminum", 0.75);
 		
-		totalAluminum = 80;
-		totalGlass = 20;
+		totalAluminum = 0;
+		totalGlass = 0;
+		
+		fileIO = new UsageDataIO();
 		
 		metric = "Value";
 		timeframe = "Day";
@@ -125,7 +130,6 @@ public class RMOS extends Observable implements Serializable{
 	 */
 	public void addItem(Item newItem){
 		acceptedItems.add(newItem);
-		rcmGroup.get(0).getAcceptedItems().add(newItem);
 		setChanged();
 		notifyObservers(this);
 	}
@@ -140,7 +144,6 @@ public class RMOS extends Observable implements Serializable{
 			if (i.getName().equals(name)) itemToRemove = i;
 		}
 		acceptedItems.remove(itemToRemove);
-		rcmGroup.get(0).getAcceptedItems().remove(itemToRemove);
 		setChanged();
 		notifyObservers(this);
 	}
@@ -210,6 +213,13 @@ public class RMOS extends Observable implements Serializable{
 		this.timeframe = timeframe;
 		setChanged();
 		notifyObservers(this);
+	}
+	
+	public void setIO(){
+		fileIO = new UsageDataIO();
+		for(RCM m: rcmGroup){
+			m.setIO();
+		}
 	}
 	
 	public ArrayList<String> getIDs(){

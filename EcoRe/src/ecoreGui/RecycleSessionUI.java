@@ -1,15 +1,19 @@
-//RecycleUI session that calculates the value of the dropped objects
 package ecoreGui;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Graphics;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
+import java.awt.dnd.DnDConstants;
+import java.awt.dnd.DragGestureEvent;
+import java.awt.dnd.DragGestureListener;
+import java.awt.dnd.DragSource;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDragEvent;
 import java.awt.dnd.DropTargetDropEvent;
@@ -17,9 +21,12 @@ import java.awt.dnd.DropTargetEvent;
 import java.awt.dnd.DropTargetListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.TooManyListenersException;
 
-import javax.swing.GrayFilter;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.JRadioButton;
 import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -27,198 +34,199 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 import javax.swing.border.EtchedBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.border.TitledBorder;
 
+import ecore.Item;
 import ecore.ItemType;
 import ecore.RCM;
+import ecore.RMOS;
 
-public class RecycleSessionUI extends JPanel implements DropTargetListener   {
+/**
+ * Represents recyclable item
+ * @author Shweta
+ *
+ */
+
+public class RecycleSessionUI extends JPanel{
 
 	private static final long serialVersionUID = 1L;
-	private RCM rcmObj;
-	private ItemType itemTypeObj = null;
-	private double FinalValue = 0;
+	private RCM rcm;
+	private RMOS rmos;
 	private CardLayout cards;
 	private JPanel cardPanel;
-	JLabel totalvalue = new JLabel("Total Value:");
+	private double value, aluminumWeight, glassWeight;
+	private ButtonGroup glassGroup, aluminumGroup;
 
-	JTextArea receptacleArea = new JTextArea(5,10);
-
-	public RecycleSessionUI() throws TooManyListenersException
+	public RecycleSessionUI() 
 	{
-		new RecycleSessionUI(new RCM(), null, null);
+		new RecycleSessionUI(new RMOS(), new RCM(), null, null);
 	}
-	public RecycleSessionUI(RCM rcm,final CardLayout cards, final JPanel cardPanel) //throws TooManyListenersException 
+
+	public RecycleSessionUI(RMOS rmos, RCM rcm,final CardLayout cards, final JPanel cardPanel) //throws TooManyListenersException 
 	{
-		this.rcmObj = rcm;
+		this.rmos = rmos;
+		this.rcm = rcm;
 		this.cards = cards;
 		this.cardPanel = cardPanel;
+		
+		value = 0;
+		aluminumWeight = 0;
+		glassWeight = 0;
+		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
-	
-	private void display(){	
-		JPanel panOuter = new JPanel(new BorderLayout());
-		JPanel leftPanel = new JPanel(new BorderLayout());
-		JPanel rightPanel = new JPanel(new BorderLayout());
 
-		panOuter.setPreferredSize(new Dimension(500,500));
-
-		leftPanel.setPreferredSize(new Dimension(200,400));
-		leftPanel.setLayout(new GridLayout(2,1));
-
-		rightPanel.setPreferredSize(new Dimension(400,350));
-		rightPanel.setLayout(new GridLayout(4,1));
-		JLabel messagelabel = new JLabel("<html> Recycle with EcoRe <br> Drag your items into the receptacle</html>",JLabel.CENTER);
-
-		rightPanel.add(messagelabel);
-
-		/*
-		ImageIcon icon = new ImageIcon("C:/Users/Shweta/git/EcoRe/EcoRe/src/Images/coke.jpg");
-		JLabel imagelabel = new JLabel();
-		imagelabel.setIcon(icon);
-		JTextField Aluminium = new JTextField("Aluminum");
-		Aluminium.setBackground(Color.black);
-		Aluminium.setSize(new Dimension(30,40));
-
-		Aluminium.setEditable(false);
-		Aluminium.setDragEnabled(true);
-		JPanel aluminumPanel = new JPanel(new BorderLayout());
-		aluminumPanel.add(imagelabel,BorderLayout.EAST);
-		aluminumPanel.add(Aluminium, BorderLayout.WEST);
-
+	private void display()
+	{	
+		JLabel title = new JLabel("<html><center>EcoRe<br>Select an Item to Recycle</center></html>");
+		title.setFont(new Font("Sans Serif", Font.BOLD, 18));
+		title.setHorizontalAlignment(SwingConstants.CENTER);
+		title.setHorizontalTextPosition(SwingConstants.CENTER);
+		title.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		rightPanel.add(aluminumPanel);
-		aluminumPanel.setBorder((new TitledBorder(new EtchedBorder(), "Aluminium")));
-
-		*/
-
-		JPanel plasticPanel = new JPanel();
-		plasticPanel.setBorder((new TitledBorder(new EtchedBorder(), "Plastic")));
-		rightPanel.add(plasticPanel);
-
-		JPanel glassPanel = new JPanel();
-		glassPanel.setBorder((new TitledBorder(new EtchedBorder(), "Glass")));
-		rightPanel.add(glassPanel);
-		panOuter.add(rightPanel,BorderLayout.CENTER);
-
-
-		JPanel topLeftPanel = new JPanel(new BorderLayout());
-		JLabel customerInfo = new JLabel("You Deposited");
-
-
-
-		topLeftPanel.add(customerInfo,BorderLayout.CENTER);
-		topLeftPanel.add(totalvalue,BorderLayout.PAGE_END);
-		leftPanel.add(topLeftPanel,BorderLayout.NORTH);
-		JPanel bottomLeftPanel = new JPanel(new BorderLayout());
-
-		JButton backButton = new JButton("BACK");
-
-		backButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				cards.previous(cardPanel);
-			}
-
-
-		});
-		JButton finishButton = new JButton("FINISH");
-		finishButton.addActionListener(new ActionListener()
-		{
-			public void actionPerformed(ActionEvent e)
-			{
-				cards.show(cardPanel, "Finish");
-			}
-
-
-		});
-
-		// This part recieves the dropped objects
-		final ImageIcon receptacleImage = new  ImageIcon("C:/Users/Shweta/git/EcoRe/EcoRe/src/Images/receptacle.jpg");
-		JTextArea receptacleArea = new JTextArea(){
-			private static final long serialVersionUID = 1L;
-		Image image = receptacleImage.getImage();
-		//setOpaque(false);
-		public void paint(Graphics g) 
-		{
-			g.drawImage(image, 0, 0, this);
-			super.paint(g);
-		}};
-
+		JLabel valueLabel = new JLabel("<html><center>You have deposited " + (aluminumWeight + glassWeight) + " lbs for a total of $" + value + "</center></html>");
+		valueLabel.setFont(new Font("Sans Serif", Font.BOLD, 14));
+		valueLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		
-
-		setVisible(true);
-		receptacleArea.setDragEnabled(true);
-		bottomLeftPanel.add(receptacleArea,BorderLayout.CENTER);
-		DropTarget dt = new DropTarget(receptacleArea, this);
-		bottomLeftPanel.add(finishButton,BorderLayout.PAGE_END);
-		leftPanel.add(bottomLeftPanel);
-		panOuter.add(leftPanel,BorderLayout.EAST);
-		add(panOuter,BorderLayout.CENTER);
-
-
-
-	}
-	@Override
-	public void dragEnter(DropTargetDragEvent dtde) {
-		// TODO Auto-generated method stub
-
-	}
-	@Override
-	public void dragExit(DropTargetEvent dte) {
-		// TODO Auto-generated method stub
-
-	}
-	@Override
-	public void dragOver(DropTargetDragEvent dtde) {
-		// TODO Auto-generated method stub
-
-	}
-	@Override
-	public void drop(DropTargetDropEvent dtde) 
-	{
-
-		try {
-			// Ok, get the dropped object and try to figure out what it is
-			Transferable tr = dtde.getTransferable();
-			DataFlavor[] flavors = tr.getTransferDataFlavors();
-			for (int i = 0; i < flavors.length; i++) 
-			{
-				System.out.println("Possible flavor: "+ i+ flavors[i].getMimeType());
-				dtde.dropComplete(true);
-				totalvalue.setText((Double.toString(FinalValue)));
-				// FinalValue = itemObj.getValue();
-
-				return;
+		JLabel aluminumLabel = new JLabel("<html><center>You have deposited " + aluminumWeight + " lbs of aluminum" + "</center></html>");
+		aluminumLabel.setFont(new Font("Sans Serif", Font.BOLD, 12));
+		aluminumLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JLabel glassLabel = new JLabel("<html><center>You have deposited " + glassWeight + " lbs of glass" + "</center></html>");
+		glassLabel.setFont(new Font("Sans Serif", Font.BOLD, 12));
+		glassLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		
+		JPanel statusPanel = new JPanel();
+		statusPanel.setAlignmentX(CENTER_ALIGNMENT);
+		statusPanel.setAlignmentY(TOP_ALIGNMENT);
+		statusPanel.setLayout(new BoxLayout(statusPanel, BoxLayout.Y_AXIS));
+		statusPanel.add(valueLabel);
+		statusPanel.add(aluminumLabel);
+		statusPanel.add(glassLabel);
+		statusPanel.add(Box.createVerticalGlue());	
+		
+		JPanel glassItems = new JPanel();
+		glassItems.setBorder(BorderFactory.createTitledBorder(new LineBorder(Color.BLACK), "Glass"));
+		glassItems.setPreferredSize(new Dimension(450, 150));
+		glassItems.setMaximumSize(new Dimension(450, 150));
+		glassItems.setMinimumSize(new Dimension(450, 150));
+		
+		glassGroup = new ButtonGroup();
+		for(Item i: rmos.getAcceptedItems()){
+			if(i.getType().getName().equals("Glass")){
+				JRadioButton button = new JRadioButton(i.getName());
+				glassGroup.add(button);
+				glassItems.add(button);
 			}
 		}
-		catch (Exception e) {
-			e.printStackTrace();
-
+		
+		JPanel aluminumItems = new JPanel();
+		aluminumItems.setBorder(BorderFactory.createTitledBorder(new LineBorder(Color.BLACK), "Aluminum"));
+		aluminumItems.setPreferredSize(new Dimension(450, 150));
+		aluminumItems.setMaximumSize(new Dimension(450, 150));
+		aluminumItems.setMinimumSize(new Dimension(450, 150));
+		
+		aluminumGroup = new ButtonGroup();
+		for(Item i: rmos.getAcceptedItems()){
+			if(i.getType().getName().equals("Aluminum")){
+				JRadioButton button = new JRadioButton(i.getName());
+				button.setActionCommand(i.getName());
+				aluminumGroup.add(button);
+				aluminumItems.add(button);
+			}
 		}
-
-
+		
+		
+		JPanel items = new JPanel();
+		items.setLayout(new BoxLayout(items, BoxLayout.Y_AXIS));
+		items.add(glassItems);
+		items.add(aluminumItems);
+		items.add(Box.createVerticalGlue());
+		
+		JButton recycle = new JButton("Recycle");
+		recycle.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				String glass = null;
+				String aluminum = null;
+				try{
+					glass = glassGroup.getSelection().getActionCommand();
+				}catch(Exception e1){
+					
+				}
+				try{
+					aluminum = aluminumGroup.getSelection().getActionCommand();
+				}catch(Exception e2){
+					
+				}
+				Item entered = null;
+				for(Item i : rmos.getAcceptedItems()){
+					if(glass != null && i.getName().equals(glass)){
+						entered = i;
+						glassWeight += i.getWeight();
+					}else if (aluminum != null && i.getName().equals(aluminum)){
+						entered = i;
+						aluminumWeight += i.getWeight();
+					}
+				}
+				if(entered == null){
+					JOptionPane.showMessageDialog(null,"Item Not Accepted", "Recycle Failed", JOptionPane.ERROR_MESSAGE);
+				}else{
+					rcm.recycleItem(entered);
+					value += entered.getValue();
+					removeAll();
+					display();
+				}
+			}
+		});
+		
+		JButton finish = new JButton("Finish");
+		finish.addActionListener(new ActionListener(){
+			@Override
+			public void actionPerformed(ActionEvent e){
+				rcm.finishSession();
+				rmos.rcmUpdate();
+				cards.next(cardPanel);
+			}
+		});
+		JPanel finishWrapper = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		finishWrapper.add(finish);
+		
+		add(Box.createRigidArea(new Dimension(10, 10)));
+		add(title);
+		add(Box.createVerticalGlue());
+		add(statusPanel);
+		add(Box.createVerticalGlue());
+		add(items);
+		add(recycle);
+		add(Box.createVerticalGlue());
+		add(finishWrapper);
 	}
-	@Override
-	public void dropActionChanged(DropTargetDragEvent dtde) {
-		// TODO Auto-generated method stub
-
-	}
-
-	public double calculateDetails()
-	{
-		rcmObj.getWeight();
-		itemTypeObj.setPrice(1.25);
-		double price =  rcmObj.getWeight() * itemTypeObj.getPrice();
-		return price;
-	} 
 	
-	public void setRCM(RCM rcm){
-		rcmObj = rcm;
+	public void setRCM(RCM rcm) 
+	{
+		this.rcm = rcm;
 		removeAll();
 		display();
 	}
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
