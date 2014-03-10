@@ -31,7 +31,8 @@ public class ItemChart extends GraphicDisplay{
 	public ItemChart(RMOS rmos){
 		setRmos(rmos);
 		setPreferredSize(new Dimension(250, 250));
-		setBorder(new EmptyBorder(50, 50, 50, 50));		
+		setBorder(new EmptyBorder(50, 50, 50, 50));
+		setBackground(new Color(148, 255, 123));
 	}
 	
 	private void getSlices(){
@@ -70,7 +71,7 @@ public class ItemChart extends GraphicDisplay{
 	    	g.fillArc(40, 40, area.width - 40, area.height - 40, startAngle, arcAngle);
 	    }
 	    
-	    int x = 0;
+	    int x = 3;
 	    int y = 35;
 	    for(Slice s: slices){
 	    	g.setColor(s.color);

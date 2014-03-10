@@ -207,6 +207,7 @@ public class RecycleSessionUI extends JPanel
 
 	public void setRCM(RCM _rcm) 
 	{
+		this.rcmObj = _rcm;
 		repaint();
 	}
 
@@ -275,6 +276,8 @@ public class RecycleSessionUI extends JPanel
 							itemTotalValue += Double.parseDouble(valueMap.get(itemKeys.itemPrice.toString()));
 							totalvalue.setText("Total Value =  $" + itemTotalValue);
 							machineCapacity += Double.parseDouble(valueMap.get(itemKeys.itemWeight.toString()));
+							
+							rcmObj.recycleItem(itemObj);
 						}
 						System.out.println("Capacity =" +machineCapacity);
 						break;
@@ -285,7 +288,8 @@ public class RecycleSessionUI extends JPanel
 				}
 			}
 			dtde.dropComplete(true);
-			if( machineCapacity >= maxCapacity)
+			//if( machineCapacity >= maxCapacity)
+			if(machineCapacity >  rcmObj.getCapacity())
 			{
 				target.setActive(false);
 				JFrame frame = null;

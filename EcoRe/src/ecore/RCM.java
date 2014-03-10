@@ -51,12 +51,13 @@ public class RCM implements Serializable{
 	private double sessionValue;
 	private ArrayList<Item> sessionItems;
 	private transient UsageDataIO fileIO;
+	private transient UsageDataIO emptyIO;
 	private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
 	public RCM(String location, String id){
 		this.id = id;
 		this.location = location;
-		status = Status.INACTIVE;
+		status = Status.ACTIVE;
 		state = State.OPERATIONAL;
 		capacity = 250;
 		weight = 0;
@@ -68,7 +69,8 @@ public class RCM implements Serializable{
 		sessionAluminumWeight = 0;
 		sessionGlassWeight = 0;
 		sessionItems = new ArrayList<Item>();
-		fileIO = new UsageDataIO();
+		fileIO = new UsageDataIO("usage.txt");
+		emptyIO = new UsageDataIO("empty.txt");
 	}
 	
 	public RCM(){
@@ -128,6 +130,7 @@ public class RCM implements Serializable{
 		}else{
 			sessionGlassWeight += item.getWeight();	
 		}
+		weight += item.getWeight();
 	}
 	
 	public void finishSession(){
@@ -148,6 +151,8 @@ public class RCM implements Serializable{
 	}
 	
 	public void empty(){
+		setTimeLastEmptied(Calendar.getInstance());
+		emptyIO.write(getID() + "," + dateFormat.format(timeLastEmptied.getTime()) + ";");
 		weight = 0;
 	}
 	
@@ -172,7 +177,8 @@ public class RCM implements Serializable{
 	}
 	
 	public void setIO(){
-		fileIO = new UsageDataIO();
+		fileIO = new UsageDataIO("usage.txt");
+		emptyIO = new UsageDataIO("empty.txt");
 	}
 	
 	public String printCash(){

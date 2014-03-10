@@ -45,6 +45,7 @@ public class CompleteSessionUI extends JPanel {
 	
 	private void display()
 	{
+		rmos.rcmUpdate();
 		setBackground(new Color(255,255,255));
 		updateSession();
 		
@@ -160,7 +161,7 @@ public class CompleteSessionUI extends JPanel {
 	}
 	
 	private void updateSession(){
-		weight = String.valueOf((int)((rcm.getSessionAluminumWeight() + rcm.getSessionGlassWeight())/16));
+		weight = String.valueOf(((rcm.getSessionAluminumWeight() + rcm.getSessionGlassWeight())/16));
 		value = String.valueOf(rcm.getSessionValue());
 	}
 }

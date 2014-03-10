@@ -1,6 +1,7 @@
 package ecoreGui.control;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -43,8 +44,10 @@ public class RecyclablesControl extends JPanel {
 	public RecyclablesControl(final RMOS rmos, final RecyclablesTable table){
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 75, 200, 75) );
+		setBackground(new Color(148, 255, 123));
 		
 		JButton removeRecyclable = new JButton("Remove");
+		removeRecyclable.setBackground(Color.WHITE);
 		removeRecyclable.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				ArrayList<String> selectedRows = new ArrayList<String>();
@@ -58,6 +61,7 @@ public class RecyclablesControl extends JPanel {
 		});
 		
 		JButton addNewRecyclable = new JButton("Add");
+		addNewRecyclable.setBackground(Color.WHITE);
 		addNewRecyclable.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				JTextField name = new JTextField();

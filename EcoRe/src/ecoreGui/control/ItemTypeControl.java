@@ -1,6 +1,7 @@
 package ecoreGui.control;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -40,8 +41,10 @@ public class ItemTypeControl extends JPanel {
 	public ItemTypeControl(final RMOS rmos, final ItemTypeTable table){
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 75, 200, 75) );
+		setBackground(new Color(148, 255, 123));
 		
 		JButton changePrice = new JButton("Change Price");
+		changePrice.setBackground(Color.WHITE);
 		changePrice.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				ArrayList<String> selectedRows = new ArrayList<String>();

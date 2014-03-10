@@ -1,11 +1,16 @@
 package ecoreGui.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 
+import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 
 import ecore.ItemType;
 import ecore.RMOS;
@@ -34,7 +39,8 @@ public class ItemTypeTable extends DisplayTable {
 		super.setRmos(rmos);
 		
 		setLayout(new BorderLayout());
-		setPreferredSize(new Dimension(200, 75));
+		setPreferredSize(new Dimension(200, 93));
+		setBackground(new Color(148, 255, 123));
 		
 		display();
 	}
@@ -43,6 +49,10 @@ public class ItemTypeTable extends DisplayTable {
 	public void display(){
 		this.removeAll();
 		this.updateUI();
+		
+		JLabel tableTitle = new JLabel("Recyclable Types");
+		setFont(new Font("Sans Serif", Font.BOLD, 14));
+		tableTitle.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		
 		String[] columnNames = {"", "Type", "Price per lb"};
 		Object[][] items = getTypes();
@@ -60,8 +70,16 @@ public class ItemTypeTable extends DisplayTable {
 		super.setTable(new JTable(model));
 		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(5);
 		
-		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		super.getTable().setGridColor(Color.BLACK);
 		
+		JTableHeader header = super.getTable().getTableHeader();
+		header.setBackground(Color.WHITE);
+		
+		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.getViewport().setBackground(Color.WHITE);
+		scrollPane.setBorder(new LineBorder(Color.BLACK));
+		
+		add(tableTitle, BorderLayout.NORTH);
 		add(scrollPane, BorderLayout.CENTER);
 		
 	}

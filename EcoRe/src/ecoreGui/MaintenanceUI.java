@@ -11,7 +11,6 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.Calendar;
 
 import javax.swing.*;
 import javax.swing.border.LineBorder;
@@ -41,12 +40,14 @@ public class MaintenanceUI extends JPanel {
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		setFont(new Font("Sans Serif", Font.BOLD, 14));
+		setBackground(Color.WHITE);
 	}
 	
 	private void display(){		
 		updateStatus();
 		
 		JLabel title = new JLabel("Machine: " + rcm.getID());
+		title.setBackground(Color.WHITE);
 		title.setFont(new Font("Sans Serif", Font.BOLD, 18));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -54,12 +55,14 @@ public class MaintenanceUI extends JPanel {
 		statusLabel.setBorder(BorderFactory.createTitledBorder(new LineBorder(Color.BLACK), "Status"));
 		statusLabel.setPreferredSize(new Dimension(150, 150));
 		JPanel statusWrapper = new JPanel();
+		statusWrapper.setBackground(Color.WHITE);
 		statusWrapper.add(Box.createHorizontalGlue());
 		statusWrapper.add(statusLabel);
 		statusWrapper.add(Box.createHorizontalGlue());
 		
 		JPanel emptyWrapper = new JPanel();
 		emptyWrapper.setAlignmentX(Component.LEFT_ALIGNMENT);
+		emptyWrapper.setBackground(Color.WHITE);
 		JLabel emptyLabel = new JLabel("Remove Recyclables:");
 		JButton empty = new JButton("Empty");
 		empty.setMaximumSize(new Dimension(70, 30));
@@ -68,7 +71,6 @@ public class MaintenanceUI extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e){
 				rcm.empty();
-				rcm.setTimeLastEmptied(Calendar.getInstance());
 				updateStatus();
 				rmos.rcmUpdate();
 			}
@@ -78,7 +80,9 @@ public class MaintenanceUI extends JPanel {
 		
 		JPanel cashWrapper = new JPanel();
 		cashWrapper.setAlignmentX(Component.LEFT_ALIGNMENT);
+		cashWrapper.setBackground(Color.WHITE);
 		JPanel cashPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		cashPanel.setBackground(Color.WHITE);
 		JLabel cashLabel = new JLabel("Add Cash");
 		cash = new JTextField(10);
 		JButton addCash = new JButton("Add");
@@ -102,7 +106,9 @@ public class MaintenanceUI extends JPanel {
 		
 		JPanel couponWrapper = new JPanel();
 		couponWrapper.setAlignmentX(Component.LEFT_ALIGNMENT);
+		couponWrapper.setBackground(Color.WHITE);
 		JPanel couponPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		couponPanel.setBackground(Color.WHITE);
 		JLabel couponLabel = new JLabel("Add Coupon Paper");
 		coupon = new JTextField(10);
 		JButton addCoupon = new JButton("Add");
@@ -125,7 +131,9 @@ public class MaintenanceUI extends JPanel {
 		couponWrapper.add(couponPanel);
 		
 		JPanel wrapper = new JPanel(new BorderLayout());
+		wrapper.setBackground(Color.WHITE);
 		JPanel options = new JPanel(new GridBagLayout());
+		options.setBackground(Color.WHITE);
 		GridBagConstraints cons = new GridBagConstraints();
 		cons.gridx = 2;
 		cons.gridy = 0;
@@ -138,6 +146,7 @@ public class MaintenanceUI extends JPanel {
 		
 		JPanel buttonWrapper = new JPanel(new FlowLayout(FlowLayout.RIGHT));
 		buttonWrapper.setAlignmentX(Component.LEFT_ALIGNMENT);
+		buttonWrapper.setBackground(Color.WHITE);
 		JButton done = new JButton("Exit");
 		done.addActionListener(new ActionListener(){
 			@Override

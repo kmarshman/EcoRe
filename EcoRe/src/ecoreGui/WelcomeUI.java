@@ -39,6 +39,7 @@ public class WelcomeUI extends JPanel {
 		
 		setLayout(new GridBagLayout());
 		setBackground(new Color(255,255,255));
+		setFont(new Font("Sans Serif", Font.BOLD, 14));
 		cons = new GridBagConstraints();
 		cons.fill = GridBagConstraints.NONE;
 		display();
@@ -63,6 +64,7 @@ public class WelcomeUI extends JPanel {
 		cons.insets = new Insets(0,50,0,0);
 		JPanel tablePanel = new JPanel();
 		tablePanel.setLayout(new BoxLayout(tablePanel, BoxLayout.Y_AXIS));
+		tablePanel.setBackground(Color.WHITE);
 		JLabel tableLabel = new JLabel("Get Cash for your Trash");
 		tableLabel.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		RcmItemTable table = new RcmItemTable(rmos);

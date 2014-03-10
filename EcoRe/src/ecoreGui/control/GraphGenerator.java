@@ -34,8 +34,10 @@ public class GraphGenerator extends JPanel{
 	public GraphGenerator(final RMOS rmos){
 		setLayout(new BorderLayout());
 		setPreferredSize(new Dimension(500, 1000));
+		setBackground(new Color(148, 255, 123));
 		
 		JPanel graphAxis = new JPanel(new GridBagLayout());
+		graphAxis.setBackground(new Color(148, 255, 123));
 		graphAxis.setBorder(new EmptyBorder(10, 10, 10, 10));
 		GridBagConstraints cons = new GridBagConstraints();
 		cons.fill = GridBagConstraints.BOTH;
@@ -44,6 +46,7 @@ public class GraphGenerator extends JPanel{
 		cons.gridy = 1;
 		String[] metricOptions = {"Value", "Weight"};
 		metrics = new JComboBox<String>(metricOptions);
+		metrics.setBackground(Color.WHITE);
 		graphAxis.add(metrics, cons);
 		
 		cons.gridx = 1;
@@ -55,6 +58,7 @@ public class GraphGenerator extends JPanel{
 		cons.gridy = 3;
 		String[] timeframeOptions = {"Day", "Week", "Month"};
 		timeframes = new JComboBox<String>(timeframeOptions);
+		timeframes.setBackground(Color.WHITE);
 		graphAxis.add(timeframes, cons);
 		
 		cons.gridx = 1;
@@ -64,6 +68,7 @@ public class GraphGenerator extends JPanel{
 		cons.gridx = 1;
 		cons.gridy = 5;
 		JButton create = new JButton("Go");
+		create.setBackground(Color.WHITE);
 		create.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				String metric = metrics.getItemAt(metrics.getSelectedIndex());

@@ -1,6 +1,7 @@
 package ecoreGui.control;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -45,9 +46,11 @@ public class MachineControl extends JPanel {
 	 */
 	public MachineControl(final RMOS rmos, final MachineTable table){
 		setLayout(new BorderLayout());
+		setBackground(new Color(148, 255, 123));
 		
 		String[] options = {"I want to...", "Activate", "Deactivate", "Remove"};
 		actions = new JComboBox<String>(options);
+		actions.setBackground(Color.WHITE);
 		actions.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				ArrayList<String> selectedRows = new ArrayList<String>();
@@ -74,6 +77,7 @@ public class MachineControl extends JPanel {
 		});
 		
 		JButton addNewMachine = new JButton("Add");
+		addNewMachine.setBackground(Color.WHITE);
 		addNewMachine.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				JTextField location = new JTextField();

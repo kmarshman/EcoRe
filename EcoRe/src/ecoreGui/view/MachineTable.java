@@ -1,12 +1,15 @@
 package ecoreGui.view;
 
 import java.awt.BorderLayout;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.Font;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.JTableHeader;
 import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
@@ -21,7 +24,6 @@ import ecore.RMOS;
 public class MachineTable extends DisplayTable {
 	
 	private static final long serialVersionUID = 1L;
-	private DateFormat dateFormat = new SimpleDateFormat("mm/dd/yy hh:mm:ss a");
 
 	/**
 	 * Default Constructor
@@ -39,6 +41,11 @@ public class MachineTable extends DisplayTable {
 		
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
+		setBackground(new Color(148, 255, 123));
+		
+		setPreferredSize(new Dimension(700, 300));
+		setMinimumSize(new Dimension(700, 300));
+		setMaximumSize(new Dimension(700, 300));
 		
 		display();
 	}
@@ -48,7 +55,11 @@ public class MachineTable extends DisplayTable {
 		this.removeAll();
 		this.updateUI();
 		
-		String[] columnNames = {"", "ID", "Location", "Status", "Capacity", "Weight", "Last Emptied", "Cash", "Paper", "Notes"};
+		JLabel tableTitle = new JLabel("Complete Machine List");
+		setFont(new Font("Sans Serif", Font.BOLD, 14));
+		tableTitle.setFont(new Font("Sans Serif", Font.BOLD, 14));
+		
+		String[] columnNames = {"", "ID", "Location", "Status", "Capacity", "Weight","Cash", "Paper", "Notes"};
 		
 		Object[][] rcms = getMachines();
 		
@@ -61,17 +72,28 @@ public class MachineTable extends DisplayTable {
 	        }
 	      };
 		super.setTable(new JTable(model));
-		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(10);
-		super.getTable().getColumnModel().getColumn(2).setPreferredWidth(100);
-		super.getTable().getColumnModel().getColumn(6).setPreferredWidth(150);
-		super.getTable().getColumnModel().getColumn(9).setPreferredWidth(100);
+		super.getTable().getColumnModel().getColumn(0).setPreferredWidth(15);
+		super.getTable().getColumnModel().getColumn(1).setPreferredWidth(50);
+		super.getTable().getColumnModel().getColumn(2).setPreferredWidth(200);
+		super.getTable().getColumnModel().getColumn(5).setPreferredWidth(50);
+		super.getTable().getColumnModel().getColumn(6).setPreferredWidth(50);
+		super.getTable().getColumnModel().getColumn(7).setPreferredWidth(50);
+		super.getTable().getColumnModel().getColumn(8).setPreferredWidth(100);
+		
+		super.getTable().setGridColor(Color.BLACK);
 		
 		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(super.getTable().getModel());
 		super.getTable().setRowSorter(sorter);
 		
-		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		super.getTable().setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
+		JTableHeader header = super.getTable().getTableHeader();
+		header.setBackground(Color.WHITE);
+		header.setFont(new Font("Sans Serif", Font.BOLD, 12));
 		
+		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.getViewport().setBackground(Color.WHITE);
+		scrollPane.setBorder(new LineBorder(Color.BLACK));
+		
+		add(tableTitle, BorderLayout.NORTH);
 		add(scrollPane, BorderLayout.CENTER);
 		
 	}
@@ -82,7 +104,7 @@ public class MachineTable extends DisplayTable {
 	 */
 	private Object[][] getMachines(){
 		int size = super.getRmos().getRCMGroup().size();
-		Object[][] items = new Object[size][10];
+		Object[][] items = new Object[size][9];
 		
 		int count = 0;
 		for (RCM machine: super.getRmos().getRCMGroup()){
@@ -92,10 +114,9 @@ public class MachineTable extends DisplayTable {
 			items[count][3] = machine.getStatus();
 			items[count][4] = machine.getCapacity();
 			items[count][5] = machine.getWeight();
-			items[count][6] = dateFormat.format(machine.getTimeLastEmptied().getTime());
-			items[count][7] = machine.getCash();
-			items[count][8] = machine.getCouponPaper();			
-			items[count][9] = machine.getState();
+			items[count][6] = machine.getCash();
+			items[count][7] = machine.getCouponPaper();			
+			items[count][8] = machine.getState();
 			
 			count++;
 		}

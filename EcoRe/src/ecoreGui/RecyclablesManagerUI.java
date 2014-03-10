@@ -1,5 +1,6 @@
 package ecoreGui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 
 import javax.swing.*;
@@ -35,6 +36,7 @@ public class RecyclablesManagerUI extends JPanel{
 	public RecyclablesManagerUI(RMOS rmos){
 		RecyclablesManagerUI.rmos = rmos;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setBackground(new Color(148, 255, 123));
 		
 		RecyclablesTable tableView = new RecyclablesTable(rmos);
 		tableView.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -48,7 +50,7 @@ public class RecyclablesManagerUI extends JPanel{
 		add(Box.createRigidArea(new Dimension(10, 50)));
 		
 		JPanel itemTypes = new JPanel();
-		
+		itemTypes.setBackground(new Color(148, 255, 123));
 		ItemTypeTable itemTableView = new ItemTypeTable(rmos);
 		itemTableView.setBorder(new EmptyBorder(10, 10, 10, 10));
 		RecyclablesManagerUI.rmos.addObserver(itemTableView);

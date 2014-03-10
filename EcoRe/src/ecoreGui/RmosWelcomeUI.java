@@ -1,6 +1,7 @@
 package ecoreGui;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -25,6 +26,7 @@ public class RmosWelcomeUI extends JPanel{
 
 	public RmosWelcomeUI(RMOS rmos, final CardLayout cards, final JPanel cardPanel){
 		setLayout(new GridBagLayout());
+		setBackground(new Color(148, 255, 123));
 		GridBagConstraints cons = new GridBagConstraints();
 		cons.fill = GridBagConstraints.NONE;
 		
@@ -43,6 +45,7 @@ public class RmosWelcomeUI extends JPanel{
 		add(login, cons);
 		
 		JButton go = new JButton("Login");
+		go.setBackground(Color.WHITE);
 		go.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(login.authenticate()){

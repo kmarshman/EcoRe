@@ -30,6 +30,7 @@ public class RMOS extends Observable implements Serializable{
 	private double totalGlass;
 	
 	private transient UsageDataIO fileIO;
+	private transient UsageDataIO emptyIO;
 	private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
 	private transient String metric;
@@ -49,7 +50,8 @@ public class RMOS extends Observable implements Serializable{
 		totalAluminum = 0;
 		totalGlass = 0;
 		
-		fileIO = new UsageDataIO();
+		fileIO = new UsageDataIO("usage.txt");
+		emptyIO = new UsageDataIO("empty.txt");
 		
 		metric = "Value";
 		timeframe = "Day";
@@ -243,7 +245,8 @@ public class RMOS extends Observable implements Serializable{
 	}
 	
 	public void setIO(){
-		fileIO = new UsageDataIO();
+		fileIO = new UsageDataIO("usage.txt");
+		emptyIO = new UsageDataIO("empty.txt");
 		for(RCM m: rcmGroup){
 			m.setIO();
 		}
@@ -324,14 +327,108 @@ public class RMOS extends Observable implements Serializable{
 				}
 			}			
 		}
-		switch(timeframe){
-		case "Day":
-			break;
-		case "Week":
-			break;
-		case "Month":
-			break;
-		}
+
+		scanner.close();
+		scan.close();
+		return map;
+	}
+	
+	public HashMap<String, Integer> getWeekEmptyData(){
+		emptyIO.open();
+		String data = emptyIO.read();
+		emptyIO.close();
+		
+		Scanner scanner = new Scanner(data);
+		Scanner scan = scanner.useDelimiter(";");
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+			while(scan.hasNext()){
+				String[] fields = scan.next().split(",");
+				if(fields.length >= 2){
+					Calendar date = Calendar.getInstance();
+					try {
+						date.setTime(dateFormat.parse(fields[1]));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					Calendar today = Calendar.getInstance();
+					if(date.get(Calendar.YEAR) == today.get(Calendar.YEAR) && date.get(Calendar.WEEK_OF_YEAR) == today.get(Calendar.WEEK_OF_YEAR)) {
+						int old = 0;
+						if(map.containsKey(fields[0])){
+							old = map.get(fields[0]);
+						}
+						map.put(fields[0], old + 1);
+					}
+				}
+			}			
+
+		scanner.close();
+		scan.close();
+		return map;
+	}
+	
+	public HashMap<String, Integer> getMonthEmptyData(){
+		emptyIO.open();
+		String data = emptyIO.read();
+		emptyIO.close();
+		
+		Scanner scanner = new Scanner(data);
+		Scanner scan = scanner.useDelimiter(";");
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+			while(scan.hasNext()){
+				String[] fields = scan.next().split(",");
+				if(fields.length >= 2){
+					Calendar date = Calendar.getInstance();
+					try {
+						date.setTime(dateFormat.parse(fields[1]));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					Calendar today = Calendar.getInstance();
+						if(date.get(Calendar.YEAR) == today.get(Calendar.YEAR) && date.get(Calendar.MONTH) == today.get(Calendar.MONTH)) {
+						int old = 0;
+						if(map.containsKey(fields[0])){
+							old = map.get(fields[0]);
+						}
+						map.put(fields[0], old + 1);
+					}
+				}
+			}			
+
+		scanner.close();
+		scan.close();
+		return map;	
+	}
+	
+	public HashMap<String, Integer> getYearEmptyData(){
+		emptyIO.open();
+		String data = emptyIO.read();
+		emptyIO.close();
+		
+		Scanner scanner = new Scanner(data);
+		Scanner scan = scanner.useDelimiter(";");
+		
+		HashMap<String, Integer> map = new HashMap<String, Integer>();
+			while(scan.hasNext()){
+				String[] fields = scan.next().split(",");
+				if(fields.length >= 2){
+					Calendar date = Calendar.getInstance();
+					try {
+						date.setTime(dateFormat.parse(fields[1]));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					Calendar today = Calendar.getInstance();
+						if(date.get(Calendar.YEAR) == today.get(Calendar.YEAR)) {
+						int old = 0;
+						if(map.containsKey(fields[0])){
+							old = map.get(fields[0]);
+						}
+						map.put(fields[0], old + 1);
+					}
+				}
+			}			
 
 		scanner.close();
 		scan.close();

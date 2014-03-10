@@ -4,6 +4,7 @@ import java.awt.*;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.LineBorder;
 import javax.swing.table.*;
 
 import ecore.Item;
@@ -34,12 +35,17 @@ public class RecyclablesTable extends DisplayTable {
 		
 		setLayout(new BorderLayout());
 		setBorder(new EmptyBorder(10, 75, 10, 75) );
+		setBackground(new Color(148, 255, 123));
 		
 		display();
 	}
 	
 	@Override
 	public void display(){
+		JLabel tableTitle = new JLabel("Accepted Items");
+		setFont(new Font("Sans Serif", Font.BOLD, 14));
+		tableTitle.setFont(new Font("Sans Serif", Font.BOLD, 14));
+		
 		String[] columnNames = {"", "Item", "Type", "Weight", "Price"};
 		Object[][] items = getItems();
 		
@@ -58,12 +64,22 @@ public class RecyclablesTable extends DisplayTable {
 		super.getTable().getColumnModel().getColumn(1).setPreferredWidth(220);
 		super.getTable().getColumnModel().getColumn(2).setPreferredWidth(130);
 		super.getTable().getColumnModel().getColumn(3).setPreferredWidth(130);
+		super.getTable().setBackground(Color.WHITE);
+		
+		super.getTable().setGridColor(Color.BLACK);
 		
 		TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(super.getTable().getModel());
 		super.getTable().setRowSorter(sorter);
 		
-		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		JTableHeader header = super.getTable().getTableHeader();
+		header.setBackground(Color.WHITE);
+		header.setFont(new Font("Sans Serif", Font.BOLD, 12));
 		
+		JScrollPane scrollPane = new JScrollPane(super.getTable(), JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.getViewport().setBackground(Color.WHITE);
+		scrollPane.setBorder(new LineBorder(Color.BLACK));
+		
+		add(tableTitle, BorderLayout.NORTH);
 		add(scrollPane, BorderLayout.CENTER);
 		
 	}

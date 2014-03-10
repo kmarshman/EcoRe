@@ -16,7 +16,7 @@ import ecore.RMOS;
 public class BarGraph extends GraphicDisplay {
 
 	private static final long serialVersionUID = 1L;
-	private Color[] colors = {new Color(43, 127, 23), new Color(148, 255, 123), new Color(85, 255, 47), new Color(74, 127, 62), new Color(68, 204, 37)};
+	private Color[] colors = {new Color(43, 127, 23), new Color(85, 255, 47), new Color(74, 127, 62), new Color(68, 204, 37)};
 	private ArrayList<String> ids;
 	private ArrayList<Double> values;
 	private String title;
@@ -24,6 +24,7 @@ public class BarGraph extends GraphicDisplay {
 	public BarGraph(RMOS rmos){
 		setRmos(rmos);
 		setBorder(new EmptyBorder(10, 10, 10, 10) );
+		setBackground(new Color(148, 255, 123));
 	}
 	
 	private void setData(){

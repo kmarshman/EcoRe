@@ -35,20 +35,25 @@ public class Login extends JPanel {
 		this.rmos = rmos;
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setBackground(new Color(148, 255, 123));
 		
 		JPanel inputs = new JPanel();
 		inputs.setLayout(new BoxLayout(inputs, BoxLayout.Y_AXIS));
 		
-		JPanel name = new JPanel(new FlowLayout());		
+		JPanel name = new JPanel(new FlowLayout());
+		name.setBackground(new Color(148, 255, 123));
 		JLabel usernameLabel = new JLabel("Username:");
 		username = new JTextField(20);
+		username.setBackground(Color.WHITE);
 		name.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		name.add(usernameLabel);
 		name.add(username);
 		
 		JPanel pass = new JPanel(new FlowLayout());
+		pass.setBackground(new Color(148, 255, 123));
 		JLabel passwordLabel = new JLabel("Password:");
-		password = new JPasswordField(20);
+		password = new JPasswordField(18);
+		password.setBackground(Color.WHITE);
 		password.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		password.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){

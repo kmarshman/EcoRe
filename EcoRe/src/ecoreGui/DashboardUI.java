@@ -1,6 +1,8 @@
 package ecoreGui;
 
 
+import java.awt.Color;
+
 import javax.swing.*;
 
 import ecoreGui.control.GraphGenerator;
@@ -32,11 +34,13 @@ public class DashboardUI extends JPanel{
 	public DashboardUI(RMOS rmos){
 		DashboardUI.rmos = rmos;
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		setBackground(new Color(148, 255, 123));
 		
 		GraphGenerator graph = new GraphGenerator(rmos);
 		add(graph);
 		
 		JPanel wrapper = new JPanel();
+		wrapper.setBackground(new Color(148, 255, 123));
 		wrapper.setLayout(new BoxLayout(wrapper, BoxLayout.X_AXIS));
 		
 		ActiveMachineTable activeMachines = new ActiveMachineTable(rmos);

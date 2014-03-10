@@ -12,14 +12,16 @@ public class UsageDataIO implements Serializable{
 	private FileOutputStream fop;
 	private FileInputStream fip;
 	private File file;
+	private String fileName;
 	
-	public UsageDataIO(){ 
+	public UsageDataIO(String fileName){
+		this.fileName = fileName;
 		open();
 	}
 	
 	public void open(){
 		try {
-			file = new File("usage.txt");
+			file = new File(fileName);
 			if (!file.exists()) {
 				file.createNewFile();
 			}
