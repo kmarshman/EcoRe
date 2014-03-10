@@ -160,7 +160,7 @@ public class CompleteSessionUI extends JPanel {
 	}
 	
 	private void updateSession(){
-		weight = String.valueOf(rcm.getSessionAluminumWeight() + rcm.getSessionGlassWeight());
+		weight = String.valueOf((int)((rcm.getSessionAluminumWeight() + rcm.getSessionGlassWeight())/16));
 		value = String.valueOf(rcm.getSessionValue());
 	}
 }

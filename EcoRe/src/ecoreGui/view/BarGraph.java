@@ -60,9 +60,9 @@ public class BarGraph extends GraphicDisplay {
 		int clientHeight = d.height;
 		int barWidth = clientWidth / values.size();
 
-		Font titleFont = new Font("SansSerif", Font.BOLD, 14);
+		Font titleFont = new Font("Sans Serif", Font.BOLD, 14);
 		FontMetrics titleFontMetrics = g2.getFontMetrics(titleFont);
-		Font labelFont = new Font("SansSerif", Font.BOLD, 10);
+		Font labelFont = new Font("Sans Serif", Font.BOLD, 12);
 		FontMetrics labelFontMetrics = g2.getFontMetrics(labelFont);
 
 		int titleWidth = titleFontMetrics.stringWidth(title);
@@ -101,6 +101,11 @@ public class BarGraph extends GraphicDisplay {
 		    int labelWidth = labelFontMetrics.stringWidth(ids.get(i));
 		    x = i * barWidth + (barWidth - labelWidth) / 2;
 		    g2.drawString(ids.get(i), x, y);
+		    if(title.contains("Weight")){
+		    	g2.drawString((String.valueOf(values.get(i)) + "lbs"), x, y - 30);
+		    }else{
+		    	g2.drawString((String.valueOf("$" +  Math.round(values.get(i)*100.0)/100.0)), x, y - 30);
+		    }
 		}
 	}
 }
