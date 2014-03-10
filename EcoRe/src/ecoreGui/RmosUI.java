@@ -31,7 +31,7 @@ public class RmosUI extends JPanel {
         tabbedPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
             	if(tabbedPane.getSelectedIndex() == 0){
-            		rmos.setItemStatistics();
+            		rmos.setTotalWeights();
             	}
             }
         });

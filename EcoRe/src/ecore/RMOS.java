@@ -1,7 +1,12 @@
 package ecore;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Observable;
 import java.util.Scanner;
 
@@ -25,6 +30,7 @@ public class RMOS extends Observable implements Serializable{
 	private double totalGlass;
 	
 	private transient UsageDataIO fileIO;
+	private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
 	private transient String metric;
 	private transient String timeframe;
@@ -182,7 +188,9 @@ public class RMOS extends Observable implements Serializable{
 	}
 	
 	public void setTotalWeights(){
+		fileIO.open();
 		String data = fileIO.read();
+		fileIO.close();
 		
 		Scanner scanner = new Scanner(data);
 		Scanner scan = scanner.useDelimiter(",|;");
@@ -213,13 +221,6 @@ public class RMOS extends Observable implements Serializable{
 	public double getTotalGlassWeight(){		
 		return totalGlass;
 	}
-	
-	public void setItemStatistics(){
-		totalAluminum = 60;
-		totalGlass = 40;
-		setChanged();
-		notifyObservers(this);
-	}
 
 	public String getMetric() {
 		return metric;
@@ -248,20 +249,93 @@ public class RMOS extends Observable implements Serializable{
 		}
 	}
 	
-	public ArrayList<String> getIDs(){
-		ArrayList<String> ids = new ArrayList<String>();
-		for(RCM m: rcmGroup){
-			ids.add(m.getID());
+	public HashMap<String, Double> getValues(){	
+		fileIO.open();
+		String data = fileIO.read();
+		fileIO.close();
+		
+		Scanner scanner = new Scanner(data);
+		Scanner scan = scanner.useDelimiter(";");
+		
+		HashMap<String, Double> map = new HashMap<String, Double>();
+		if(metric.equals("Value")){
+			while(scan.hasNext()){
+				String line = scan.next();
+				String[] fields = line.split(",");
+				if(fields.length >= 5){
+					Calendar date = Calendar.getInstance();
+					try {
+						date.setTime(dateFormat.parse(fields[1]));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					Calendar today = Calendar.getInstance();
+					boolean add = false;
+					switch(timeframe){
+					case "Day":
+						if(date.get(Calendar.YEAR) == today.get(Calendar.YEAR) && date.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)) add = true; 
+						break;
+					case "Week":
+						if(date.get(Calendar.YEAR) == today.get(Calendar.YEAR) && date.get(Calendar.WEEK_OF_YEAR) == today.get(Calendar.WEEK_OF_YEAR)) add = true; 
+						break;
+					case "Month":
+						if(date.get(Calendar.YEAR) == today.get(Calendar.YEAR) && date.get(Calendar.MONTH) == today.get(Calendar.MONTH)) add = true; 
+						break;
+					}
+					if(add){
+						Double old = 0.0;
+						if(map.containsKey(fields[0])){
+							old = map.get(fields[0]);
+						}
+						map.put(fields[0], old + Double.parseDouble(fields[2]));
+					}
+				}
+			}
+		}else{
+			while(scan.hasNext()){
+				String[] fields = scan.next().split(",");
+				if(fields.length >= 5){
+					Calendar date = Calendar.getInstance();
+					try {
+						date.setTime(dateFormat.parse(fields[1]));
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					Calendar today = Calendar.getInstance();
+					boolean add = false;
+					switch(timeframe){
+					case "Day":
+						if(date.get(Calendar.YEAR) == today.get(Calendar.YEAR) && date.get(Calendar.DAY_OF_YEAR) == today.get(Calendar.DAY_OF_YEAR)) add = true; 
+						break;
+					case "Week":
+						if(date.get(Calendar.YEAR) == today.get(Calendar.YEAR) && date.get(Calendar.WEEK_OF_YEAR) == today.get(Calendar.WEEK_OF_YEAR)) add = true; 
+						break;
+					case "Month":
+						if(date.get(Calendar.YEAR) == today.get(Calendar.YEAR) && date.get(Calendar.MONTH) == today.get(Calendar.MONTH)) add = true; 
+						break;
+					}
+					if(add){
+						Double old = 0.0;
+						if(map.containsKey(fields[0])){
+							old = map.get(fields[0]);
+						}
+						map.put(fields[0], old + Double.parseDouble(fields[3]) + Double.parseDouble(fields[4]));
+					}
+				}
+			}			
 		}
-		return ids;
-	}
-	
-	public ArrayList<Double> getValues(){
-		ArrayList<Double> values = new ArrayList<Double>();
-		for(RCM m: rcmGroup){
-			values.add(1000 + Double.parseDouble(m.getID()));
+		switch(timeframe){
+		case "Day":
+			break;
+		case "Week":
+			break;
+		case "Month":
+			break;
 		}
-		return values;
+
+		scanner.close();
+		scan.close();
+		return map;
 	}
 	
 	public void rcmUpdate(){

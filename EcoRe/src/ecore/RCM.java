@@ -51,7 +51,7 @@ public class RCM implements Serializable{
 	private double sessionValue;
 	private ArrayList<Item> sessionItems;
 	private transient UsageDataIO fileIO;
-	private DateFormat dateFormat = new SimpleDateFormat("mm/dd/yy hh:mm:ss a");
+	private DateFormat dateFormat = new SimpleDateFormat("MM/dd/yy hh:mm:ss a");
 	
 	public RCM(String location, String id){
 		this.id = id;

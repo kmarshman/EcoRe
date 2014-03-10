@@ -68,7 +68,11 @@ public class GraphGenerator extends JPanel{
 			public void actionPerformed(ActionEvent e){
 				String metric = metrics.getItemAt(metrics.getSelectedIndex());
 				String time = timeframes.getItemAt(timeframes.getSelectedIndex());
-				rmos.setChart((metric + " by " + time), metric, time);
+				if(metric.equals("Day")){
+					rmos.setChart((metric + " Collected Today"), metric, time);
+				}else{
+					rmos.setChart((metric + " Collected This " + time), metric, time);
+				}
 			}
 		});
 		graphAxis.add(create, cons);

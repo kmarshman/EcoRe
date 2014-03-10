@@ -67,7 +67,7 @@ public class Main extends JFrame {
 	    	FileInputStream fileIn = new FileInputStream("rmos.ser");
 	    	ObjectInputStream in = new ObjectInputStream(fileIn);
 	    	rmos = (RMOS) in.readObject();
-	    	rmos.setChart("Value by Day", "Value", "Day");
+	    	rmos.setChart("Value Collected Today", "Value", "Day");
 	    	rmos.setIO();
 	    	in.close();
 	    	fileIn.close();

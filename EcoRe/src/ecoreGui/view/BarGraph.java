@@ -7,6 +7,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.swing.border.EmptyBorder;
 
@@ -27,8 +28,17 @@ public class BarGraph extends GraphicDisplay {
 	
 	private void setData(){
 		title = getRmos().getChartTitle();
-		ids = getRmos().getIDs();
-		values = getRmos().getValues();
+		ids = new ArrayList<String>();
+		values = new ArrayList<Double>();
+		HashMap<String, Double> data = getRmos().getValues();
+		Object[] temp = data.keySet().toArray();
+		for(Object t: temp){
+			ids.add((String)t);
+		}
+		temp = data.values().toArray();
+		for(Object t: temp){
+			values.add((Double)t);
+		}
 	}
 	@Override
 	public void paintComponent(Graphics g){

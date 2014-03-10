@@ -132,6 +132,7 @@ public class CompleteSessionUI extends JPanel {
 		done.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				rcm.finishSession();
 				cards.show(cardPanel, "RCM Selector");
 				
 				//cards.next(cardPanel);

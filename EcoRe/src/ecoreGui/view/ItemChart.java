@@ -37,7 +37,7 @@ public class ItemChart extends GraphicDisplay{
 	private void getSlices(){
 		getRmos().setTotalWeights();
 		slices[0] = new Slice(getRmos().getTotalAluminumWeight(), new Color(85, 255, 47), "Aluminum");
-		slices[1] = new Slice(getRmos().getTotalGlassWeight(), new Color(68, 204, 37), "Glass");;
+		slices[1] = new Slice(getRmos().getTotalGlassWeight(), new Color(68, 204, 37), "Glass");
 	}
 	
 	@Override
@@ -54,15 +54,20 @@ public class ItemChart extends GraphicDisplay{
 	    }
 
 	    int startAngle = 0;
-	    int curValue = 0;
+	    int aluminumArc = (int) Math.round(slices[0].value * 360 / total);
+	    int glassArc = 360 - aluminumArc;
 	    for (Slice s: slices) {
-	    	startAngle = (int) (curValue * 360 / total);
-	    	int arcAngle = (int) (s.value * 360 / total);
+	    	startAngle = 0;
+	    	int arcAngle = 0;
+	    	if(s.name.equals("Aluminum")){
+	    		arcAngle = aluminumArc;
+	    	}else{
+	    		arcAngle = glassArc;
+	    		startAngle = aluminumArc;
+	    	}
 	      
 	    	g.setColor(s.color);
 	    	g.fillArc(40, 40, area.width - 40, area.height - 40, startAngle, arcAngle);
-		      
-	    	curValue += s.value;
 	    }
 	    
 	    int x = 0;
@@ -72,7 +77,7 @@ public class ItemChart extends GraphicDisplay{
 	    	g.fillRect(x, y, 10, 10);
 	    	
 	    	g.setColor(Color.BLACK);
-	    	int percentage = (int) (s.value / total * 100);
+	    	int percentage = (int) Math.round(s.value / total * 100);
 	    	g.drawString ((s.name + " " + percentage + "%"), x + 15, y + 10);
 	    	y += 15;
 	    }
