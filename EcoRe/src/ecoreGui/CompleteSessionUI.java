@@ -32,7 +32,9 @@ public class CompleteSessionUI extends JPanel {
 	private JLabel print, error;
 	private JButton coupon, cash;
 
-	public CompleteSessionUI(RMOS rmos, RCM rcm,final CardLayout cards, final JPanel cardPanel){
+
+	public CompleteSessionUI(RMOS rmos, RCM rcm,final CardLayout cards, final JPanel cardPanel)
+	{
 		this.rcm = rcm;
 		this.cards = cards;
 		this.cardPanel = cardPanel;
@@ -41,7 +43,9 @@ public class CompleteSessionUI extends JPanel {
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 	}
 	
-	private void display(){
+	private void display()
+	{
+		setBackground(new Color(255,255,255));
 		updateSession();
 		
 		if(rcm.getCash() < rcm.getSessionValue()){
@@ -53,7 +57,7 @@ public class CompleteSessionUI extends JPanel {
 			error.setText("Out of coupons");
 		}
 		
-		JLabel title = new JLabel("<html><center>Woud you like to receive cash or coupon?</center></html>");
+		JLabel title = new JLabel("<html><center>Woud you like to receive cash or coupon*?</center></html>");
 		title.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setHorizontalTextPosition(SwingConstants.CENTER);
@@ -65,6 +69,7 @@ public class CompleteSessionUI extends JPanel {
 		valueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		JPanel cashWrapper = new JPanel();
+		cashWrapper.setBackground(new Color(255,255,255));
 		cashWrapper.setLayout(new BoxLayout(cashWrapper, BoxLayout.Y_AXIS));
 		cash = new JButton("Cash");
 		cash.addActionListener(new ActionListener(){
@@ -102,12 +107,14 @@ public class CompleteSessionUI extends JPanel {
 		print.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JPanel options = new JPanel();
+		options.setBackground(new Color(255,255,255));
 		options.add(cashWrapper);
 		options.add(Box.createRigidArea(new Dimension(30, 0)));
 		options.add(Box.createHorizontalGlue());
 		options.add(couponWrapper);
 		
 		JPanel printPanel = new JPanel();
+		printPanel.setBackground(new Color(255,255,255));
 		printPanel.setLayout(new BoxLayout(printPanel, BoxLayout.Y_AXIS));
 		printPanel.add(options);
 		printPanel.add(Box.createRigidArea(new Dimension(0, 30)));
@@ -120,12 +127,15 @@ public class CompleteSessionUI extends JPanel {
 		error.setHorizontalAlignment(SwingConstants.CENTER);
 		
 		JPanel exitWrapper = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+		exitWrapper.setBackground(new Color(255,255,255));
 		JButton done = new JButton("Exit");
 		done.addActionListener(new ActionListener(){
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				cards.next(cardPanel);
-				cards.next(cardPanel);
+				cards.show(cardPanel, "RCM Selector");
+				
+				//cards.next(cardPanel);
+				//cards.next(cardPanel);
 			}
 		});
 		exitWrapper.add(done);

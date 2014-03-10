@@ -2,6 +2,7 @@
 package ecoreGui;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -37,12 +38,14 @@ public class WelcomeUI extends JPanel {
 		this.cardPanel = cardPanel;
 		
 		setLayout(new GridBagLayout());
+		setBackground(new Color(255,255,255));
 		cons = new GridBagConstraints();
 		cons.fill = GridBagConstraints.NONE;
 		display();
 	}
 	
-	private void display(){
+	private void display()
+	{
 		cons.gridx = 2;
 		cons.gridy = 0;
 		cons.anchor = GridBagConstraints.PAGE_START;
