@@ -213,7 +213,7 @@ public class RCM implements Serializable{
 		penny = (int) (sessionValue/.01);
 		sessionValue = sessionValue%.01;
 		
-		return "<html>" + ten + " tens<br>" + five + " fives<br>"+ one + " ones<br>" + quarter + " quarters<br>" + dime + " dimes<br>"+ nickel + " nickels<br>" + penny + " pennys</html>";
+		return "<html>" + ten + " tens <br>" + five + " fives<br>"+ one + " ones<br>" + quarter + " quarters<br>" + dime + " dimes<br>"+ nickel + " nickels<br>" + penny + " pennys</html>";
 	}
 	
 	public String printCoupon(){

@@ -155,7 +155,7 @@ public class CompleteSessionUI extends JPanel {
 	}
 	
 	public void setRCM(RCM rcm){
-		this.rcm = rcm;
+		this.rcm =  rcm;
 		removeAll();
 		display();
 	}

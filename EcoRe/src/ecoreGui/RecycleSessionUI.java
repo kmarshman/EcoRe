@@ -450,7 +450,7 @@ public class RecycleSessionUI extends JPanel
 								{
 									target.setActive(false);
 									JOptionPane.showMessageDialog(frame,"Please use any other nearest machine", " Machine Full !", JOptionPane.WARNING_MESSAGE);
-									cards.next(cardPanel);
+									cards.next(cardPanel );
 								}else{
 									rcmObj.recycleItem(value,weight,type);
 									

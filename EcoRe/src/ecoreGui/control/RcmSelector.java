@@ -67,7 +67,7 @@ public class RcmSelector extends JPanel implements Observer {
 		cons.gridy = 0;
 		cons.anchor = GridBagConstraints.PAGE_START;
 		JLabel welcomeLabel = new JLabel("<html><font face=\"Garamond\" color=\"228b22\"><left>Welcome to EcoRe!<br>Select a machine to get started.<left></font><html>");
-		welcomeLabel.setFont(new Font("Sans Serif", Font.BOLD, 18));
+		welcomeLabel.setFont(new Font("Sans Serif",  Font.BOLD, 18));
 		add(welcomeLabel, cons);
 		
 		cons.gridx = 1;

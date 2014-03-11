@@ -22,7 +22,7 @@ public class RcmUI extends JPanel {
 		RcmSelector selector = new RcmSelector(rmos, cards, this, welcome, recycle, finish, maintenance);
 		rmos.addObserver(selector);
 
-		add(selector, "RCM Selector");
+		add(selector,  "RCM Selector");
 		add(welcome, "Welcome");
 		add(recycle, "Recycle");
 		add(finish, "Finish");
