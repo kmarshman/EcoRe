@@ -29,7 +29,7 @@ public class CompleteSessionUI extends JPanel {
 	protected CardLayout cards;
 	protected JPanel cardPanel;
 	private String weight, value;
-	private JLabel print, error;
+	private JLabel print, error, valueLabel;
 	private JButton coupon, cash;
 
 
@@ -41,6 +41,7 @@ public class CompleteSessionUI extends JPanel {
 		this.rmos = rmos;
 		
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+		valueLabel = new JLabel("");
 	}
 	
 	private void display()
@@ -58,13 +59,12 @@ public class CompleteSessionUI extends JPanel {
 			error.setText("Out of coupons");
 		}
 		
-		JLabel title = new JLabel("<html><center>Woud you like to receive cash or coupon*?</center></html>");
+		JLabel title = new JLabel("<html><center>Woud you like to receive cash or coupon?</center></html>");
 		title.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setHorizontalTextPosition(SwingConstants.CENTER);
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
-		JLabel valueLabel = new JLabel("<html>You deposited " + weight + " lbs for a total of $" + value);
 		valueLabel.setFont(new Font("Sans Serif", Font.BOLD, 18));
 		valueLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		valueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -160,10 +160,11 @@ public class CompleteSessionUI extends JPanel {
 		display();
 	}
 	
-	private void updateSession(){
-		weight = String.valueOf(((rcm.getSessionAluminumWeight() + rcm.getSessionGlassWeight())/16));
-		System.out.println("aluminum: " + rcm.getSessionAluminumWeight());
-		System.out.println("glass: " + rcm.getSessionGlassWeight());
+	public void updateSession(){
+		System.out.println("updating with " + rcm.getSessionValue());
+		weight = String.valueOf((rcm.getSessionAluminumWeight() + rcm.getSessionGlassWeight()));
 		value = String.valueOf(rcm.getSessionValue());
+		
+		valueLabel.setText("<html>You deposited " + weight + " oz for a total of $" + value);
 	}
 }

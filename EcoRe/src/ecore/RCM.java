@@ -123,15 +123,15 @@ public class RCM implements Serializable{
 		if(weight <= capacity) state = State.OPERATIONAL;
 	}
 	
-	public void recycleItem(Item item){
-		sessionItems.add(item);
-		sessionValue += item.getValue();
-		if(item.getType().getName().equals("Aluminum")){
-			sessionAluminumWeight += item.getWeight();
+	public void recycleItem(double value, double weight, String type){
+		System.out.println("new session value "+ sessionValue);
+		sessionValue += value;
+		if(type.equals("Aluminum")){
+			sessionAluminumWeight += (weight/16);
 		}else{
-			sessionGlassWeight += item.getWeight();	
+			sessionGlassWeight += (weight/16);	
 		}
-		weight += item.getWeight();
+		this.weight += (weight/16);
 		if(weight >= capacity) state = State.NONOPERATIONAL; 
 	}
 	

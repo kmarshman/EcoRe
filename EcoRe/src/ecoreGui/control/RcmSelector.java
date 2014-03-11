@@ -43,7 +43,7 @@ public class RcmSelector extends JPanel implements Observer {
 	private MaintenanceUI maintenance;
 	private ArrayList<RCM> activeMachines;
 	private Image imgBackground = null;
-	private final String imgPath = "src/ecore/images/recycle.jpg";
+	private final String imgPath = "images/recycle.jpg";
 
 	public RcmSelector(RMOS rmos, CardLayout cards, JPanel cardPanel, WelcomeUI welcome, RecycleSessionUI recycle, CompleteSessionUI complete, MaintenanceUI maintenance){
 		setLayout(new GridBagLayout());

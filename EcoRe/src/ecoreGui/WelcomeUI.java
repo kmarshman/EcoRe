@@ -57,6 +57,7 @@ public class WelcomeUI extends JPanel {
 		cons.insets = new Insets(0,0,100,0);
 		JLabel welcomeLabel = new JLabel("<html><font face=\"Garamond\" color=\"228b22\"><center>Welcome to EcoRe <br> Recycle your aluminium , glass and plastic here</center></font></html>");;
 		welcomeLabel.setFont(new Font("Sans Serif", Font.BOLD, 18));
+		welcomeLabel.setForeground(new Color(34, 139, 34));
 		welcomeLabel.setAlignmentX(SwingConstants.CENTER);
 		add(welcomeLabel, cons);
 
