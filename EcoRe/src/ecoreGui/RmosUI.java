@@ -18,18 +18,23 @@ public class RmosUI extends JPanel {
 	JTabbedPane tabbedPane;
 	
 	public RmosUI(final RMOS rmos){
-		CardLayout cards = new CardLayout();
+		final CardLayout cards = new CardLayout();
 		setLayout(cards);
 		setBackground(new Color(148, 255, 123));
 		
-		RmosWelcomeUI loginContainer = new RmosWelcomeUI(rmos, cards, this);
+		final RmosWelcomeUI loginContainer = new RmosWelcomeUI(rmos, cards, this);
 		
 		DashboardUI dashboard = new DashboardUI(rmos);
 		MachineManagerUI machineManager = new MachineManagerUI(rmos);
 		RecyclablesManagerUI recyclablesManager = new RecyclablesManagerUI(rmos);
 		
+		UIManager.put("TabbedPane.selected", new javax.swing.plaf.ColorUIResource(new Color(148, 255, 123)));
+		UIManager.put("TabbedPane.borderHightlightColor", java.awt.Color.BLACK);
+		UIManager.put("TabbedPane.selectHighlight", java.awt.Color.BLACK);
+    	UIManager.put("TabbedPane.tabAreaBackground", Color.BLACK);
+    	
     	tabbedPane = new JTabbedPane();
-    	tabbedPane.setBackground(new Color(148, 255, 123));
+    	tabbedPane.setBackground(Color.WHITE);
     	tabbedPane.setForeground(Color.BLACK);
     	tabbedPane.setUI(new BasicTabbedPaneUI() {
     		   @Override
@@ -37,20 +42,25 @@ public class RmosUI extends JPanel {
     		       super.installDefaults();
     		       highlight = Color.WHITE;
     		       lightHighlight = Color.WHITE;
-    		       shadow = Color.BLACK;
-    		       darkShadow = Color.BLACK;
-    		       focus = Color.BLACK;
+    		       shadow = new Color(148, 255, 123);
+    		       darkShadow = new Color(148, 255, 123);
+    		       focus = Color.WHITE;
     		   }
     		});
-    	UIManager.put("TabbedPane.tabAreaBackground", Color.BLACK);
     	
     	tabbedPane.addTab("Home", dashboard);
     	tabbedPane.addTab("Manage Machines", machineManager);
     	tabbedPane.addTab("Manage Recyclables", recyclablesManager);
+    	tabbedPane.addTab("Logout", null);
         tabbedPane.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent e) {
             	if(tabbedPane.getSelectedIndex() == 0){
             		rmos.setTotalWeights();
+            	}
+            	if(tabbedPane.getSelectedIndex() == 3){
+            		loginContainer.clear();
+            		tabbedPane.setSelectedIndex(0);
+            		cards.previous(RmosUI.this);
             	}
             }
         });

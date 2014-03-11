@@ -276,8 +276,8 @@ public class RecycleSessionUI extends JPanel
 							itemTotalValue += Double.parseDouble(valueMap.get(itemKeys.itemPrice.toString()));
 							totalvalue.setText("Total Value =  $" + itemTotalValue);
 							machineCapacity += Double.parseDouble(valueMap.get(itemKeys.itemWeight.toString()));
-							
-							rcmObj.recycleItem(itemObj);
+							//Not working
+							//rcmObj.recycleItem(itemObj);
 						}
 						System.out.println("Capacity =" +machineCapacity);
 						break;

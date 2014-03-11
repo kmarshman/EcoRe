@@ -32,7 +32,7 @@ public class Main extends JFrame {
 		setTitle("EcoRe");
 		
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-		setSize(new Dimension((screenSize.width/8)*7, screenSize.height/5*4));
+		setSize(new Dimension((screenSize.width/8)*7, screenSize.height/7*6));
 		setLocationRelativeTo(null);
 		
 		
@@ -40,9 +40,9 @@ public class Main extends JFrame {
 		
 		RcmUI rcmUI = new RcmUI(rmos);
 		RmosUI rmosUI = new RmosUI(rmos);
-    	
+		
     	getContentPane().add(rmosUI);
-    	getContentPane().add(rcmUI);
+		getContentPane().add(rcmUI);
     	
     	setVisible(true);
     	

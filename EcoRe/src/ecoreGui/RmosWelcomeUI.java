@@ -49,6 +49,7 @@ public class RmosWelcomeUI extends JPanel{
 		go.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
 				if(login.authenticate()){
+					login.clear();
 					cards.next(cardPanel);
 				}else{
 					login.loginFailed();
@@ -59,6 +60,10 @@ public class RmosWelcomeUI extends JPanel{
 		cons.gridy =2;
 		cons.anchor = GridBagConstraints.LINE_END;
 		add(go,cons);
+	}
+	
+	public void clear(){
+		login.clear();
 	}
 
 }

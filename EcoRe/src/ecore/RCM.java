@@ -213,5 +213,9 @@ public class RCM implements Serializable{
 		couponPaper --;
 		return "<html><center>This $" + sessionValue + " coupon is redeemable at common grocery outlets.<br>Visit ecore.org to see a complete list.</center<</html>";
 	}
+	
+	public ArrayList<Item> getSessionItems(){
+		return sessionItems;
+	}
 
 }

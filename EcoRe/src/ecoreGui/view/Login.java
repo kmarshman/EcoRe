@@ -89,4 +89,9 @@ public class Login extends JPanel {
 		JOptionPane.showMessageDialog(this, "Username and/or password is incorrect. Please try again", "Login Failed", JOptionPane.ERROR_MESSAGE);
 		password.setText("");
 	}
+	
+	public void clear(){
+		password.setText("");
+		username.setText("");
+	}
 }
