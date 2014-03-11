@@ -20,6 +20,8 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
+import ecore.RCM;
+import ecore.RCM.State;
 import ecore.RMOS;
 import ecoreGui.view.RcmItemTable;
 
@@ -29,11 +31,13 @@ public class WelcomeUI extends JPanel {
 	private CardLayout cards;
 	private JPanel cardPanel;
 	private RMOS rmos;
+	private RCM rcm;
 	private GridBagConstraints cons;
 
-	public WelcomeUI(RMOS rmos, final CardLayout cards, final JPanel cardPanel)
+	public WelcomeUI(RMOS rmos, RCM rcm, final CardLayout cards, final JPanel cardPanel)
 	{
 		this.rmos = rmos;
+		this.rcm = rcm;
 		this.cards = cards;
 		this.cardPanel = cardPanel;
 		
@@ -42,7 +46,6 @@ public class WelcomeUI extends JPanel {
 		setFont(new Font("Sans Serif", Font.BOLD, 14));
 		cons = new GridBagConstraints();
 		cons.fill = GridBagConstraints.NONE;
-		display();
 	}
 	
 	private void display()
@@ -81,6 +84,11 @@ public class WelcomeUI extends JPanel {
 		cons.ipadx = 40;
 		cons.insets = new Insets(0,250,0,10);
 		JButton start = new JButton("Start");
+		if(rcm.getState() == State.NONOPERATIONAL){
+			start.setText("Out of Order");
+			start.setForeground(Color.RED);
+			start.setEnabled(false);
+		}
 		start.setSize(new Dimension(100, 100));
 		start.addActionListener(new ActionListener(){
 			public void actionPerformed(ActionEvent e){
@@ -115,5 +123,11 @@ public class WelcomeUI extends JPanel {
 			}
 		});
 		add(maintenance, cons);
+	}
+	
+	public void setRCM(RCM rcm){
+		this.rcm = rcm;
+		removeAll();
+		display();
 	}
 }

@@ -23,11 +23,11 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import ecore.RCM;
-import ecore.RCM.Status;
 import ecore.RMOS;
 import ecoreGui.CompleteSessionUI;
 import ecoreGui.MaintenanceUI;
 import ecoreGui.RecycleSessionUI;
+import ecoreGui.WelcomeUI;
 
 public class RcmSelector extends JPanel implements Observer {
 	
@@ -36,7 +36,8 @@ public class RcmSelector extends JPanel implements Observer {
 	private GridBagConstraints cons;
 	private RMOS rmos;
 	private CardLayout cards;
-	private JPanel cardPanel;;
+	private JPanel cardPanel;
+	private WelcomeUI welcome;
 	private RecycleSessionUI recycle;
 	private CompleteSessionUI complete;
 	private MaintenanceUI maintenance;
@@ -44,13 +45,14 @@ public class RcmSelector extends JPanel implements Observer {
 	private Image imgBackground = null;
 	private final String imgPath = "src/ecore/images/recycle.jpg";
 
-	public RcmSelector(RMOS rmos, CardLayout cards, JPanel cardPanel, RecycleSessionUI recycle, CompleteSessionUI complete, MaintenanceUI maintenance){
+	public RcmSelector(RMOS rmos, CardLayout cards, JPanel cardPanel, WelcomeUI welcome, RecycleSessionUI recycle, CompleteSessionUI complete, MaintenanceUI maintenance){
 		setLayout(new GridBagLayout());
 		imgBackground = new ImageIcon(imgPath).getImage();
 
 		this.rmos = rmos;
 		this.cards = cards;
 		this.cardPanel = cardPanel;
+		this.welcome = welcome;
 		this.recycle = recycle;
 		this.complete = complete;
 		this.maintenance = maintenance;
@@ -77,9 +79,7 @@ public class RcmSelector extends JPanel implements Observer {
 		
 		activeMachines = new ArrayList<RCM>();
 		for(RCM m: rmos.getRCMGroup()){
-			if(m.getStatus() == Status.ACTIVE){
-				activeMachines.add(m);
-			}
+			activeMachines.add(m);
 		}
 		
 		int size = activeMachines.size();
@@ -93,6 +93,7 @@ public class RcmSelector extends JPanel implements Observer {
 			public void actionPerformed(ActionEvent e){
 				if(rcmChoice.getSelectedIndex() != 0){
 					RCM rcm = activeMachines.get(rcmChoice.getSelectedIndex()-1);
+					welcome.setRCM(rcm);
 					recycle.setRCM(rcm);
 					complete.setRCM(rcm);
 					maintenance.setRCM(rcm);

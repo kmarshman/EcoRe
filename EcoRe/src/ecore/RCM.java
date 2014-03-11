@@ -120,6 +120,7 @@ public class RCM implements Serializable{
 	
 	public void addCash(double cash){
 		this.cash += cash;
+		if(weight <= capacity) state = State.OPERATIONAL;
 	}
 	
 	public void recycleItem(Item item){
@@ -131,6 +132,7 @@ public class RCM implements Serializable{
 			sessionGlassWeight += item.getWeight();	
 		}
 		weight += item.getWeight();
+		if(weight >= capacity) state = State.NONOPERATIONAL; 
 	}
 	
 	public void finishSession(){
@@ -154,10 +156,12 @@ public class RCM implements Serializable{
 		setTimeLastEmptied(Calendar.getInstance());
 		emptyIO.write(getID() + "," + dateFormat.format(timeLastEmptied.getTime()) + ";");
 		weight = 0;
+		if(cash >= 0 || couponPaper >= 0) state = State.OPERATIONAL;
 	}
 	
 	public void addCoupon(int coupon){
-		couponPaper += coupon;;
+		couponPaper += coupon;
+		if(weight < capacity) state = State.OPERATIONAL;
 	}
 	
 	public double getSessionAluminumWeight(){
@@ -183,6 +187,9 @@ public class RCM implements Serializable{
 	
 	public String printCash(){
 		cash -= sessionValue;
+		if(cash <= 0){
+			state = State.NONOPERATIONAL;
+		}
 
 		int ten, five, one, quarter, dime, nickel, penny;
 		ten = (int) (sessionValue/10);
@@ -211,6 +218,9 @@ public class RCM implements Serializable{
 	
 	public String printCoupon(){
 		couponPaper --;
+		if(couponPaper <= 0){
+			state = State.NONOPERATIONAL;
+		}
 		return "<html><center>This $" + sessionValue + " coupon is redeemable at common grocery outlets.<br>Visit ecore.org to see a complete list.</center<</html>";
 	}
 	
