@@ -26,8 +26,8 @@ public class CompleteSessionUI extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private RCM rcm;
 	private RMOS rmos;
-	protected CardLayout cards;
-	protected JPanel cardPanel;
+	private CardLayout cards;
+	private JPanel cardPanel;
 	private String weight, value;
 	private JLabel print, error, valueLabel;
 	private JButton coupon, cash;
@@ -163,7 +163,6 @@ public class CompleteSessionUI extends JPanel {
 	}
 	
 	public void updateSession(){
-		System.out.println("updating with " + rcm.getSessionValue());
 		weight = String.valueOf((rcm.getSessionAluminumWeight() + rcm.getSessionGlassWeight()));
 		value = String.valueOf((rcm.getSessionValue()));
 		

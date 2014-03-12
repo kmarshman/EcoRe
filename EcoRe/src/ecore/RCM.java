@@ -124,7 +124,6 @@ public class RCM implements Serializable{
 	}
 	
 	public void recycleItem(double value, double weight, String type){
-		System.out.println("new session value "+ sessionValue);
 		sessionValue += value;
 		if(type.equals("Aluminum")){
 			sessionAluminumWeight += (weight/16);

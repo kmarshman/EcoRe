@@ -58,42 +58,18 @@ public class RecycleSessionUI extends JPanel
 
 	private static final long serialVersionUID = 1L;
 	private RCM rcmObj;
-	private Item itemObj;
 	private RMOS rmosObj;
-	private Item itemPlasticObj;
-	private Item itemGlassObj;
 	private CardLayout cards;
 	private JPanel cardPanel;
-	private JLabel totalvalue = new JLabel("Total Weight : ");
-	private JLabel customerInfo = new JLabel();
-	JLabel totalWeight = new JLabel();
-	private JTextArea receptacleArea = new JTextArea();
-	JFrame frame = null;
-	double currentWeight = 0;
-	private double itemCount = 0;
-
-	JPanel rightPanel = new JPanel(new BorderLayout());
-	JPanel leftPanel = new JPanel(new BorderLayout());
-	JPanel panOuter = new JPanel(new BorderLayout());
-	JPanel topLeftPanel = new JPanel();
-	JPanel bottomLeftPanel = new JPanel(new BorderLayout());
-	JPanel plasticPanel = new JPanel();
-	JPanel glassPanel = new JPanel();
-	JLabel imagelabel = new JLabel(); 
-	JLabel imagelabel2 = new JLabel();
-	JLabel imagelabel3 = new JLabel();
-	JTextArea recycleInfoArea = new JTextArea(5,20);
-	JLabel ItemWeightLabel = new JLabel();
-	
-	JLabel totalValue, itemName, itemWeight, itemValue;
-
-	myTextField aluminumTextField;
-	myTextField glassTextField;
-	myTextField plasticTextField;
-
-	DragSource ds;
-	
 	private CompleteSessionUI complete;
+	
+	private JLabel customerInfo = new JLabel();
+	private JTextArea receptacleArea = new JTextArea();
+	private double itemCount;
+
+	private JLabel totalValue, itemName, itemWeight, itemValue;
+
+	private DragSource ds;
 	
 	private RecycleSessionUIDragDrop dragDropObj;
 
@@ -107,6 +83,7 @@ public class RecycleSessionUI extends JPanel
 
 	public RecycleSessionUI(RMOS rmos,RCM rcm,final CardLayout cards, final JPanel cardPanel, CompleteSessionUI complete)  
 	{
+		itemCount = 0;
 		dragDropObj = new RecycleSessionUIDragDrop();
 		
 		this.complete = complete;
@@ -180,7 +157,7 @@ public class RecycleSessionUI extends JPanel
 		}
 		@Override
 		protected void exportDone(JComponent c, Transferable data, int action) {
-			System.out.println("Export done.");
+			
 		}
 
 		@Override
@@ -192,13 +169,18 @@ public class RecycleSessionUI extends JPanel
 	private void display()
 	{
 		myTransferHandler trHndlr = new myTransferHandler();
+		
+		JPanel panOuter = new JPanel(new BorderLayout());
 		panOuter.setPreferredSize(new Dimension(500,500));
+		
 		//Left Panel Initial setup
+		JPanel leftPanel = new JPanel(new BorderLayout());
 		leftPanel.setPreferredSize(new Dimension(200,400));
 		leftPanel.setBackground(new Color(133,255,133));
 		leftPanel.setLayout(new GridLayout(2,1));
 
 		//Right Panel code
+		JPanel rightPanel = new JPanel(new BorderLayout());
 		rightPanel.setPreferredSize(new Dimension(400,350));
 		rightPanel.setBackground(new Color(255,255,255));
 		rightPanel.setLayout(new GridLayout(4,1));
@@ -208,22 +190,20 @@ public class RecycleSessionUI extends JPanel
 		rightPanel.add(messagelabel);
 
 		//Aluminium Instance
+		Item itemObj = new Item("Coke Can",rmosObj.getAluminum(), 5.2);
 
-		itemObj = new Item("Coke Can",rmosObj.getAluminum(), 5.2);
-		//itemTypeAluminumObj = new ItemType("Aluminium", itemObj.getValue());
 		//Glass Instance 
-		itemGlassObj = new Item("Soda Bottles",rmosObj.getGlass(), 4.21);
-		//itemTypeGlassObj = new ItemType("Glass",itemObj.getValue());
+		Item itemGlassObj = new Item("Soda Bottles",rmosObj.getGlass(), 4.21);
 
 		//Plastic Instance
 		ItemType itemTypePlasticObj = new ItemType("Plastic" , 1.80);
-		itemPlasticObj = new Item("Plastic Bottle",itemTypePlasticObj,1);
+		Item itemPlasticObj = new Item("Plastic Bottle",itemTypePlasticObj,1);
 
 
 
 
 		//Draggable objects
-		aluminumTextField = new myTextField(
+		myTextField aluminumTextField = new myTextField(
 				itemObj.getType().getName(),
 				itemObj.getName(),
 				itemObj.getWeight(),
@@ -250,7 +230,7 @@ public class RecycleSessionUI extends JPanel
 
 
 
-		glassTextField = new myTextField(
+		myTextField glassTextField = new myTextField(
 				itemGlassObj.getType().getName(),
 				itemGlassObj.getName(),
 				itemGlassObj.getWeight(),
@@ -267,6 +247,7 @@ public class RecycleSessionUI extends JPanel
 		glassTextField.setTransferHandler(trHndlr);
 
 		//Glass Panel
+		JPanel glassPanel = new JPanel();
 		glassPanel.setBorder((new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GREEN, null), "Glass")));
 		glassPanel.setBackground(Color.white);
 		glassPanel.add(Box.createHorizontalGlue());
@@ -277,7 +258,7 @@ public class RecycleSessionUI extends JPanel
 
 		//Plastic Panel
 		
-		plasticTextField = new myTextField(
+		myTextField plasticTextField = new myTextField(
 				itemPlasticObj.getType().getName(),
 				itemPlasticObj.getName(),
 				itemPlasticObj.getWeight(),
@@ -292,6 +273,7 @@ public class RecycleSessionUI extends JPanel
 		plasticTextField.setMaximumSize(new Dimension(70, 100));
 		plasticTextField.setMinimumSize(new Dimension(70, 100));
 		
+		JPanel plasticPanel = new JPanel();
 		plasticPanel.add(Box.createHorizontalGlue());
 		plasticPanel.add(plasticTextField);
 		plasticPanel.add(Box.createHorizontalGlue());
@@ -301,6 +283,7 @@ public class RecycleSessionUI extends JPanel
 		panOuter.add(rightPanel,BorderLayout.CENTER);
 
 		//Left Panel
+		JPanel topLeftPanel = new JPanel();
 		topLeftPanel.setLayout(new BoxLayout(topLeftPanel, BoxLayout.Y_AXIS));
 		topLeftPanel.setBackground(new Color(255,255,255));
 		
@@ -356,6 +339,7 @@ public class RecycleSessionUI extends JPanel
 		//	Drop Target Area
 		receptacleArea.setDragEnabled(true);
 		receptacleArea.setBorder((new TitledBorder(new EtchedBorder(EtchedBorder.RAISED, Color.GREEN, null), "Dump Here !")));
+		JPanel bottomLeftPanel = new JPanel(new BorderLayout());
 		bottomLeftPanel.add(receptacleArea,BorderLayout.CENTER);
 		bottomLeftPanel.add(finishButton,BorderLayout.PAGE_END);
 		leftPanel.add(bottomLeftPanel);
@@ -451,13 +435,12 @@ public class RecycleSessionUI extends JPanel
 								if(((weight/16) + rcmObj.getWeight()) > rcmObj.getCapacity())
 								{
 									target.setActive(false);
-									JOptionPane.showMessageDialog(frame,"Please use any other nearest machine", " Machine Full !", JOptionPane.WARNING_MESSAGE);
+									JOptionPane.showMessageDialog(null,"Please use any other nearest machine", " Machine Full !", JOptionPane.WARNING_MESSAGE);
 									cards.next(cardPanel );
 								}else{
 									rcmObj.recycleItem(value,weight,type);
 									
 									customerInfo.setText("Items: " + Double.toString(itemCount) );
-									System.out.println("new value: " + rcmObj.getSessionValue());
 									totalValue.setText("Value: " + String.valueOf(rcmObj.getSessionValue()));
 									itemName.setText(name);
 									itemWeight.setText("Weight: " + String.valueOf(weight) + "oz");
@@ -468,7 +451,7 @@ public class RecycleSessionUI extends JPanel
 						}
 						if(!good)
 						{
-							JOptionPane.showMessageDialog(frame,"The item that you have dropped is not accepted", " Invalid Item !", JOptionPane.WARNING_MESSAGE);
+							JOptionPane.showMessageDialog(null,"The item that you have dropped is not accepted", " Invalid Item !", JOptionPane.WARNING_MESSAGE);
 						}
 					}
 				}
