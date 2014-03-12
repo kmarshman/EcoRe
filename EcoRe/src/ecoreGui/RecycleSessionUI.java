@@ -212,7 +212,7 @@ public class RecycleSessionUI extends JPanel
 		itemObj = new Item("Coke Can",rmosObj.getAluminum(), 5.2);
 		//itemTypeAluminumObj = new ItemType("Aluminium", itemObj.getValue());
 		//Glass Instance 
-		itemGlassObj = new Item("Soda Bottles",rmosObj.getGlass(), 400);
+		itemGlassObj = new Item("Soda Bottles",rmosObj.getGlass(), 4.21);
 		//itemTypeGlassObj = new ItemType("Glass",itemObj.getValue());
 
 		//Plastic Instance
@@ -256,6 +256,7 @@ public class RecycleSessionUI extends JPanel
 				itemGlassObj.getWeight(),
 				itemGlassObj.getValue(),
 				"$/lbs");
+		glassTextField.setBackground(new Color(34, 139, 34));
 		glassTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		glassTextField.setPreferredSize(new Dimension(70,100));
 		glassTextField.setMaximumSize(new Dimension(70, 100));
@@ -285,6 +286,7 @@ public class RecycleSessionUI extends JPanel
 		
 		plasticTextField.setDragEnabled(true);
 		plasticTextField.setTransferHandler(trHndlr);
+		plasticTextField.setBackground(new Color(34, 139, 34));
 		plasticTextField.setHorizontalAlignment(SwingConstants.CENTER);
 		plasticTextField.setPreferredSize(new Dimension(70,100));
 		plasticTextField.setMaximumSize(new Dimension(70, 100));

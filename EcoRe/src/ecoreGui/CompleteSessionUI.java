@@ -59,13 +59,14 @@ public class CompleteSessionUI extends JPanel {
 			error.setText("Out of coupons");
 		}
 		
-		JLabel title = new JLabel("<html><center>Woud you like to receive cash or coupon?</center></html>");
+		JLabel title = new JLabel("<html><font face=\"Garamond\" color=\"228b22\"><center>Woud you like to receive cash or coupon?</center></font></html>");
 		title.setFont(new Font("Sans Serif", Font.BOLD, 14));
 		title.setHorizontalAlignment(SwingConstants.CENTER);
 		title.setHorizontalTextPosition(SwingConstants.CENTER);
 		title.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
 		valueLabel.setFont(new Font("Sans Serif", Font.BOLD, 18));
+		valueLabel.setForeground(new Color(34,139, 34));
 		valueLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		valueLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
 		
@@ -134,6 +135,7 @@ public class CompleteSessionUI extends JPanel {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				rcm.finishSession();
+				rmos.rcmUpdate();
 				cards.show(cardPanel, "RCM Selector");
 				
 				//cards.next(cardPanel);
@@ -163,8 +165,8 @@ public class CompleteSessionUI extends JPanel {
 	public void updateSession(){
 		System.out.println("updating with " + rcm.getSessionValue());
 		weight = String.valueOf((rcm.getSessionAluminumWeight() + rcm.getSessionGlassWeight()));
-		value = String.valueOf(rcm.getSessionValue());
+		value = String.valueOf((rcm.getSessionValue()));
 		
-		valueLabel.setText("<html>You deposited " + weight + " oz for a total of $" + value);
+		valueLabel.setText("<html>You deposited " + weight + " lb for a total of $" + value);
 	}
 }

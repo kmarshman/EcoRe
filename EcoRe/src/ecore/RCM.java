@@ -132,7 +132,7 @@ public class RCM implements Serializable{
 			sessionGlassWeight += (weight/16);	
 		}
 		this.weight += (weight/16);
-		if(weight >= capacity) state = State.NONOPERATIONAL; 
+		if(this.weight >= capacity)  state = State.NONOPERATIONAL;
 	}
 	
 	public void finishSession(){
@@ -186,6 +186,7 @@ public class RCM implements Serializable{
 	}
 	
 	public String printCash(){
+		double temp = sessionValue;
 		cash -= sessionValue;
 		if(cash <= 0){
 			state = State.NONOPERATIONAL;
@@ -213,6 +214,7 @@ public class RCM implements Serializable{
 		penny = (int) (sessionValue/.01);
 		sessionValue = sessionValue%.01;
 		
+		sessionValue = temp;
 		return "<html>" + ten + " tens <br>" + five + " fives<br>"+ one + " ones<br>" + quarter + " quarters<br>" + dime + " dimes<br>"+ nickel + " nickels<br>" + penny + " pennys</html>";
 	}
 	
